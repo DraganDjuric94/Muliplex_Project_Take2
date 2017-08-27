@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="stampajBTN" layoutX="719.0" layoutY="555.0" mnemonicParsing="false" text="Stampaj" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="35.0" />
+      <AnchorPane fx:id="gridSjedistaANP" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="35.0" />
+      <Button fx:id="rezervisiBTN" layoutX="636.0" layoutY="555.0" mnemonicParsing="false" text="Rezervisi" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="102.0" />
+   </children>
+</AnchorPane>
