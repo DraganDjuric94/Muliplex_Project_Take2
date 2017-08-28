@@ -6,29 +6,32 @@
 package org.unibl.etf.model.domain;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+
+
 
 
 /**
  *
- * @author User
+ * @author Aleksandar
  */
 public class Karta {
-    public Integer kartaId;
-    public Integer projekcijaId;
-    public Integer sjedisteId;
-    public Date datumIzdavanja;
-    public Double cijena;
-    public Boolean rezervisana;
-    
+    private Integer kartaId;
+    private Integer projekcijaId;
+    private Integer sjedisteId;
+    private Timestamp datumVrijeme;
+    private Double cijena;
+    private Boolean rezervisana;
+
     public Karta() {
-        
     }
 
-    public Karta(Integer kartaId, Integer projekcijaId, Integer sjedisteId, Date datumIzdavanja, Double cijena, Boolean rezervisana) {
+    public Karta(Integer kartaId, Integer projekcijaId, Integer sjedisteId, Timestamp datumVrijeme, Double cijena, Boolean rezervisana) {
         this.kartaId = kartaId;
         this.projekcijaId = projekcijaId;
         this.sjedisteId = sjedisteId;
-        this.datumIzdavanja = datumIzdavanja;
+        this.datumVrijeme = datumVrijeme;
         this.cijena = cijena;
         this.rezervisana = rezervisana;
     }
@@ -45,8 +48,8 @@ public class Karta {
         return sjedisteId;
     }
 
-    public Date getDatumIzdavanja() {
-        return datumIzdavanja;
+    public Timestamp getDatumVrijeme() {
+        return datumVrijeme;
     }
 
     public Double getCijena() {
@@ -69,8 +72,8 @@ public class Karta {
         this.sjedisteId = sjedisteId;
     }
 
-    public void setDatumIzdavanja(Date datumIzdavanja) {
-        this.datumIzdavanja = datumIzdavanja;
+    public void setDatumVrijeme(Timestamp datumVrijeme) {
+        this.datumVrijeme = datumVrijeme;
     }
 
     public void setCijena(Double cijena) {
@@ -83,8 +86,8 @@ public class Karta {
 
     @Override
     public String toString() {
-        return "Karta{" + "kartaId=" + kartaId + ", projekcijaId=" + projekcijaId + ", sjedisteId=" + sjedisteId + ", datumIzdavanja=" + datumIzdavanja + ", cijena=" + cijena + ", rezervisana=" + rezervisana + '}';
+        return "Karta{" + "kartaId=" + kartaId + ", projekcijaId=" + projekcijaId + ", sjedisteId=" + sjedisteId + ", datumVrijeme=" + datumVrijeme + ", cijena=" + cijena + ", rezervisana=" + rezervisana + '}';
     }
-    
+
     
 }

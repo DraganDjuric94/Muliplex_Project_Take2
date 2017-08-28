@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.unibl.etf.model.domain;
+package org.unibl.etf.model.domain.oo;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.Objects;
 
 /**
  *
  * @author Aleksandar
  */
-public class Faktura {
+public class FakturaOO {
 
     private Integer fakturaId;
     private String brojRacuna;
@@ -22,11 +23,10 @@ public class Faktura {
     private Date datum;
     private String racunIzdao;
 
-    public Faktura() {
-
+    public FakturaOO() {
     }
 
-    public Faktura(Integer fakturaId, String brojRacuna, String nazivRobe, String jedinicaMjere, Integer kolicina, Double cijena, Date datum, String racunIzdao) {
+    public FakturaOO(Integer fakturaId, String brojRacuna, String nazivRobe, String jedinicaMjere, Integer kolicina, Double cijena, Date datum, String racunIzdao) {
         this.fakturaId = fakturaId;
         this.brojRacuna = brojRacuna;
         this.nazivRobe = nazivRobe;
@@ -36,7 +36,7 @@ public class Faktura {
         this.datum = datum;
         this.racunIzdao = racunIzdao;
     }
-    
+
     public Integer getFakturaId() {
         return fakturaId;
     }
@@ -102,8 +102,35 @@ public class Faktura {
     }
 
     @Override
-    public String toString() {
-        return "Faktura{" + "fakturaId=" + fakturaId + ", brojRacuna=" + brojRacuna + ", nazivRobe=" + nazivRobe + ", jedinicaMjere=" + jedinicaMjere + ", kolicina=" + kolicina + ", cijena=" + cijena + ", datum=" + datum + ", racunIzdao=" + racunIzdao + '}';
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.fakturaId);
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FakturaOO other = (FakturaOO) obj;
+        if (!Objects.equals(this.fakturaId, other.fakturaId)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "FakturaOO{" + "fakturaId=" + fakturaId + ", brojRacuna=" + brojRacuna + ", nazivRobe=" + nazivRobe + ", jedinicaMjere=" + jedinicaMjere + ", kolicina=" + kolicina + ", cijena=" + cijena + ", datum=" + datum + ", racunIzdao=" + racunIzdao + '}';
+    }
+
+    
 
 }

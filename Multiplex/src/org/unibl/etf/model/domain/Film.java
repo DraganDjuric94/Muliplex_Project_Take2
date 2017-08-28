@@ -5,27 +5,23 @@
  */
 package org.unibl.etf.model.domain;
 
-import java.sql.Blob;
-
 /**
  *
- * @author User
+ * @author Aleksandar
  */
 public class Film {
    private Integer filmId;
-   private Integer ponudaZaFilmId;
    private String naziv;
    private Integer trajanje;
    private String opis;
-   private Blob slika;
+   private String slika;
    
    public Film(){
        
    }
 
-    public Film(Integer filmId, Integer ponudaZaFilmId, String naziv, Integer trajanje, String opis, Blob slika) {
+    public Film(Integer filmId, String naziv, Integer trajanje, String opis, String slika) {
         this.filmId = filmId;
-        this.ponudaZaFilmId = ponudaZaFilmId;
         this.naziv = naziv;
         this.trajanje = trajanje;
         this.opis = opis;
@@ -34,10 +30,6 @@ public class Film {
 
     public Integer getFilmId() {
         return filmId;
-    }
-
-    public Integer getPonudaZaFilmId() {
-        return ponudaZaFilmId;
     }
 
     public String getNaziv() {
@@ -52,17 +44,13 @@ public class Film {
         return opis;
     }
 
-    public Blob getSlika() {
+    public String getSlika() {
         return slika;
     }
     
 
     public void setFilmId(Integer filmId) {
         this.filmId = filmId;
-    }
-
-    public void setPonudaZaFilmId(Integer ponudaZaFilmId) {
-        this.ponudaZaFilmId = ponudaZaFilmId;
     }
 
     public void setNaziv(String naziv) {
@@ -77,13 +65,13 @@ public class Film {
         this.opis = opis;
     }
 
-    public void setSlika(Blob slika) {
+    public void setSlika(String slika) {
         this.slika = slika;
     }
 
     @Override
     public String toString() {
-        return "Film{" + "filmId=" + filmId + ", ponudaZaFilmId=" + ponudaZaFilmId + ", naziv=" + naziv + ", trajanje=" + trajanje + ", opis=" + opis + '}';
+        return "Film{" + "filmId=" + filmId + ", naziv=" + naziv + ", trajanje=" + trajanje + ", opis=" + opis + '}';
     }
    
    

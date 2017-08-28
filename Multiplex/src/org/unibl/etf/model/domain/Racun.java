@@ -5,27 +5,24 @@
  */
 package org.unibl.etf.model.domain;
 
-import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.Timestamp;
 
 /**
  *
- * @author User
+ * @author Aleksandar
  */
-public class Racun implements Serializable{
-   private Integer racunId;
-   private Date datumIzdavanja;
-   private Time vrijemeIzdavanja;
-   private Double ukupnaCijena;
-   
-   public Racun(){
-       
-   }
+public class Racun {
 
-    public Racun(Integer racunId, Date datumIzdavanja, Double ukupnaCijena) {
+    private Integer racunId;
+    private Timestamp datumVrijeme;
+    private Double ukupnaCijena;
+
+    public Racun() {
+    }
+
+    public Racun(Integer racunId, Timestamp datumVrijeme, Double ukupnaCijena) {
         this.racunId = racunId;
-        this.datumIzdavanja = datumIzdavanja;
+        this.datumVrijeme = datumVrijeme;
         this.ukupnaCijena = ukupnaCijena;
     }
 
@@ -33,14 +30,10 @@ public class Racun implements Serializable{
         return racunId;
     }
 
-    public Date getDatumIzdavanja() {
-        return datumIzdavanja;
+    public Timestamp getDatumVrijeme() {
+        return datumVrijeme;
     }
 
-    public Time getVrijemeIzdavanja() {
-        return vrijemeIzdavanja;
-    }
-    
     public Double getUkupnaCijena() {
         return ukupnaCijena;
     }
@@ -49,22 +42,17 @@ public class Racun implements Serializable{
         this.racunId = racunId;
     }
 
-    public void setDatumIzdavanja(Date datumIzdavanja) {
-        this.datumIzdavanja = datumIzdavanja;
+    public void setDatumVrijeme(Timestamp datumVrijeme) {
+        this.datumVrijeme = datumVrijeme;
     }
 
-    public void setVrijemeIzdavanja(Time vrijemeIzdavanja) {
-        this.vrijemeIzdavanja = vrijemeIzdavanja;
-    }
-    
     public void setUkupnaCijena(Double ukupnaCijena) {
         this.ukupnaCijena = ukupnaCijena;
     }
 
     @Override
     public String toString() {
-        return "Racun{" + "racunId=" + racunId + ", datumIzdavanja=" + datumIzdavanja + ", ukupnaCijena=" + ukupnaCijena + '}';
+        return "Racun{" + "racunId=" + racunId + ", datumVrijeme=" + datumVrijeme + ", ukupnaCijena=" + ukupnaCijena + '}';
     }
-   
-   
+
 }

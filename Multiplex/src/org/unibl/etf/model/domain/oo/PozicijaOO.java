@@ -3,27 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.unibl.etf.model.domain;
+package org.unibl.etf.model.domain.oo;
 
-import java.io.Serializable;
-import java.sql.Date;
-
+import java.util.Date;
+import java.util.Objects;
 
 /**
  *
  * @author Aleksandar
  */
-public class Pozicija{
+public class PozicijaOO {
     private Integer pozicijaId;
     private String naziv;
     private Date datumOd;
     private Date datumDo;
-    
-    public Pozicija(){
-        
+
+    public PozicijaOO() {
     }
 
-    public Pozicija(Integer pozicijaId, String naziv, Date datumOd, Date datumDo) {
+    public PozicijaOO(Integer pozicijaId, String naziv, Date datumOd, Date datumDo) {
         this.pozicijaId = pozicijaId;
         this.naziv = naziv;
         this.datumOd = datumOd;
@@ -63,10 +61,34 @@ public class Pozicija{
     }
 
     @Override
-    public String toString() {
-        return "Pozicija{" + "pozicijaId=" + pozicijaId + ", naziv=" + naziv + ", datumOd=" + datumOd + ", datumDo=" + datumDo + '}';
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.pozicijaId);
+        return hash;
     }
-    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PozicijaOO other = (PozicijaOO) obj;
+        if (!Objects.equals(this.pozicijaId, other.pozicijaId)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "PozicijaOO{" + "pozicijaId=" + pozicijaId + ", naziv=" + naziv + ", datumOd=" + datumOd + ", datumDo=" + datumDo + '}';
+    }
     
     
 }

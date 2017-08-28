@@ -3,25 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.unibl.etf.model.domain;
+package org.unibl.etf.model.domain.oo;
 
+import java.util.Objects;
 
 /**
  *
  * @author Aleksandar
  */
-public class Oprema {
+public class OpremaOO {
 
     private Integer opremaId;
     private String brojInventara;
     private String naziv;
     private Boolean ispravnost;
-    
-    public Oprema(){
-        
+
+    public OpremaOO() {
+
     }
-    
-    public Oprema(Integer opremaId, String brojInventara, String naziv, Boolean ispravnost) {
+
+    public OpremaOO(Integer opremaId, String brojInventara, String naziv, Boolean ispravnost) {
         this.opremaId = opremaId;
         this.brojInventara = brojInventara;
         this.naziv = naziv;
@@ -61,10 +62,39 @@ public class Oprema {
     }
 
     @Override
-    public String toString() {
-        return "Oprema{" + "opremaId=" + opremaId + ", brojInventara=" + brojInventara + ", naziv=" + naziv + ", ispravnost=" + ispravnost + '}';
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.opremaId);
+        return hash;
     }
-    
-    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OpremaOO other = (OpremaOO) obj;
+        if (!Objects.equals(this.opremaId, other.opremaId)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return 
+                '{' 
+                + "opremaId=" + opremaId 
+                + ", brojInventara=" + brojInventara 
+                + ", naziv=" + naziv 
+                + ", ispravnost=" + ispravnost 
+                + '}';
+    }
 
 }

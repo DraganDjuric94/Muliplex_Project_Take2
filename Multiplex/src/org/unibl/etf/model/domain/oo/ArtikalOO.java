@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.unibl.etf.model.domain;
+package org.unibl.etf.model.domain.oo;
+
+import java.util.Objects;
 
 /**
  *
  * @author Aleksandar
  */
-public class Artikal {
+public class ArtikalOO {
 
     private Integer artikalId;
     private String naziv;
@@ -18,11 +20,11 @@ public class Artikal {
     private String tip;
     private Double cijena;
 
-    public Artikal() {
+    public ArtikalOO() {
 
     }
 
-    public Artikal(Integer artikalId, String naziv, Integer kolicinaNaStanju, String barkod, String tip, Double cijena) {
+    public ArtikalOO(Integer artikalId, String naziv, Integer kolicinaNaStanju, String barkod, String tip, Double cijena) {
         this.artikalId = artikalId;
         this.naziv = naziv;
         this.kolicinaNaStanju = kolicinaNaStanju;
@@ -47,12 +49,12 @@ public class Artikal {
         return barkod;
     }
 
-    public String getTip() {
-        return tip;
-    }
-
     public Double getCijena() {
         return cijena;
+    }
+
+    public String getTip() {
+        return tip;
     }
 
     public void setArtikalId(Integer artikalId) {
@@ -71,17 +73,49 @@ public class Artikal {
         this.barkod = barkod;
     }
 
-    public void setTip(String tip) {
-        this.tip = tip;
-    }
-
     public void setCijena(Double cijena) {
         this.cijena = cijena;
     }
 
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.artikalId);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ArtikalOO other = (ArtikalOO) obj;
+        if (!Objects.equals(this.artikalId, other.artikalId)) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
-        return "Artikal{" + "artikalId=" + artikalId + ", naziv=" + naziv + ", kolicinaNaStanju=" + kolicinaNaStanju + ", barkod=" + barkod + ", tip=" + tip + ", cijena=" + cijena + '}';
+        return '{'
+                + "artikalId=" + artikalId
+                + ", naziv=" + naziv
+                + ", kolicinaNaStanju=" + kolicinaNaStanju
+                + ", barkod=" + barkod
+                + ", tip=" + tip
+                + ", cijena=" + cijena
+                + '}';
     }
 
 }

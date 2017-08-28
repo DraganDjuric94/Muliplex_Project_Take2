@@ -3,26 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.unibl.etf.model.domain;
+package org.unibl.etf.model.domain.oo;
 
-import java.sql.Date;
-
+import java.util.Date;
+import java.util.Objects;
 
 /**
  *
  * @author Aleksandar
  */
-public class PonudaZaFilm {
+public class PonudaZaFilmOO {
 
     private Integer ponudaZaFilmId;
     private Integer filmId;
     private String opis;
     private Date datum;
 
-    public PonudaZaFilm() {
+    public PonudaZaFilmOO() {
     }
 
-    public PonudaZaFilm(Integer ponudaZaFilmId, Integer filmId, String opis, Date datum) {
+    public PonudaZaFilmOO(Integer ponudaZaFilmId, Integer filmId, String opis, Date datum) {
         this.ponudaZaFilmId = ponudaZaFilmId;
         this.filmId = filmId;
         this.opis = opis;
@@ -62,8 +62,38 @@ public class PonudaZaFilm {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.ponudaZaFilmId);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PonudaZaFilmOO other = (PonudaZaFilmOO) obj;
+        if (!Objects.equals(this.ponudaZaFilmId, other.ponudaZaFilmId)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public String toString() {
-        return "PonudaZaFilm{" + "ponudaZaFilmId=" + ponudaZaFilmId + ", filmId=" + filmId + ", opis=" + opis + ", datum=" + datum + '}';
+        return '{'
+                + "ponudaZaFilmId=" + ponudaZaFilmId
+                + ", filmId=" + filmId
+                + ", opis=" + opis
+                + ", datum=" + datum
+                + '}';
     }
 
 }

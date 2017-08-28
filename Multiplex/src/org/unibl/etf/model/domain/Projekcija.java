@@ -5,29 +5,27 @@
  */
 package org.unibl.etf.model.domain;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.Timestamp;
+
+
 
 
 /**
  *
- * @author User
+ * @author Aleksandar
  */
 public class Projekcija {
     private Integer projekcijaId;
     private Integer filmId;
-    private Date datum;
-    private Time vrijeme;
-    
-    public Projekcija(){
-        
+    private Timestamp datumVrijeme;
+
+    public Projekcija() {
     }
 
-    public Projekcija(Integer projekcijaId, Integer filmId, Date datum, Time vrijeme) {
+    public Projekcija(Integer projekcijaId, Integer filmId, Timestamp datumVrijeme) {
         this.projekcijaId = projekcijaId;
         this.filmId = filmId;
-        this.datum = datum;
-        this.vrijeme = vrijeme;
+        this.datumVrijeme = datumVrijeme;
     }
 
     public Integer getProjekcijaId() {
@@ -38,12 +36,8 @@ public class Projekcija {
         return filmId;
     }
 
-    public Date getDatum() {
-        return datum;
-    }
-
-    public Time getVrijeme() {
-        return vrijeme;
+    public Timestamp getDatumVrijeme() {
+        return datumVrijeme;
     }
 
     public void setProjekcijaId(Integer projekcijaId) {
@@ -54,18 +48,16 @@ public class Projekcija {
         this.filmId = filmId;
     }
 
-    public void setDatum(Date datum) {
-        this.datum = datum;
-    }
-
-    public void setVrijeme(Time vrijeme) {
-        this.vrijeme = vrijeme;
+    public void setDatumVrijeme(Timestamp datumVrijeme) {
+        this.datumVrijeme = datumVrijeme;
     }
 
     @Override
     public String toString() {
-        return "Projekcija{" + "projekcijaId=" + projekcijaId + ", filmId=" + filmId + ", datum=" + datum + ", vrijeme=" + vrijeme + '}';
+        return "Projekcija{" + "projekcijaId=" + projekcijaId + ", filmId=" + filmId + ", datumVrijeme=" + datumVrijeme + '}';
     }
+    
+    
     
     
 }

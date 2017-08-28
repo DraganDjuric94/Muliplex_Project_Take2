@@ -18,18 +18,21 @@ public class Zaposleni implements Serializable{
     private String jmbg;
     private Boolean aktivan;
     private Double plata;
-    
-    public Zaposleni(){
-        
+    private String korisnickoIme;
+    private String lozinka;
+
+    public Zaposleni() {
     }
 
-    public Zaposleni(Integer zaposleniId, String ime, String prezime, String jmbg, Boolean aktivan, Double plata) {
+    public Zaposleni(Integer zaposleniId, String ime, String prezime, String jmbg, Boolean aktivan, Double plata, String korisnickoIme, String lozinka) {
         this.zaposleniId = zaposleniId;
         this.ime = ime;
         this.prezime = prezime;
         this.jmbg = jmbg;
         this.aktivan = aktivan;
         this.plata = plata;
+        this.korisnickoIme = korisnickoIme;
+        this.lozinka = lozinka;
     }
 
     public Integer getZaposleniId() {
@@ -56,6 +59,14 @@ public class Zaposleni implements Serializable{
         return plata;
     }
 
+    public String getKorisnickoIme() {
+        return korisnickoIme;
+    }
+
+    public String getLozinka() {
+        return lozinka;
+    }
+
     public void setZaposleniId(Integer zaposleniId) {
         this.zaposleniId = zaposleniId;
     }
@@ -80,10 +91,20 @@ public class Zaposleni implements Serializable{
         this.plata = plata;
     }
 
+    public void setKorisnickoIme(String korisnickoIme) {
+        this.korisnickoIme = korisnickoIme;
+    }
+
+    public void setLozinka(String lozinka) {
+        this.lozinka = lozinka;
+    }
+
     @Override
     public String toString() {
-        return "Zaposleni{" + "zaposleniId=" + zaposleniId + ", ime=" + ime + ", prezime=" + prezime + ", jmbg=" + jmbg + ", aktivan=" + aktivan + ", plata=" + plata + '}';
+        return "Zaposleni{" + "zaposleniId=" + zaposleniId + ", ime=" + ime + ", prezime=" + prezime + ", jmbg=" + jmbg + ", aktivan=" + aktivan + ", plata=" + plata + ", korisnickoIme=" + korisnickoIme + ", lozinka=" + lozinka + '}';
     }
+    
+    
     
     
 }
