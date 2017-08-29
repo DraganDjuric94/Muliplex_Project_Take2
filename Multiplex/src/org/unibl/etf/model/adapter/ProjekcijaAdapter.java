@@ -159,6 +159,8 @@ public class ProjekcijaAdapter {
         FilmOO film = FilmAdapter.preuzmiPoId(filmId);
         retVal.setFilm(film);
         
+        /*
+        POSTAVITI IH U KONTROLERU
         ArrayList<KartaOO> karteZaProjekciju = KartaAdapter.preuzmiPoProjekcijaId(projekcija.getProjekcijaId());
         ArrayList<SjedisteOO> zauzetaSjedista = new ArrayList<>();
         
@@ -167,6 +169,8 @@ public class ProjekcijaAdapter {
         }
         
         retVal.setZauzetaSjedista(zauzetaSjedista);
+        
+        */
         
         return retVal;
         

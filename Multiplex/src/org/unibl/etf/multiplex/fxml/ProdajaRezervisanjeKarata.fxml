@@ -6,12 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.unibl.etf.multiplex.controller.ProdajaRezervisanjeKarataController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.unibl.etf.multiplex.controller.ProdajaRezervisanjeKarataController">
    <children>
       <Button fx:id="pretraziBTN" layoutX="686.0" layoutY="34.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="76.0" text="Pretrazi" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="34.0" />
       <ChoiceBox fx:id="zanrCBX" layoutX="543.0" layoutY="34.0" prefHeight="25.0" prefWidth="139.0" AnchorPane.rightAnchor="118.0" AnchorPane.topAnchor="34.0" />
       <ListView fx:id="projekcijeLST" layoutX="33.0" layoutY="72.0" prefHeight="475.0" prefWidth="730.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="70.0" />
       <TextField fx:id="pretraziTXT" layoutX="41.0" layoutY="34.0" prefHeight="25.0" prefWidth="501.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="34.0" />
       <Button fx:id="izaberiBTN" layoutX="713.0" layoutY="554.0" mnemonicParsing="false" text="Izaberi" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="35.0" />
+      <Button fx:id="pregledajRezervacijeBTN" layoutX="581.0" layoutY="555.0" mnemonicParsing="false" text="Pregledaj rezervacije" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="94.0" />
    </children>
 </AnchorPane>

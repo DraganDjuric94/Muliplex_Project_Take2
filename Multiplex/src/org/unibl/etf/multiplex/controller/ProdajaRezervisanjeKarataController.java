@@ -27,11 +27,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import org.unibl.etf.model.adapter.ProjekcijaAdapter;
+import org.unibl.etf.model.adapter.ZanrAdapter;
 import org.unibl.etf.model.domain.Projekcija;
+import org.unibl.etf.model.domain.oo.ProjekcijaOO;
+import org.unibl.etf.model.domain.oo.ZanrOO;
 
 /**
  * FXML Controller class
@@ -41,7 +49,7 @@ import org.unibl.etf.model.domain.Projekcija;
 public class ProdajaRezervisanjeKarataController implements Initializable {
     
     @FXML
-    private ListView<Projekcija> projekcijeLST;
+    private ListView<ProjekcijaOO> projekcijeLST;
 
     @FXML
     private Button pretraziBTN;
@@ -55,27 +63,53 @@ public class ProdajaRezervisanjeKarataController implements Initializable {
     @FXML
     private ChoiceBox<String> zanrCBX;
     
-    private ObservableList<Projekcija> projekcije;
+    @FXML
+    private Button pregledajRezervacijeBTN;
+    
+    private ObservableList<ProjekcijaOO> projekcije;
     private ObservableList<String> zanrovi;
     
     public void preuzmiSveProjekcije(){
-        //projekcije = daj mi iz baze
-        
+        projekcije.clear();
+        projekcije.addAll(ProjekcijaAdapter.preuzmiSve());
+        for(ProjekcijaOO p : projekcije){
+            p.getFilm().setSlika("images/testSlika.jpg");
+        }
+    }
+    
+    public void preuzmiSveZanrove(){
+        zanrovi.clear();
+        ArrayList<ZanrOO> tempList = ZanrAdapter.preuzmiSve();
+        zanrovi.add("Svi");
+        for(ZanrOO z : tempList){
+            zanrovi.add(z.getNaziv());
+        }
     }
     
     public void pretrazi(String tekst){
-        //projekcije je daj iz baze po tekstu
+        projekcije.clear();
+        projekcije.addAll(ProjekcijaAdapter.preuzmiPoNazivuFilma(tekst));
         
         if(zanrCBX.getSelectionModel().getSelectedItem().equals("Svi")){
             //nista
         }else{
             String zanr = zanrCBX.getSelectionModel().getSelectedItem();
-            Iterator it = projekcije.iterator();
+            Iterator<ProjekcijaOO> it = projekcije.iterator();
             while(it.hasNext()){
-                if(true/*it.next().film.znarovi not contains zanr*/){
+                boolean imaZanr = false;
+                for(ZanrOO z : it.next().getFilm().getZanrovi()){
+                    if(zanr.toLowerCase().equals(z.getNaziv().toLowerCase())){
+                        imaZanr = true;
+                        break;
+                    }
+                }
+                if(!imaZanr){
                     it.remove();
                 }
             }
+        }
+        for(ProjekcijaOO p : projekcije){
+            p.getFilm().setSlika("images/testSlika.jpg");
         }
     }
 
@@ -90,6 +124,24 @@ public class ProdajaRezervisanjeKarataController implements Initializable {
         projekcijeLST.setItems(projekcije);
         zanrCBX.setItems(zanrovi);
         preuzmiSveProjekcije();
+        preuzmiSveZanrove();
+        zanrCBX.getSelectionModel().select(0);
+        
+        projekcijeLST.setCellFactory(listView -> new ListCell<ProjekcijaOO>(){
+            @Override
+            public void updateItem(ProjekcijaOO proj, boolean empty){
+                super.updateItem(proj, empty);		
+                if(empty){
+                    setText(null);
+                    setGraphic(null);
+                }else{
+                    PodaciZaProjekcijuList podaci = new PodaciZaProjekcijuList(proj.getFilm().getSlika(), proj.getFilm().getNaziv(),proj.getFilm().getOpis(), proj.getFilm().getTrajanje().toString(), "5.35");
+                    AnchorPane fxmlPrikaz = podaci.getFXMLPrikaz();
+                    fxmlPrikaz.prefWidthProperty().bindBidirectional(projekcijeLST.prefWidthProperty());
+                    setGraphic(fxmlPrikaz);
+                   }
+            }		
+        });       
         
         pretraziBTN.setOnAction((event) -> {
             pretrazi(pretraziTXT.getText());
@@ -99,8 +151,27 @@ public class ProdajaRezervisanjeKarataController implements Initializable {
             pretrazi(pretraziTXT.getText());
         });
         
+        pregledajRezervacijeBTN.setOnAction((event) -> {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/unibl/etf/multiplex/fxml/PregledRezervacija.fxml"));
+            try {
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("");
+                
+                stage.setOnCloseRequest((WindowEvent event1) -> {
+                    //
+                });
+                
+                stage.show();
+            }catch (IOException ex) {
+                Logger.getLogger(ProdajaRezervisanjeKarataController.class.getName()).log(Level.SEVERE, null, ex);
+            }  
+        });
+        
         izaberiBTN.setOnAction((ActionEvent event) -> {
-            IzborSjedistaController control = new IzborSjedistaController(null/*projekcijeLST.getSelectionModel().getSelectedItem().getProjekcijaId()*/);
+            IzborSjedistaController control = new IzborSjedistaController(projekcijeLST.getSelectionModel().getSelectedItem().getProjekcijaId());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/unibl/etf/multiplex/fxml/IzborSjedista.fxml"));
             try {
                 loader.setController(control);
@@ -109,7 +180,7 @@ public class ProdajaRezervisanjeKarataController implements Initializable {
                 Stage stage = new Stage();
                 stage.setScene(scene);
                 stage.setTitle("");
-                //stage.setResizable(false);
+                stage.setMaximized(true);
                 
                 stage.setOnCloseRequest((WindowEvent event1) -> {
                     //

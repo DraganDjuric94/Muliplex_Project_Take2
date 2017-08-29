@@ -23,6 +23,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
+import org.unibl.etf.model.adapter.KartaAdapter;
+import org.unibl.etf.model.adapter.ProjekcijaAdapter;
+import org.unibl.etf.model.domain.oo.KartaOO;
+import org.unibl.etf.model.domain.oo.ProjekcijaOO;
+import org.unibl.etf.model.domain.oo.SjedisteOO;
 
 /**
  * FXML Controller class
@@ -39,8 +44,8 @@ public class IzborSjedistaController implements Initializable {
     
     @FXML
     private AnchorPane gridSjedistaANP;
-
-    private Integer ProjekcijaId;
+    
+    private ProjekcijaOO projekcija;
     private Integer brKolona;
     private Integer brVrsta;
     private ArrayList<PomocnoSjediste> svaSjedista = new ArrayList<>();
@@ -58,19 +63,33 @@ public class IzborSjedistaController implements Initializable {
     }
 
     public IzborSjedistaController(Integer ProjekcijaId) {
-        this.ProjekcijaId = ProjekcijaId;
+        projekcija = ProjekcijaAdapter.preuzmiPoId(ProjekcijaId);
     }
     
     public void preuzmiSjedista(){
         //pronaci sve karte za ovu projekciju iz baze
         //oznaciti kakva su sva sjedista i napraviti niz istih
         
-        brKolona = 9;
-        brVrsta = 5;
+        brKolona = projekcija.getSala().getBrojKolona();
+        brVrsta = projekcija.getSala().getBrojRedova();
         
-        for(int i = 1; i < 6; i++){
-            for(int j = 1; j < 10; j++){
-                svaSjedista.add(new PomocnoSjediste(i, j, (i%3 + j%2 == 0) ? Boolean.TRUE : Boolean.FALSE));
+        ArrayList<SjedisteOO> zauzetaSjedista = new ArrayList<>();
+        ArrayList<KartaOO> karteZaProjekciju = KartaAdapter.preuzmiPoProjekcijaId(projekcija.getProjekcijaId());
+        
+        for(KartaOO k : karteZaProjekciju){
+            zauzetaSjedista.add(k.getSjediste());
+        }
+        
+        for(int i = 1; i < brVrsta + 1; i++){
+            for(int j = 1; j < brKolona + 1; j++){
+                Boolean zauzeto = false;
+                for(SjedisteOO sj :zauzetaSjedista){
+                    if(sj.getVrsta()== i && sj.getKolona()== j){
+                        zauzeto = true;
+                        break;
+                    }
+                }   
+                svaSjedista.add(new PomocnoSjediste(i, j, zauzeto));
             }
         }
         
@@ -97,7 +116,7 @@ public class IzborSjedistaController implements Initializable {
         for(int i = 0; i < brVrsta; i++){
             for (int j = 0; j < brKolona; j++){
                 StackPane square = new StackPane();
-                CheckBox cb = new CheckBox("Red: " + (i+1) + "\nBroj: " + (j+1));
+                CheckBox cb = new CheckBox("(" + (i+1) + "," + (j+1) + ")");
                 String color ;
                 cb.disableProperty().setValue(svaSjedista.get(i*brKolona + j).zauzeto);
                 if (svaSjedista.get(i*brKolona + j).zauzeto) {
