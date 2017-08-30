@@ -11,26 +11,40 @@
    <children>
       <TabPane layoutX="200.0" layoutY="118.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-            <Tab text="Oprema">
+            <Tab fx:id="opremaTAB" text="Oprema">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+                        <Button mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <TableView prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <TextField prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <Button mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <Button mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                     </children>
+                  </AnchorPane>
               </content>
             </Tab>
             <Tab text="Zaposleni">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Izmijeni" />
-                        <Button mnemonicParsing="false" text="Pretrazi" />
-                        <TextField prefHeight="25.0" prefWidth="625.0" />
-                        <TableView prefHeight="448.0" prefWidth="765.0">
+                        <Button mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="C1" />
                               <TableColumn prefWidth="75.0" text="C2" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Obrisi" />
-                        <Button mnemonicParsing="false" text="Dodaj" />
+                        <Button mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
               </content>
@@ -39,17 +53,17 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Izmijeni" />
-                        <Button mnemonicParsing="false" text="Pretrazi" />
-                        <TextField prefHeight="25.0" prefWidth="625.0" />
-                        <TableView prefHeight="448.0" prefWidth="765.0">
+                        <Button mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField prefHeight="25.0" prefWidth="695.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="C1" />
                               <TableColumn prefWidth="75.0" text="C2" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Obrisi" />
-                        <Button mnemonicParsing="false" text="Dodaj" />
+                        <Button mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -58,17 +72,17 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Izmijeni" />
-                        <Button mnemonicParsing="false" text="Pretrazi" />
-                        <TextField prefHeight="25.0" prefWidth="625.0" />
-                        <TableView prefHeight="448.0" prefWidth="765.0">
+                        <Button mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="C1" />
                               <TableColumn prefWidth="75.0" text="C2" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Obrisi" />
-                        <Button mnemonicParsing="false" text="Dodaj" />
+                        <Button mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -77,17 +91,17 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Izmijeni" />
-                        <Button mnemonicParsing="false" text="Pretrazi" />
-                        <TextField prefHeight="25.0" prefWidth="625.0" />
-                        <TableView prefHeight="448.0" prefWidth="765.0">
+                        <Button mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="C1" />
                               <TableColumn prefWidth="75.0" text="C2" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Obrisi" />
-                        <Button mnemonicParsing="false" text="Dodaj" />
+                        <Button mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
               </content>
@@ -96,17 +110,17 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Izmijeni" />
-                        <Button mnemonicParsing="false" text="Pretrazi" />
-                        <TextField prefHeight="25.0" prefWidth="625.0" />
-                        <TableView prefHeight="448.0" prefWidth="765.0">
+                        <Button mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="C1" />
                               <TableColumn prefWidth="75.0" text="C2" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Obrisi" />
-                        <Button mnemonicParsing="false" text="Dodaj" />
+                        <Button mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
               </content>
@@ -115,36 +129,36 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Izmijeni" />
-                        <Button mnemonicParsing="false" text="Pretrazi" />
-                        <TextField prefHeight="25.0" prefWidth="625.0" />
-                        <TableView prefHeight="448.0" prefWidth="765.0">
+                        <Button mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="C1" />
                               <TableColumn prefWidth="75.0" text="C2" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Obrisi" />
-                        <Button mnemonicParsing="false" text="Dodaj" />
+                        <Button mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Projekcija">
+            <Tab fx:id="projekcijaTAB" text="Projekcija">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Izmijeni" />
-                        <Button mnemonicParsing="false" text="Pretrazi" />
-                        <TextField prefHeight="25.0" prefWidth="625.0" />
-                        <TableView prefHeight="448.0" prefWidth="765.0">
+                        <Button fx:id="izmijeniProjekcijaBTN" mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button fx:id="pretraziProjekcijaBTN" mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField fx:id="pretraziProjekcijaTXT" prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView fx:id="tabelaProjekcijaTBL" prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="C1" />
                               <TableColumn prefWidth="75.0" text="C2" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Obrisi" />
-                        <Button mnemonicParsing="false" text="Dodaj" />
+                        <Button fx:id="obrisiProjekcijaBTN" mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button fx:id="dodajProjekcijaBTN" mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
               </content>
@@ -162,7 +176,7 @@
                           </columns>
                         </TableView>
                         <TextField layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="695.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
-                        <Button layoutX="723.0" layoutY="15.0" mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" />
+                        <Button layoutX="723.0" layoutY="15.0" mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
                         <Button layoutX="612.0" layoutY="531.0" mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
                      </children>
                   </AnchorPane>
@@ -172,17 +186,17 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="586.0" layoutY="524.0" mnemonicParsing="false" text="Izmijeni" />
-                        <Button layoutX="713.0" layoutY="13.0" mnemonicParsing="false" text="Pretrazi" />
-                        <TextField layoutX="57.0" layoutY="13.0" prefHeight="25.0" prefWidth="625.0" />
-                        <TableView layoutX="14.0" layoutY="54.0" prefHeight="448.0" prefWidth="765.0">
+                        <Button layoutX="586.0" layoutY="524.0" mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button layoutX="713.0" layoutY="13.0" mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField layoutX="57.0" layoutY="13.0" prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView layoutX="14.0" layoutY="54.0" prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="C1" />
                               <TableColumn prefWidth="75.0" text="C2" />
                            </columns>
                         </TableView>
-                        <Button layoutX="660.0" layoutY="524.0" mnemonicParsing="false" text="Obrisi" />
-                        <Button layoutX="741.0" layoutY="524.0" mnemonicParsing="false" text="Dodaj" />
+                        <Button layoutX="660.0" layoutY="524.0" mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button layoutX="741.0" layoutY="524.0" mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
               </content>
