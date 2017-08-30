@@ -48,7 +48,6 @@ public class ProjekcijaAdapter {
         
         List<Projekcija> projekcijeOv = projekcijaDAO.selectAll();
         
-        System.out.println(projekcijeOv.size());
         
         for(Projekcija p : projekcijeOv){
             projekcije.add(konvertujUOO(p.getFilmId(), p));
