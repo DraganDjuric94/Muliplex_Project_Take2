@@ -48,6 +48,8 @@ public class ProjekcijaAdapter {
         
         List<Projekcija> projekcijeOv = projekcijaDAO.selectAll();
         
+        System.out.println(projekcijeOv.size());
+        
         for(Projekcija p : projekcijeOv){
             projekcije.add(konvertujUOO(p.getFilmId(), p));
         }
@@ -139,21 +141,21 @@ public class ProjekcijaAdapter {
         ProjekcijaOO retVal = new ProjekcijaOO();
         
         retVal.setProjekcijaId(projekcija.getProjekcijaId());
+        retVal.setFilm(FilmAdapter.preuzmiPoId(filmId));
         retVal.setDatumVrijeme(projekcija.getDatumVrijeme());
         retVal.setCijenaKarte(projekcija.getCijenaKarte());
 
        
         ProjekcijaSala projSal = null;
+        
         List<ProjekcijaSala> projSalLST = projekcijaSalaDAO.selectBy(new ProjekcijaSala(projekcija.getProjekcijaId(), null));
+        
         if(projSalLST.size() == 1){
             projSal = projSalLST.get(0);
         }
         
         SalaOO sala = SalaAdapter.preuzmiPoId(projSal.getSalaId());
         retVal.setSala(sala);
-        
-        FilmOO film = FilmAdapter.preuzmiPoId(filmId);
-        retVal.setFilm(film);
         
         /*
         ArrayList<KartaOO> karteZaProjekciju = KartaAdapter.preuzmiPoProjekcijaId(projekcija.getProjekcijaId());
