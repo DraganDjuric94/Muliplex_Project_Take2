@@ -1,0 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.unibl.etf.model.dao;
+
+import java.util.List;
+import org.unibl.etf.model.domain.Karta;
+
+/**
+ *
+ * @author Aleksandar
+ */
+public interface KartaDAO {
+
+    public List<Karta> selectAll();
+
+    public List<Karta> selectBy(Karta karta);
+
+    public int insert(Karta karta);
+
+    public int update(Karta karta);
+
+    public int delete(Integer kartaId);
+}
