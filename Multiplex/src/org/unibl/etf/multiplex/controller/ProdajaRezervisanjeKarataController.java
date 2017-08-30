@@ -1,201 +1,262 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Decompiled with CFR 0_122.
+ * 
+ * Could not load the following classes:
+ *  javafx.application.Platform
+ *  javafx.beans.property.DoubleProperty
+ *  javafx.beans.property.Property
+ *  javafx.collections.FXCollections
+ *  javafx.collections.ObservableList
+ *  javafx.event.ActionEvent
+ *  javafx.event.Event
+ *  javafx.event.EventHandler
+ *  javafx.fxml.FXML
+ *  javafx.fxml.FXMLLoader
+ *  javafx.fxml.Initializable
+ *  javafx.scene.Node
+ *  javafx.scene.Parent
+ *  javafx.scene.Scene
+ *  javafx.scene.control.Button
+ *  javafx.scene.control.ChoiceBox
+ *  javafx.scene.control.ListCell
+ *  javafx.scene.control.ListView
+ *  javafx.scene.control.MultipleSelectionModel
+ *  javafx.scene.control.SingleSelectionModel
+ *  javafx.scene.control.TextField
+ *  javafx.scene.input.KeyEvent
+ *  javafx.scene.layout.AnchorPane
+ *  javafx.stage.Stage
+ *  javafx.stage.Window
+ *  javafx.stage.WindowEvent
+ *  javafx.util.Callback
  */
 package org.unibl.etf.multiplex.controller;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URL;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.stage.WindowEvent;
+import javafx.util.Callback;
 import org.unibl.etf.model.adapter.ProjekcijaAdapter;
 import org.unibl.etf.model.adapter.ZanrAdapter;
-import org.unibl.etf.model.domain.Projekcija;
+import org.unibl.etf.model.domain.oo.FilmOO;
 import org.unibl.etf.model.domain.oo.ProjekcijaOO;
+import org.unibl.etf.model.domain.oo.SalaOO;
 import org.unibl.etf.model.domain.oo.ZanrOO;
+import org.unibl.etf.multiplex.controller.IzborSjedistaController;
+import org.unibl.etf.multiplex.controller.PodaciZaProjekcijuList;
 
-/**
- * FXML Controller class
- *
- * @author juhu
- */
-public class ProdajaRezervisanjeKarataController implements Initializable {
-    
+public class ProdajaRezervisanjeKarataController
+implements Initializable {
     @FXML
     private ListView<ProjekcijaOO> projekcijeLST;
-
     @FXML
     private Button pretraziBTN;
-
     @FXML
     private Button izaberiBTN;
-
     @FXML
     private TextField pretraziTXT;
-
     @FXML
     private ChoiceBox<String> zanrCBX;
-    
     @FXML
     private Button pregledajRezervacijeBTN;
-    
     private ObservableList<ProjekcijaOO> projekcije;
     private ObservableList<String> zanrovi;
-    
-    public void preuzmiSveProjekcije(){
-        projekcije.clear();
-        projekcije.addAll(ProjekcijaAdapter.preuzmiSve());
-        for(ProjekcijaOO p : projekcije){
-            p.getFilm().setSlika("images/testSlika.jpg");
-        }
-    }
-    
-    public void preuzmiSveZanrove(){
-        zanrovi.clear();
-        ArrayList<ZanrOO> tempList = ZanrAdapter.preuzmiSve();
-        zanrovi.add("Svi");
-        for(ZanrOO z : tempList){
-            zanrovi.add(z.getNaziv());
-        }
-    }
-    
-    public void pretrazi(String tekst){
-        projekcije.clear();
-        projekcije.addAll(ProjekcijaAdapter.preuzmiPoNazivuFilma(tekst));
-        
-        if(zanrCBX.getSelectionModel().getSelectedItem().equals("Svi")){
-            //nista
-        }else{
-            String zanr = zanrCBX.getSelectionModel().getSelectedItem();
-            Iterator<ProjekcijaOO> it = projekcije.iterator();
-            while(it.hasNext()){
-                boolean imaZanr = false;
-                for(ZanrOO z : it.next().getFilm().getZanrovi()){
-                    if(zanr.toLowerCase().equals(z.getNaziv().toLowerCase())){
-                        imaZanr = true;
-                        break;
-                    }
-                }
-                if(!imaZanr){
-                    it.remove();
-                }
-            }
-        }
-        for(ProjekcijaOO p : projekcije){
+
+    public void preuzmiSveProjekcije() {
+        this.projekcije.clear();
+        this.projekcije.addAll(ProjekcijaAdapter.preuzmiSve());
+        for (ProjekcijaOO p : this.projekcije) {
             p.getFilm().setSlika("images/testSlika.jpg");
         }
     }
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
+    public void preuzmiSveZanrove() {
+        this.zanrovi.clear();
+        ArrayList<ZanrOO> tempList = ZanrAdapter.preuzmiSve();
+        this.zanrovi.add("Svi");
+        for (ZanrOO z : tempList) {
+            this.zanrovi.add(z.getNaziv());
+        }
+    }
+
+    public void pretrazi(String tekst) {
+        this.projekcije.clear();
+        this.projekcije.addAll(ProjekcijaAdapter.preuzmiPoNazivuFilma(tekst));
+        if (!((String)this.zanrCBX.getSelectionModel().getSelectedItem()).equals("Svi")) {
+            String zanr = (String)this.zanrCBX.getSelectionModel().getSelectedItem();
+            Iterator it = this.projekcije.iterator();
+            while (it.hasNext()) {
+                boolean imaZanr = false;
+                for (ZanrOO z : ((ProjekcijaOO)it.next()).getFilm().getZanrovi()) {
+                    if (!zanr.toLowerCase().equals(z.getNaziv().toLowerCase())) continue;
+                    imaZanr = true;
+                    break;
+                }
+                if (imaZanr) continue;
+                it.remove();
+            }
+        }
+        for (ProjekcijaOO p : this.projekcije) {
+            p.getFilm().setSlika("images/testSlika.jpg");
+        }
+    }
+
+    public void update() {
+        ObservableList<ProjekcijaOO> proj = FXCollections.observableArrayList();
+        proj.addAll(ProjekcijaAdapter.preuzmiPoNazivuFilma(this.pretraziTXT.getText()));
+        if (!((String)this.zanrCBX.getSelectionModel().getSelectedItem()).equals("Svi")) {
+            String zanr = (String)this.zanrCBX.getSelectionModel().getSelectedItem();
+            Iterator it = proj.iterator();
+            while (it.hasNext()) {
+                boolean imaZanr = false;
+                for (ZanrOO z : ((ProjekcijaOO)it.next()).getFilm().getZanrovi()) {
+                    if (!zanr.toLowerCase().equals(z.getNaziv().toLowerCase())) continue;
+                    imaZanr = true;
+                    break;
+                }
+                if (imaZanr) continue;
+                it.remove();
+            }
+        }
+        for (ProjekcijaOO p : proj) {
+            p.getFilm().setSlika("images/testSlika.jpg");
+        }
+        if (!proj.equals(this.projekcije)) {
+            this.projekcije.clear();
+            this.projekcije.addAll((Collection)proj);
+            System.out.println("update!");
+        }
+    }
+
     public void initialize(URL url, ResourceBundle rb) {
-        
-        projekcije = FXCollections.observableArrayList();
-        zanrovi = FXCollections.observableArrayList();
-        projekcijeLST.setItems(projekcije);
-        zanrCBX.setItems(zanrovi);
-        preuzmiSveProjekcije();
-        preuzmiSveZanrove();
-        zanrCBX.getSelectionModel().select(0);
-        
-        projekcijeLST.setCellFactory(listView -> new ListCell<ProjekcijaOO>(){
+        this.projekcije = FXCollections.observableArrayList();
+        this.zanrovi = FXCollections.observableArrayList();
+        this.projekcijeLST.setItems(this.projekcije);
+        this.zanrCBX.setItems(this.zanrovi);
+        this.preuzmiSveProjekcije();
+        this.preuzmiSveZanrove();
+        this.zanrCBX.getSelectionModel().select(0);
+        Timer t = new Timer();
+        t.schedule(new TimerTask(){
+
             @Override
-            public void updateItem(ProjekcijaOO proj, boolean empty){
-                super.updateItem(proj, empty);		
-                if(empty){
-                    setText(null);
-                    setGraphic(null);
-                }else{
-                    PodaciZaProjekcijuList podaci = new PodaciZaProjekcijuList(proj.getFilm().getSlika(), proj.getFilm().getNaziv(),proj.getFilm().getOpis(), proj.getFilm().getTrajanje().toString(), "5.35");
+            public void run() {
+                Platform.runLater((Runnable)new Runnable(){
+
+                    @Override
+                    public void run() {
+                        ProdajaRezervisanjeKarataController.this.update();
+                    }
+                });
+            }
+
+        }, 0, 5000);
+        this.projekcijeLST.setCellFactory(listView -> new ListCell<ProjekcijaOO>(){
+
+            public void updateItem(ProjekcijaOO proj, boolean empty) {
+                super.updateItem(proj, empty);
+                if (empty) {
+                    this.setText(null);
+                    this.setGraphic(null);
+                } else {
+                    PodaciZaProjekcijuList podaci = new PodaciZaProjekcijuList(proj.getFilm().getSlika(), proj.getFilm().getNaziv(), proj.getFilm().getOpis(), proj.getFilm().getTrajanje().toString(), "5.35");
                     AnchorPane fxmlPrikaz = podaci.getFXMLPrikaz();
-                    fxmlPrikaz.prefWidthProperty().bindBidirectional(projekcijeLST.prefWidthProperty());
-                    setGraphic(fxmlPrikaz);
-                   }
-            }		
-        });       
-        
-        pretraziBTN.setOnAction((event) -> {
-            pretrazi(pretraziTXT.getText());
-        });
-        
-        pretraziTXT.setOnKeyReleased((event) -> {
-            pretrazi(pretraziTXT.getText());
-        });
-        
-        pregledajRezervacijeBTN.setOnAction((event) -> {
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/unibl/etf/multiplex/fxml/PregledRezervacija.fxml"));
-            try {
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.setTitle("");
-                
-                stage.setOnCloseRequest((WindowEvent event1) -> {
-                    //
-                });
-                
-                stage.show();
-            }catch (IOException ex) {
-                Logger.getLogger(ProdajaRezervisanjeKarataController.class.getName()).log(Level.SEVERE, null, ex);
-            }  
-        });
-        
-        izaberiBTN.setOnAction((ActionEvent event) -> {
-            IzborSjedistaController control = new IzborSjedistaController(projekcijeLST.getSelectionModel().getSelectedItem().getProjekcijaId());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/unibl/etf/multiplex/fxml/IzborSjedista.fxml"));
-            try {
-                loader.setController(control);
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.setTitle("");
-                stage.setMaximized(true);
-                
-                stage.setOnCloseRequest((WindowEvent event1) -> {
-                    //
-                });
-                
-                stage.show();
-            }catch (IOException ex) {
-                Logger.getLogger(ProdajaRezervisanjeKarataController.class.getName()).log(Level.SEVERE, null, ex);
+                    fxmlPrikaz.prefWidthProperty().bindBidirectional((Property)ProdajaRezervisanjeKarataController.this.projekcijeLST.prefWidthProperty());
+                    this.setGraphic((Node)fxmlPrikaz);
+                }
             }
         });
-        
-        
-        
-        
-        
-    }    
-    
+        this.pretraziBTN.setOnAction(event -> {
+            this.pretrazi(this.pretraziTXT.getText());
+        }
+        );
+        this.pretraziTXT.setOnKeyReleased(event -> {
+            this.pretrazi(this.pretraziTXT.getText());
+        }
+        );
+        this.pregledajRezervacijeBTN.setOnAction(event -> {
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/org/unibl/etf/multiplex/fxml/PregledRezervacija.fxml"));
+            try {
+                Parent root = (Parent)loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("");
+                Stage ja = (Stage)this.pregledajRezervacijeBTN.getScene().getWindow();
+                ja.close();
+                stage.setOnCloseRequest(event1 -> {
+                    ja.show();
+                }
+                );
+                stage.show();
+            }
+            catch (IOException ex) {
+                Logger.getLogger(ProdajaRezervisanjeKarataController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        );
+        this.izaberiBTN.setOnAction(event -> {
+            IzborSjedistaController control = new IzborSjedistaController(((ProjekcijaOO)this.projekcijeLST.getSelectionModel().getSelectedItem()).getProjekcijaId());
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/org/unibl/etf/multiplex/fxml/IzborSjedista.fxml"));
+            try {
+                loader.setController((Object)control);
+                Parent root = (Parent)loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("");
+                int brVrsta = ((ProjekcijaOO)this.projekcijeLST.getSelectionModel().getSelectedItem()).getSala().getBrojRedova();
+                int brKolona = ((ProjekcijaOO)this.projekcijeLST.getSelectionModel().getSelectedItem()).getSala().getBrojKolona();
+                double sirina = 650.0 * ((double)brKolona / (double)brVrsta);
+                stage.setWidth(sirina);
+                stage.setHeight(650.0);
+                stage.setResizable(false);
+                stage.setOnCloseRequest(event1 -> {
+                }
+                );
+                stage.show();
+            }
+            catch (IOException ex) {
+                Logger.getLogger(ProdajaRezervisanjeKarataController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        );
+    }
+
 }
+

@@ -34,10 +34,9 @@ public class Multiplex extends Application {
                 Stage stage = new Stage();
                 stage.setScene(scene);
                 stage.setTitle("");
-                //stage.setResizable(false);
                 
                 stage.setOnCloseRequest((WindowEvent event1) -> {
-                    //
+                    System.exit(1);
                 });
                 
                 stage.show();
