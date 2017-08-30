@@ -22,3 +22,7 @@
 hs_err_pid*
 
 Multiplex/build/*
+Multiplex/dist/*
+Multiplex/nbproject/project.properties
+Multiplex/nbproject/private/private.properties
+Multiplex/nbproject/private/private.xml

@@ -25,7 +25,7 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
 
     private static final String SQL_SELECT = "SELECT * FROM zaposleni";
     private static final String SQL_INSERT = "INSERT INTO zaposleni VALUES (null, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE zaposleni SET Ime=?, Prezime=?, JMBG=?, Aktivan=?, Plata=?, KorisnickoIme=?, Loznika=? WHERE ZaposleniId=?";
+    private static final String SQL_UPDATE = "UPDATE zaposleni SET Ime=?, Prezime=?, JMBG=?, Aktivan=?, Plata=?, KorisnickoIme=?, Lozinka=? WHERE ZaposleniId=?";
     private static final String SQL_DELETE = "DELETE FROM zaposleni WHERE ZaposleniId=?";
 
     @Override
@@ -49,7 +49,7 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
                                 resultSet.getBoolean("Aktivan"),
                                 resultSet.getDouble("Plata"),
                                 resultSet.getString("KorisnickoIme"),
-                                resultSet.getString("Loznika")
+                                resultSet.getString("Lozinka")
                         )
                 );
             }
