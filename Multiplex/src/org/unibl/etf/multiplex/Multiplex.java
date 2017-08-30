@@ -18,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import org.unibl.etf.multiplex.controller.MenadzerController;
+import org.unibl.etf.multiplex.controller.PravnikControlelr;
 
 /**
  *
@@ -27,8 +29,9 @@ public class Multiplex extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ProdajaRezervisanjeKarata.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/PrikazPodataka.fxml"));
             try {
+                loader.setController(new PravnikControlelr());
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
