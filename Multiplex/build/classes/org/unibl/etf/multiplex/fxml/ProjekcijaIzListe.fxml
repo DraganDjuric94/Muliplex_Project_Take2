@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="projekcijaANP" prefHeight="210.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="slikaIMG" fitHeight="200.0" fitWidth="134.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="134.0" AnchorPane.topAnchor="5.0" />
+      <Label fx:id="naslovFilmaLBL" layoutX="157.0" prefHeight="63.0" prefWidth="456.0" text="NASLOV FILMA" wrapText="true" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="opisFilmLBL" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="144.0" layoutY="69.0" prefHeight="88.0" prefWidth="456.0" text="OPIS FILMA I SL." wrapText="true" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0" />
+      <Label fx:id="trajanjeLBL" layoutX="382.0" layoutY="169.0" prefHeight="17.0" prefWidth="105.0" text="Trajanje: 200 min" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="113.0" />
+      <Label fx:id="cijenaLBL" layoutX="437.0" layoutY="169.0" text="Cijena karte: 15KM" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+   </children>
+</AnchorPane>
