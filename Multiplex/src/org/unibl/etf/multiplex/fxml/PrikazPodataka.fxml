@@ -6,8 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane layoutX="200.0" layoutY="118.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -15,93 +14,108 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
-                        <Button mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
-                        <TableView prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+                        <Button fx:id="opremaAddBTN" mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+                        <Button fx:id="opremaEraseBTN" mnemonicParsing="false" text="Obriši" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <TableView fx:id="opremaTable" prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn fx:id="opremaBrojInventaraColumn" prefWidth="137.0" text="Broj inventara" />
+                              <TableColumn fx:id="opremaNazivOpremeColumn" minWidth="0.0" prefWidth="154.0" text="Naziv opreme" />
+                              <TableColumn fx:id="opremaIspravnostColumn" minWidth="0.0" prefWidth="154.0" text="Ispravnost" />
                            </columns>
                         </TableView>
-                        <TextField prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
-                        <Button mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
-                        <Button mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <TextField fx:id="opremaSearchTXT" prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <Button fx:id="opremaSearchBTN" mnemonicParsing="false" text="Pretraži" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <Button fx:id="opremaEditBTN" mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Zaposleni">
+            <Tab fx:id="zaposleniTAB" text="Zaposleni">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
-                        <Button mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
-                        <TextField prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
-                        <TableView prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+                        <Button fx:id="zaposleniEditBTN" mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button fx:id="zaposleniSearchBTN" mnemonicParsing="false" text="Pretraži" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField fx:id="zaposleniSearchTXT" prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView fx:id="zaposleniTable" prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn fx:id="zaposleniImeColumn" prefWidth="180.0" text="Ime" />
+                              <TableColumn fx:id="zaposleniPrezimeColumn" minWidth="0.0" prefWidth="171.0" text="Prezime" />
+                              <TableColumn fx:id="zaposleniJmbgColumn" minWidth="0.0" prefWidth="189.0" text="JMBG" />
+                              <TableColumn fx:id="zaposleniPlataColumn" maxWidth="399.0" minWidth="0.0" prefWidth="65.0" text="Plata" />
+                              <TableColumn fx:id="zaposleniPozicijaColumn" minWidth="0.0" prefWidth="154.0" text="Pozicija" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
-                        <Button mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+                        <Button fx:id="zaposleniEraseBTN" mnemonicParsing="false" text="Obriši" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button fx:id="zaposleniAddBTN" mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
-          <Tab text="Artikal">
+          <Tab fx:id="artikalTAB" text="Artikal">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
-                        <Button mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
-                        <TextField prefHeight="25.0" prefWidth="695.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
-                        <TableView prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+                        <Button fx:id="artikalEditBTN" mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button fx:id="artikalSearchBTN" mnemonicParsing="false" text="Pretraži" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField fx:id="artikalSearchTXT" prefHeight="25.0" prefWidth="695.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView fx:id="artikalTable" prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn fx:id="artikalNazivColumn" prefWidth="185.0" text="Naziv" />
+                              <TableColumn fx:id="artikalKolicinaColumn" prefWidth="124.0" text="Količina na stanju" />
+                              <TableColumn fx:id="artikalBarkodColumn" minWidth="0.0" prefWidth="162.0" text="Barkod" />
+                              <TableColumn fx:id="artikalTipColumn" minWidth="0.0" prefWidth="139.0" text="Tip" />
+                              <TableColumn fx:id="artikalCijenaColumn" minWidth="0.0" prefWidth="111.0" text="Cijena" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
-                        <Button mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+                        <Button fx:id="artikalEraseBTN" mnemonicParsing="false" text="Obriši" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button fx:id="artikalAddBTN" mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Transakcija">
+          <Tab fx:id="transakcijaTAB" text="Transakcija">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
-                        <Button mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
-                        <TextField prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
-                        <TableView prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+                        <Button fx:id="transakcijaEditBTN" mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button fx:id="transakcijaSearchBTN" mnemonicParsing="false" text="Pretraži" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField fx:id="transakcijaSearchTXT" prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView fx:id="traksancijaTable" prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn fx:id="transakcijaVrstaColumn" prefWidth="136.0" text="Vrsta transakcije" />
+                              <TableColumn fx:id="transakcijaPrimalacColumn" prefWidth="106.0" text="Primalac" />
+                              <TableColumn fx:id="transakcijaPosiljalacColumn" minWidth="3.0" prefWidth="132.0" text="Pošiljalac" />
+                              <TableColumn fx:id="transakcijaDatumColumn" minWidth="0.0" prefWidth="188.0" text="Datum transakcije" />
+                              <TableColumn fx:id="transakcijaIznosColumn" minWidth="0.0" prefWidth="153.0" text="Iznos" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
-                        <Button mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+                        <Button fx:id="transakcijaEraseBTN" mnemonicParsing="false" text="Obriši" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button fx:id="transakcijaAddBTN" mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Faktura">
+            <Tab fx:id="fakturaTAB" text="Faktura">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
-                        <Button mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
-                        <TextField prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
-                        <TableView prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+                        <Button fx:id="fakturaEditBTN" mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button fx:id="fakturaSearchBTN" mnemonicParsing="false" text="Pretraži" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField fx:id="fakturaSearchTXT" prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView fx:id="fakturaTable" prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn fx:id="fakturaBrojRacunaColumn" prefWidth="110.0" text="Broj računa" />
+                              <TableColumn fx:id="fakturaNazivRobeColumn" prefWidth="111.0" text="Naziv robe" />
+                              <TableColumn fx:id="fakturaJedinicaMjereColumn" prefWidth="111.0" text="Jedinica mjere" />
+                              <TableColumn fx:id="fakturaKolicinaColumn" prefWidth="111.0" text="Količina" />
+                              <TableColumn fx:id="fakturaCijenaColumn" prefWidth="111.0" text="Cijena" />
+                              <TableColumn fx:id="fakturaDatumColumn" prefWidth="88.0" text="Datum" />
+                              <TableColumn fx:id="fakturaRacunIzdaoColumn" prefWidth="134.0" text="Račun izdao" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
-                        <Button mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+                        <Button fx:id="fakturaObrisiBTN" mnemonicParsing="false" text="Obriši" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button fx:id="fakturaAddBTN" mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
               </content>

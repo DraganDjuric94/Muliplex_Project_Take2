@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="zaposleniForm" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Podaci o zaposlenom" AnchorPane.leftAnchor="15.0" />
+      <Label layoutX="14.0" layoutY="41.0" text="Ime" AnchorPane.leftAnchor="15.0" />
+      <TextField fx:id="zaposleniFormImeTXT" layoutX="14.0" layoutY="58.0" prefHeight="25.0" prefWidth="371.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <Label layoutX="15.0" layoutY="100.0" text="Prezime" />
+      <TextField fx:id="zaposleniFormPrezimeTXT" layoutX="15.0" layoutY="117.0" prefHeight="25.0" prefWidth="371.0" />
+      <Label layoutX="15.0" layoutY="158.0" text="JMBG" />
+      <TextField fx:id="zaposleniFormPlataTXT" layoutX="15.0" layoutY="238.0" prefHeight="25.0" prefWidth="371.0" />
+      <Label layoutX="15.0" layoutY="221.0" text="Plata" />
+      <TextField fx:id="zaposleniFormJmbgTXT" layoutX="15.0" layoutY="175.0" prefHeight="25.0" prefWidth="371.0" />
+      <CheckBox fx:id="zaposleniFormAktivanCHK" layoutX="22.0" layoutY="283.0" mnemonicParsing="false" text="Aktivan" AnchorPane.leftAnchor="15.0" />
+      <Button fx:id="zaposleniFormOkBTN" layoutX="175.0" layoutY="561.0" mnemonicParsing="false" text="OK" />
+      <Button fx:id="zaposleniFormCancelBTN" layoutX="333.0" layoutY="561.0" mnemonicParsing="false" text="Poništi" />
+   </children>
+</AnchorPane>
