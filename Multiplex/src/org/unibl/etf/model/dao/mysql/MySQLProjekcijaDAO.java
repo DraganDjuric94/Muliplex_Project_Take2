@@ -25,7 +25,7 @@ public class MySQLProjekcijaDAO implements ProjekcijaDAO {
 
     private static final String SQL_SELECT = "SELECT * FROM projekcija";
     private static final String SQL_INSERT = "INSERT INTO projekcija VALUES (null, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE projekcija SET FilmId=?, DatumVrijeme=? WHERE ProjekcijaId=?";
+    private static final String SQL_UPDATE = "UPDATE projekcija SET FilmId=?, DatumVrijeme=?, CijenaKarte=? WHERE ProjekcijaId=?";
     private static final String SQL_DELETE = "DELETE FROM projekcija WHERE ProjekcijaId=?";
 
     @Override
@@ -44,7 +44,8 @@ public class MySQLProjekcijaDAO implements ProjekcijaDAO {
                         new Projekcija(
                                 resultSet.getInt("ProjekcijaId"),
                                 resultSet.getInt("FilmId"),
-                                resultSet.getTimestamp("DatumVrijeme")
+                                resultSet.getTimestamp("DatumVrijeme"),
+                                resultSet.getDouble("CijenaKarte")
                         )
                 );
             }
@@ -82,6 +83,11 @@ public class MySQLProjekcijaDAO implements ProjekcijaDAO {
                 query += " AND DatumVrijeme=?";
                 pom.add(projekcija.getDatumVrijeme());
             }
+            
+            if(null != projekcija.getCijenaKarte()){
+                query += " AND CijenaKarte=?";
+                pom.add(projekcija.getCijenaKarte());
+            }
 
             preparedStatement = MySQLDAOFactory.prepareStatement(connection, query, false, pom.toArray());
             resultSet = preparedStatement.executeQuery();
@@ -90,7 +96,8 @@ public class MySQLProjekcijaDAO implements ProjekcijaDAO {
                         new Projekcija(
                                 resultSet.getInt("ProjekcijaId"),
                                 resultSet.getInt("FilmId"),
-                                resultSet.getTimestamp("DatumVrijeme")
+                                resultSet.getTimestamp("DatumVrijeme"),
+                                resultSet.getDouble("CijenaKarte")
                         )
                 );
             }
@@ -116,6 +123,7 @@ public class MySQLProjekcijaDAO implements ProjekcijaDAO {
             Object values[] = {
                 projekcija.getFilmId(),
                 projekcija.getDatumVrijeme(),
+                projekcija.getCijenaKarte()
             };
             preparedStatement = MySQLDAOFactory.prepareStatement(connection, SQL_INSERT, true, values);
             retVal = preparedStatement.executeUpdate();
@@ -146,6 +154,7 @@ public class MySQLProjekcijaDAO implements ProjekcijaDAO {
             Object values[] = {
                 projekcija.getFilmId(),
                 projekcija.getDatumVrijeme(),
+                projekcija.getCijenaKarte(),
                 projekcija.getProjekcijaId()
             };
             preparedStatement = MySQLDAOFactory.prepareStatement(connection, SQL_UPDATE, false, values);

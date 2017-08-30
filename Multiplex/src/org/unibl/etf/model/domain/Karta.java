@@ -5,8 +5,6 @@
  */
 package org.unibl.etf.model.domain;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
 
 
@@ -21,18 +19,16 @@ public class Karta {
     private Integer projekcijaId;
     private Integer sjedisteId;
     private Timestamp datumVrijeme;
-    private Double cijena;
     private Boolean rezervisana;
 
     public Karta() {
     }
 
-    public Karta(Integer kartaId, Integer projekcijaId, Integer sjedisteId, Timestamp datumVrijeme, Double cijena, Boolean rezervisana) {
+    public Karta(Integer kartaId, Integer projekcijaId, Integer sjedisteId, Timestamp datumVrijeme, Boolean rezervisana) {
         this.kartaId = kartaId;
         this.projekcijaId = projekcijaId;
         this.sjedisteId = sjedisteId;
         this.datumVrijeme = datumVrijeme;
-        this.cijena = cijena;
         this.rezervisana = rezervisana;
     }
 
@@ -50,10 +46,6 @@ public class Karta {
 
     public Timestamp getDatumVrijeme() {
         return datumVrijeme;
-    }
-
-    public Double getCijena() {
-        return cijena;
     }
 
     public Boolean getRezervisana() {
@@ -76,18 +68,16 @@ public class Karta {
         this.datumVrijeme = datumVrijeme;
     }
 
-    public void setCijena(Double cijena) {
-        this.cijena = cijena;
-    }
-
     public void setRezervisana(Boolean rezervisana) {
         this.rezervisana = rezervisana;
     }
 
     @Override
     public String toString() {
-        return "Karta{" + "kartaId=" + kartaId + ", projekcijaId=" + projekcijaId + ", sjedisteId=" + sjedisteId + ", datumVrijeme=" + datumVrijeme + ", cijena=" + cijena + ", rezervisana=" + rezervisana + '}';
+        return "Karta{" + "kartaId=" + kartaId + ", projekcijaId=" + projekcijaId + ", sjedisteId=" + sjedisteId + ", datumVrijeme=" + datumVrijeme + ", rezervisana=" + rezervisana + '}';
     }
+
+    
 
     
 }

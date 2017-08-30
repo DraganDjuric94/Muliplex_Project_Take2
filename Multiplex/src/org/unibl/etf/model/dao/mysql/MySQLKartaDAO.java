@@ -24,8 +24,8 @@ import org.unibl.etf.model.domain.Karta;
 public class MySQLKartaDAO implements KartaDAO {
 
     private static final String SQL_SELECT = "SELECT * FROM karta";
-    private static final String SQL_INSERT = "INSERT INTO karta VALUES (null, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE karta SET ProjekcijaId=?, SjedisteId=?, DatumVrijeme=?, Cijena=?, Rezervisana=? WHERE KartaId=?";
+    private static final String SQL_INSERT = "INSERT INTO karta VALUES (null, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE karta SET ProjekcijaId=?, SjedisteId=?, DatumVrijeme=?, Rezervisana=? WHERE KartaId=?";
     private static final String SQL_DELETE = "DELETE FROM karta WHERE KartaId=?";
 
     @Override
@@ -46,7 +46,6 @@ public class MySQLKartaDAO implements KartaDAO {
                                 resultSet.getInt("ProjekcijaId"),
                                 resultSet.getInt("SjedisteId"),
                                 resultSet.getTimestamp("DatumVrijeme"),
-                                resultSet.getDouble("Cijena"),
                                 resultSet.getBoolean("Rezervisana")
                         )
                 );
@@ -91,11 +90,6 @@ public class MySQLKartaDAO implements KartaDAO {
                 pom.add(karta.getDatumVrijeme());
             }
 
-            if (null != karta.getCijena()) {
-                query += " AND Cijena=?";
-                pom.add(karta.getCijena());
-            }
-
             if (null != karta.getRezervisana()) {
                 query += " AND Rezervisana=?";
                 pom.add(karta.getRezervisana());
@@ -110,7 +104,6 @@ public class MySQLKartaDAO implements KartaDAO {
                                 resultSet.getInt("ProjekcijaId"),
                                 resultSet.getInt("SjedisteId"),
                                 resultSet.getTimestamp("DatumVrijeme"),
-                                resultSet.getDouble("Cijena"),
                                 resultSet.getBoolean("Rezervisana")
                         )
                 );
@@ -138,7 +131,6 @@ public class MySQLKartaDAO implements KartaDAO {
                 karta.getProjekcijaId(),
                 karta.getSjedisteId(),
                 karta.getDatumVrijeme(),
-                karta.getCijena(),
                 karta.getRezervisana()
             };
             preparedStatement = MySQLDAOFactory.prepareStatement(connection, SQL_INSERT, true, values);
@@ -171,7 +163,6 @@ public class MySQLKartaDAO implements KartaDAO {
                 karta.getProjekcijaId(),
                 karta.getSjedisteId(),
                 karta.getDatumVrijeme(),
-                karta.getCijena(),
                 karta.getRezervisana(),
                 karta.getKartaId()
             };

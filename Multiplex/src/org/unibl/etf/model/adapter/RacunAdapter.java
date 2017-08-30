@@ -8,10 +8,8 @@ package org.unibl.etf.model.adapter;
 import java.util.ArrayList;
 import java.util.List;
 import org.unibl.etf.model.dao.RacunDAO;
-import org.unibl.etf.model.dao.StavkaDAO;
 import org.unibl.etf.model.dao.mysql.MySQLDAOFactory;
 import org.unibl.etf.model.domain.Racun;
-import org.unibl.etf.model.domain.oo.ProjekcijaOO;
 import org.unibl.etf.model.domain.oo.RacunOO;
 import org.unibl.etf.model.domain.oo.StavkaOO;
 
@@ -42,16 +40,19 @@ public class RacunAdapter {
     }
     
     public static void unesi(RacunOO racunOO){
-        //Unesi stavke racuna
+        
+        Racun racun = konvertujUOV(racunOO);
+        racunDAO.insert(racun);
+        racunOO.setRacunId(racun.getRacunId());
+         
         for(StavkaOO stavkaOO: racunOO.getStavke()){
             StavkaAdapter.unesi(racunOO.getRacunId(), stavkaOO);
         }
-        
-        //Unesi racun
-        racunDAO.insert(konvertujUOV(racunOO));
     }
     
     public static void izmijeni(RacunOO racunOO){
+        
+        
         //Izbrisi stare stavke
         List<StavkaOO> stavkaOOList = StavkaAdapter.preuzmiPoRacunId(racunOO.getRacunId());
         for(StavkaOO stavkaOO: stavkaOOList){

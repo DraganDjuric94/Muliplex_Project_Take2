@@ -5,27 +5,22 @@
  */
 package org.unibl.etf.model.adapter;
 
-import java.lang.annotation.Documented;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import org.unibl.etf.model.dao.ProjekcijaDAO;
 import org.unibl.etf.model.dao.ProjekcijaSalaDAO;
 import org.unibl.etf.model.dao.mysql.MySQLDAOFactory;
-import org.unibl.etf.model.dao.mysql.MySQLProjekcijaDAO;
 import org.unibl.etf.model.domain.Projekcija;
 import org.unibl.etf.model.domain.ProjekcijaSala;
 import org.unibl.etf.model.domain.oo.FilmOO;
 import org.unibl.etf.model.domain.oo.KartaOO;
 import org.unibl.etf.model.domain.oo.ProjekcijaOO;
 import org.unibl.etf.model.domain.oo.SalaOO;
-import org.unibl.etf.model.domain.oo.SjedisteOO;
 
 /**
  *
- * @author juhu
+ * @author juhu, Aleksandar
  */
 
 public class ProjekcijaAdapter {
@@ -64,7 +59,7 @@ public class ProjekcijaAdapter {
         
         ProjekcijaOO retVal = null;
         
-        List<Projekcija> tempLst = projekcijaDAO.selectBy(new Projekcija(projekcijaId, null, null));
+        List<Projekcija> tempLst = projekcijaDAO.selectBy(new Projekcija(projekcijaId, null, null, null));
         Projekcija tempProj = null;
         if(tempLst.size() == 1){
             tempProj = tempLst.get(0);
@@ -145,6 +140,7 @@ public class ProjekcijaAdapter {
         
         retVal.setProjekcijaId(projekcija.getProjekcijaId());
         retVal.setDatumVrijeme(projekcija.getDatumVrijeme());
+        retVal.setCijenaKarte(projekcija.getCijenaKarte());
 
        
         ProjekcijaSala projSal = null;
@@ -160,7 +156,6 @@ public class ProjekcijaAdapter {
         retVal.setFilm(film);
         
         /*
-        POSTAVITI IH U KONTROLERU
         ArrayList<KartaOO> karteZaProjekciju = KartaAdapter.preuzmiPoProjekcijaId(projekcija.getProjekcijaId());
         ArrayList<SjedisteOO> zauzetaSjedista = new ArrayList<>();
         
@@ -169,7 +164,6 @@ public class ProjekcijaAdapter {
         }
         
         retVal.setZauzetaSjedista(zauzetaSjedista);
-        
         */
         
         return retVal;
@@ -178,7 +172,12 @@ public class ProjekcijaAdapter {
     
     private static  Projekcija konvertujUOV(ProjekcijaOO projekcija){
        
-        return new Projekcija(projekcija.getProjekcijaId(), projekcija.getFilm().getFilmId(), new Timestamp(projekcija.getDatumVrijeme().getTime()));
+        return new Projekcija(
+                projekcija.getProjekcijaId(),
+                projekcija.getFilm().getFilmId(),
+                new Timestamp(projekcija.getDatumVrijeme().getTime()),
+                projekcija.getCijenaKarte()
+        );
         
     }
     

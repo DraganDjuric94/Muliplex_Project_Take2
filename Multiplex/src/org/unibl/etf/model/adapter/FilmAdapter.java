@@ -38,9 +38,8 @@ public class FilmAdapter {
     public static FilmOO preuzmiPoId(Integer filmId){
         FilmOO filmOO = null;
         List<Film> filmList = filmDAO.selectBy(new Film(filmId, null, null, null, null));
-        Film film = filmList.get(0);
-        if (null != film) {
-            filmOO = konvertujUOO(film);
+        if (1 == filmList.size()) {
+            filmOO = konvertujUOO(filmList.get(0));
         }
         return filmOO;
     }
@@ -55,7 +54,9 @@ public class FilmAdapter {
     }
     
     public static void unesi(FilmOO filmOO){
-        filmDAO.insert(konvertujUOV(filmOO));
+        Film film = konvertujUOV(filmOO);
+        filmDAO.insert(film);
+        filmOO.setFilmId(film.getFilmId());
         
         for(ZanrOO zanrOO: filmOO.getZanrovi()){
             filmZanrDAO.insert(new FilmZanr(filmOO.getFilmId(), zanrOO.getZanrId()));
@@ -90,8 +91,10 @@ public class FilmAdapter {
             }
         }
         
-        PonudaZaFilmOO ponudaZaFilm = PonudaZaFilmAdapter.preuzmiPoFilmId(filmId);
-        PonudaZaFilmAdapter.obrisi(ponudaZaFilm.getPonudaZaFilmId());
+        List<PonudaZaFilmOO> ponudaZaFilmOOList = PonudaZaFilmAdapter.preuzmiPoFilmId(filmId);
+        for(PonudaZaFilmOO ponudaZaFilmOO: ponudaZaFilmOOList){
+           PonudaZaFilmAdapter.obrisi(ponudaZaFilmOO.getPonudaZaFilmId());
+        }
         
         List<FilmZanr> filmZanrList = filmZanrDAO.selectBy(new FilmZanr(filmId, null));
         
@@ -107,11 +110,9 @@ public class FilmAdapter {
         ArrayList<ZanrOO> zanrOOList = new ArrayList<>();
 
         List<FilmZanr> filmZanrList = filmZanrDAO.selectBy(new FilmZanr(film.getFilmId(), null));
-        
         for(FilmZanr filmZanr: filmZanrList){
             zanrOOList.add(ZanrAdapter.preuzmiPoId(filmZanr.getZanrId()));
         }
-        
         return new FilmOO(
                 film.getFilmId(),
                 film.getNaziv(),

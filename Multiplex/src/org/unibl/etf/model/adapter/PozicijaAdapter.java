@@ -32,9 +32,8 @@ public class PozicijaAdapter {
     public static PozicijaOO preuzmiPoId(Integer pozicijaId) {
         PozicijaOO pozicijaOO = null;
         List<Pozicija> pozicijaList = pozicijaDAO.selectBy(new Pozicija(pozicijaId, null, null, null));
-        Pozicija pozicija = pozicijaList.get(0);
-        if (null != pozicija) {
-            pozicijaOO = konvertujUOO(pozicija);
+        if (1 == pozicijaList.size()) {
+            pozicijaOO = konvertujUOO(pozicijaList.get(0));
         }
         return pozicijaOO;
     }
@@ -48,8 +47,10 @@ public class PozicijaAdapter {
         return pozicijaOOList;
     }
 
-    public static void dodaj(PozicijaOO pozicija){
-        pozicijaDAO.insert(konvertujUOV(pozicija));
+    public static void unesi(PozicijaOO pozicijaOO){
+        Pozicija pozicija = konvertujUOV(pozicijaOO);
+        pozicijaDAO.insert(pozicija);
+        pozicijaOO.setPozicijaId(pozicija.getPozicijaId());
     }
     
     public static void izmijeni(PozicijaOO pozicija) {
@@ -71,7 +72,10 @@ public class PozicijaAdapter {
 
     private static Pozicija konvertujUOV(PozicijaOO pozicijaOO) {
         java.sql.Date datumOdSQL = new java.sql.Date(pozicijaOO.getDatumOd().getTime());
-        java.sql.Date datumDoSQL = new java.sql.Date(pozicijaOO.getDatumDo().getTime());
+        java.sql.Date datumDoSQL = null;
+        if(null != pozicijaOO.getDatumDo()){
+            datumDoSQL = new java.sql.Date(pozicijaOO.getDatumDo().getTime());
+        }
         return new Pozicija(
                 pozicijaOO.getPozicijaId(),
                 pozicijaOO.getNaziv(),

@@ -18,14 +18,16 @@ public class Projekcija {
     private Integer projekcijaId;
     private Integer filmId;
     private Timestamp datumVrijeme;
+    private Double cijenaKarte;
 
     public Projekcija() {
     }
 
-    public Projekcija(Integer projekcijaId, Integer filmId, Timestamp datumVrijeme) {
+    public Projekcija(Integer projekcijaId, Integer filmId, Timestamp datumVrijeme, Double cijenaKarte) {
         this.projekcijaId = projekcijaId;
         this.filmId = filmId;
         this.datumVrijeme = datumVrijeme;
+        this.cijenaKarte = cijenaKarte;
     }
 
     public Integer getProjekcijaId() {
@@ -40,6 +42,10 @@ public class Projekcija {
         return datumVrijeme;
     }
 
+    public Double getCijenaKarte() {
+        return cijenaKarte;
+    }
+    
     public void setProjekcijaId(Integer projekcijaId) {
         this.projekcijaId = projekcijaId;
     }
@@ -52,10 +58,16 @@ public class Projekcija {
         this.datumVrijeme = datumVrijeme;
     }
 
+    public void setCijenaKarte(Double cijenaKarte) {
+        this.cijenaKarte = cijenaKarte;
+    }
+
     @Override
     public String toString() {
-        return "Projekcija{" + "projekcijaId=" + projekcijaId + ", filmId=" + filmId + ", datumVrijeme=" + datumVrijeme + '}';
+        return "Projekcija{" + "projekcijaId=" + projekcijaId + ", filmId=" + filmId + ", datumVrijeme=" + datumVrijeme + ", cijenaKarte=" + cijenaKarte + '}';
     }
+    
+    
     
     
     

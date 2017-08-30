@@ -79,37 +79,37 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
             }
 
             if (null != zaposleni.getIme()) {
-                query += " Ime=?";
+                query += " AND Ime=?";
                 pom.add(zaposleni.getIme());
             }
 
             if (null != zaposleni.getPrezime()) {
-                query += " Prezime=?";
+                query += " AND Prezime=?";
                 pom.add(zaposleni.getPrezime());
             }
 
             if (null != zaposleni.getJmbg()) {
-                query += " JMBG=?";
+                query += " AND JMBG=?";
                 pom.add(zaposleni.getJmbg());
             }
 
             if (null != zaposleni.getAktivan()) {
-                query += " Aktivan=?";
+                query += " AND Aktivan=?";
                 pom.add(zaposleni.getAktivan());
             }
 
             if (null != zaposleni.getPlata()) {
-                query += " Plata=?";
+                query += " AND Plata=?";
                 pom.add(zaposleni.getPlata());
             }
             
             if (null != zaposleni.getKorisnickoIme()){
-                query += " KorisnickoIme=?";
+                query += " AND KorisnickoIme=?";
                 pom.add(zaposleni.getKorisnickoIme());
             }
             
             if (null != zaposleni.getLozinka()){
-                query += " Lozinka=?";
+                query += " AND Lozinka=?";
                 pom.add(zaposleni.getLozinka());
             }
 

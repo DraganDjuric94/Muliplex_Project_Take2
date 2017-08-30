@@ -32,9 +32,8 @@ public class ZanrAdapter {
     public static ZanrOO preuzmiPoId(Integer zanrId){
         ZanrOO zanrOO = null;
         List<Zanr> zanrList = zanrDAO.selectBy(new Zanr(zanrId, null));
-        Zanr zanr = zanrList.get(0);
-        if (null != zanr) {
-            zanrOO = konvertujUOO(zanr);
+        if (1 == zanrList.size()) {
+            zanrOO = konvertujUOO(zanrList.get(0));
         }
         return zanrOO;
     }
@@ -48,8 +47,10 @@ public class ZanrAdapter {
         return zanrOOList;
     }
     
-    public static void unesi(ZanrOO zanr){
-        zanrDAO.insert(konvertujUOV(zanr));
+    public static void unesi(ZanrOO zanrOO){
+        Zanr zanr = konvertujUOV(zanrOO);
+        zanrDAO.insert(zanr);
+        zanrOO.setZanrId(zanr.getZanrId());
     }
     
     public static void izmijeni(ZanrOO zanr){

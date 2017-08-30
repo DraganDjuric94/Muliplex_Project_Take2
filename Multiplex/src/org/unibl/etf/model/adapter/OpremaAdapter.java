@@ -11,7 +11,6 @@ import org.unibl.etf.model.dao.OpremaDAO;
 import org.unibl.etf.model.dao.mysql.MySQLDAOFactory;
 import org.unibl.etf.model.domain.Oprema;
 import org.unibl.etf.model.domain.oo.OpremaOO;
-import org.unibl.etf.model.domain.oo.ProjekcijaOO;
 
 /**
  *
@@ -67,7 +66,9 @@ public class OpremaAdapter {
     }
     
     public static void unesi(OpremaOO opremaOO){
-        opremaDAO.insert(konvertujUOV(opremaOO));
+        Oprema oprema = konvertujUOV(opremaOO);
+        opremaDAO.insert(oprema);
+        opremaOO.setOpremaId(oprema.getOpremaId());
     }
 
     public static void izmijeni(OpremaOO opremaOO) {

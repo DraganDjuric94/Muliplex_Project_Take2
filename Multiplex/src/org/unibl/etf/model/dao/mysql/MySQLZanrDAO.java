@@ -71,6 +71,11 @@ public class MySQLZanrDAO implements ZanrDAO {
                 query += " AND ZanrId=?";
                 pom.add(zanr.getZanrId());
             }
+            
+            if (null != zanr.getNaziv()){
+                query += " AND Naziv=?";
+                pom.add(zanr.getNaziv());
+            }
 
             preparedStatement = MySQLDAOFactory.prepareStatement(connection, query, false, pom.toArray());
             resultSet = preparedStatement.executeQuery();

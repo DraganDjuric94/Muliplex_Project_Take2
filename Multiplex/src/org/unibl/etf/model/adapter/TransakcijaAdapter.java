@@ -35,8 +35,8 @@ public class TransakcijaAdapter {
         TransakcijaOO transakcijaOO = null;
         List<Transakcija> transakcijaList = transakcijaDAO.selectBy(new Transakcija(transakcijaId, null, null, null, null, null));
         Transakcija transakcija = transakcijaList.get(0);
-        if (null != transakcija) {
-            transakcijaOO = konvertujUOO(transakcija);
+        if (1 == transakcijaList.size()) {
+            transakcijaOO = konvertujUOO(transakcijaList.get(0));
         }
         return transakcijaOO;
     }
@@ -88,7 +88,9 @@ public class TransakcijaAdapter {
     }
 
     public static void unesi(TransakcijaOO transakcijaOO){
-        transakcijaDAO.insert(konvertujUOV(transakcijaOO));
+        Transakcija transakcija = konvertujUOV(transakcijaOO);
+        transakcijaDAO.insert(transakcija);
+        transakcijaOO.setTransakcijaId(transakcija.getTransakcijaId());
     }
     
     public static void izmijeni(TransakcijaOO transakcijaOO) {

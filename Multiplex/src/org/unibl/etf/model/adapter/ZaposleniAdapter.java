@@ -6,6 +6,7 @@
 package org.unibl.etf.model.adapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.unibl.etf.model.dao.ZaposleniDAO;
 import org.unibl.etf.model.dao.ZaposleniPozicijaDAO;
@@ -87,25 +88,50 @@ public class ZaposleniAdapter {
         return zaposleniOOList;
     }
     
+    public static ArrayList<ZaposleniOO> preuzmiPoLozinki(String lozinka){
+        ArrayList<ZaposleniOO> zaposleniOOList = new ArrayList<>();
+        List<Zaposleni> zaposleniList = zaposleniDAO.selectBy(new Zaposleni(null, null, null, null, null, null, null, lozinka));
+        for (Zaposleni zaposleni : zaposleniList) {
+            zaposleniOOList.add(konvertujUOO(zaposleni));
+        }
+        return zaposleniOOList;
+    }
+    
     public static void unesi(ZaposleniOO zaposleniOO){
+        PozicijaOO pozicijaOO = zaposleniOO.getPozicija();
+        
+        if((null == pozicijaOO.getPozicijaId()) || (null == PozicijaAdapter.preuzmiPoId(pozicijaOO.getPozicijaId()))){
+            PozicijaAdapter.unesi(pozicijaOO);
+        }
+        
+        Zaposleni zaposleni = konvertujUOV(zaposleniOO);
+        zaposleniDAO.insert(zaposleni);
+        zaposleniOO.setZaposleniId(zaposleni.getZaposleniId());
+        
         zaposleniPozicijaDAO.insert(new ZaposleniPozicija(zaposleniOO.getZaposleniId(), zaposleniOO.getPozicija().getPozicijaId()));
-        zaposleniDAO.insert(konvertujUOV(zaposleniOO));
     }
     
     public static void izmijeni(ZaposleniOO zaposleniOO){
-        //odraditi 
+        PozicijaOO zadnjaPozicijaZaposlenogOO = vratiTrenutnuPozicijuZaposlenog(zaposleniOO.getZaposleniId());
+        PozicijaOO trenutnaPozicijaZaposlenogOO = zaposleniOO.getPozicija();
+        if(!zadnjaPozicijaZaposlenogOO.getPozicijaId().equals(trenutnaPozicijaZaposlenogOO.getPozicijaId())){
+            zaposleniPozicijaDAO.insert(new ZaposleniPozicija(zaposleniOO.getZaposleniId(), trenutnaPozicijaZaposlenogOO.getPozicijaId()));
+        }
+        zaposleniDAO.update(konvertujUOV(zaposleniOO));
+        
     }
     
     public static void obrisi(Integer zaposleniId){
-        //vrati pozicije zaposlenog
-        List<ZaposleniPozicija> zaposleniPozicijaList = zaposleniPozicijaDAO.selectBy(new ZaposleniPozicija(zaposleniId, null));
+        List<ZaposleniPozicija> zaposleniPozicijaList = zaposleniPozicijaDAO.selectBy(new ZaposleniPozicija(zaposleniId, null));     
         
-        //obrisi pozicije na kojima je bio zaposleni
         for(ZaposleniPozicija zaposleniPozicija: zaposleniPozicijaList){
             zaposleniPozicijaDAO.delete(zaposleniId, zaposleniPozicija.getPozicijaId());
         }
         
-        //obrisi zaposlenog
+        for(ZaposleniPozicija zaposleniPozicija: zaposleniPozicijaList){
+            PozicijaAdapter.obrisi(zaposleniPozicija.getPozicijaId());
+        }
+        
         zaposleniDAO.delete(zaposleniId);
     }   
     

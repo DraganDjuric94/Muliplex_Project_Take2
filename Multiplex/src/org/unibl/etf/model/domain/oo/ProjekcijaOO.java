@@ -19,16 +19,18 @@ public class ProjekcijaOO {
     private Date datumVrijeme;
     private FilmOO film;
     private SalaOO sala;
+    private Double cijenaKarte;
     private List<SjedisteOO> zauzetaSjedista;
 
     public ProjekcijaOO() {
     }
 
-    public ProjekcijaOO(Integer projekcijaId, Date datumVrijeme, FilmOO film, SalaOO sala, List<SjedisteOO> zauzetaSjedista) {
+    public ProjekcijaOO(Integer projekcijaId, Date datumVrijeme, FilmOO film, SalaOO sala, Double cijenaKarte, List<SjedisteOO> zauzetaSjedista) {
         this.projekcijaId = projekcijaId;
         this.datumVrijeme = datumVrijeme;
         this.film = film;
         this.sala = sala;
+        this.cijenaKarte = cijenaKarte;
         this.zauzetaSjedista = zauzetaSjedista;
     }
 
@@ -46,6 +48,10 @@ public class ProjekcijaOO {
 
     public SalaOO getSala() {
         return sala;
+    }
+
+    public Double getCijenaKarte() {
+        return cijenaKarte;
     }
 
     public List<SjedisteOO> getZauzetaSjedista() {
@@ -68,14 +74,18 @@ public class ProjekcijaOO {
         this.sala = sala;
     }
 
+    public void setCijenaKarte(Double cijenaKarte) {
+        this.cijenaKarte = cijenaKarte;
+    }
+
     public void setZauzetaSjedista(List<SjedisteOO> zauzetaSjedista) {
         this.zauzetaSjedista = zauzetaSjedista;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 13 * hash + Objects.hashCode(this.projekcijaId);
+        int hash = 3;
+        hash = 89 * hash + Objects.hashCode(this.projekcijaId);
         return hash;
     }
 
@@ -99,13 +109,9 @@ public class ProjekcijaOO {
 
     @Override
     public String toString() {
-        return '{'
-                + "projekcijaId=" + projekcijaId
-                + ", datumVrijeme=" + datumVrijeme
-                + ", film=" + film
-                + ", sala=" + sala
-                + ", zauzetaSjedista=" + zauzetaSjedista
-                + '}';
+        return "ProjekcijaOO{" + "projekcijaId=" + projekcijaId + ", datumVrijeme=" + datumVrijeme + ", film=" + film + ", sala=" + sala + ", cijenaKarte=" + cijenaKarte + ", zauzetaSjedista=" + zauzetaSjedista + '}';
     }
+
+    
 
 }

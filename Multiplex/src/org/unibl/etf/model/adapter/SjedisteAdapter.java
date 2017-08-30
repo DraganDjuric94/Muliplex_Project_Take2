@@ -33,9 +33,8 @@ public class SjedisteAdapter {
     public static SjedisteOO preuzmiPoId(Integer sjedisteId){
         SjedisteOO sjedisteOO = null;
         List<Sjediste> sjedisteList = sjedisteDAO.selectBy(new Sjediste(sjedisteId, null, null, null));
-        Sjediste sjediste = sjedisteList.get(0);
-        if (null != sjediste) {
-            sjedisteOO = konvertujUOO(sjediste);
+        if (1 == sjedisteList.size()) {
+            sjedisteOO = konvertujUOO(sjedisteList.get(0));
         }
         return sjedisteOO;
     }
@@ -51,7 +50,9 @@ public class SjedisteAdapter {
     
     
     public static void unesi(Integer salaId, SjedisteOO sjedisteOO){
-        sjedisteDAO.insert(konvertujUOV(salaId, sjedisteOO));
+        Sjediste sjediste = konvertujUOV(salaId, sjedisteOO);
+        sjedisteDAO.insert(sjediste);
+        sjedisteOO.setSjedisteId(sjediste.getSjedisteId());
     }
     
     public static void izmijeni(Integer salaId, SjedisteOO sjedisteOO){

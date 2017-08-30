@@ -33,9 +33,8 @@ public class FakturaAdapter {
     public static FakturaOO preuzmiPoId(Integer fakturaId) {
         FakturaOO fakturaOO = null;
         List<Faktura> fakturaList = fakturaDAO.selectBy(new Faktura(fakturaId, null, null, null, null, null, null, null));
-        Faktura faktura = fakturaList.get(0);
-        if (null != faktura) {
-            fakturaOO = konvertujUOO(faktura);
+        if (1 == fakturaList.size()) {
+            fakturaOO = konvertujUOO(fakturaList.get(0));
         }
         return fakturaOO;
     }
@@ -107,6 +106,7 @@ public class FakturaAdapter {
     public static void unesi(FakturaOO fakturaOO){
         Faktura faktura = konvertujUOV(fakturaOO);
         fakturaDAO.insert(faktura);
+        fakturaOO.setFakturaId(faktura.getFakturaId());
     }
 
     public static void izmijeni(FakturaOO fakturaOO) {

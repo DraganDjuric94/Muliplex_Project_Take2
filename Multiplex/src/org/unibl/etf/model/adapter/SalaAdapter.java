@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.unibl.etf.model.dao.ProjekcijaSalaDAO;
 import org.unibl.etf.model.dao.SalaDAO;
-import org.unibl.etf.model.dao.SjedisteDAO;
 import org.unibl.etf.model.dao.mysql.MySQLDAOFactory;
 import org.unibl.etf.model.domain.ProjekcijaSala;
 import org.unibl.etf.model.domain.Sala;
-import org.unibl.etf.model.domain.Sjediste;
 import org.unibl.etf.model.domain.oo.SalaOO;
 import org.unibl.etf.model.domain.oo.SjedisteOO;
 
@@ -24,7 +22,6 @@ import org.unibl.etf.model.domain.oo.SjedisteOO;
 public class SalaAdapter {
 
     private static final SalaDAO salaDAO = MySQLDAOFactory.getInstance().getSalaDAO();
-    private static final SjedisteDAO sjedisteDAO = MySQLDAOFactory.getInstance().getSjedisteDAO();
     private static final ProjekcijaSalaDAO projekcijaSalaDAO = MySQLDAOFactory.getInstance().getProjekcijaSalaDAO();
 
     public static ArrayList<SalaOO> preuzmiSve() {
@@ -39,48 +36,51 @@ public class SalaAdapter {
     public static SalaOO preuzmiPoId(Integer salaId) {
         SalaOO salaOO = null;
         List<Sala> salaList = salaDAO.selectBy(new Sala(salaId, null, null));
-        Sala sala = salaList.get(0);
-        if (null != sala) {
-            salaOO = konvertujUOO(sala);
+        if (1 == salaList.size()) {
+            salaOO = konvertujUOO(salaList.get(0));
         }
         return salaOO;
     }
 
-    public static void unesi(SalaOO salaOO) {
+    public static void unesi(SalaOO salaOO) {        
+        //unos sale
+        Sala sala = konvertujUOV(salaOO);
+        salaDAO.insert(sala);
+        salaOO.setSalaId(sala.getSalaId());
+        
         //unos sjediste
         for (SjedisteOO sjedisteOO : salaOO.getSjedista()) {
             SjedisteAdapter.unesi(salaOO.getSalaId(), sjedisteOO);
         }
-        
-        //unos sale
-        salaDAO.insert(konvertujUOV(salaOO));
     }
 
     public static void izmijeni(SalaOO salaOO) {
-        //brisanje sjedista
-        List<Sjediste> sjedisteList = sjedisteDAO.selectBy(new Sjediste(null, salaOO.getSalaId(), null, null));
-        for (Sjediste sjediste : sjedisteList) {
-            sjedisteDAO.delete(sjediste.getSjedisteId());
+        List<SjedisteOO> sjedisteOOList = SjedisteAdapter.preuzmiPoSalaId(salaOO.getSalaId());
+        for(SjedisteOO sjedisteOO: sjedisteOOList){
+            SjedisteAdapter.obrisi(sjedisteOO.getSjedisteId());
         }
         
-        //brisanje sale
-        salaDAO.delete(salaOO.getSalaId());
+        for(SjedisteOO sjedisteOO: salaOO.getSjedista()){
+            SjedisteAdapter.unesi(salaOO.getSalaId(), sjedisteOO);
+        }
+        
+        salaDAO.update(konvertujUOV(salaOO));
+        
     }
 
     public static void obrisi(Integer salaId) {
-        //brisanje sjediste
-        List<Sjediste> sjedisteList = sjedisteDAO.selectBy(new Sjediste(null, salaId, null, null));
-        for (Sjediste sjediste : sjedisteList) {
-            sjedisteDAO.delete(sjediste.getSjedisteId());
+        List<ProjekcijaSala> projekcijaSalaList = projekcijaSalaDAO.selectBy(new ProjekcijaSala(null, salaId));
+        
+        for(ProjekcijaSala projekcijaSala: projekcijaSalaList){
+            projekcijaSalaDAO.delete(salaId, projekcijaSala.getProjekcijaId());
         }
         
-        //brisanje projekcija_baza
-        List<ProjekcijaSala> projekcijaSalaList = projekcijaSalaDAO.selectBy(new ProjekcijaSala(salaId, null));
-        for(ProjekcijaSala projekcijaSala:projekcijaSalaList){
-            projekcijaSalaDAO.delete(projekcijaSala.getProjekcijaId(), projekcijaSala.getSalaId());
+        SalaOO salaOO = preuzmiPoId(salaId);
+        for(SjedisteOO sjedisteOO: salaOO.getSjedista()){
+            SjedisteAdapter.obrisi(salaId);
         }
         
-        salaDAO.delete(salaId);
+        
     }
 
     private static SalaOO konvertujUOO(Sala sala) {

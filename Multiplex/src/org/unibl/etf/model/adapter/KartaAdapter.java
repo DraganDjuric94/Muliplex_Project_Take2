@@ -33,7 +33,7 @@ public class KartaAdapter {
     
     public static KartaOO preuzmiPoId(Integer kartaId){
         KartaOO kartaOO = null;
-        List<Karta> kartaList = kartaDAO.selectBy(new Karta(kartaId, null, null, null, null, null));
+        List<Karta> kartaList = kartaDAO.selectBy(new Karta(kartaId, null, null, null, null));
         if (1 == kartaList.size()) {
             Karta karta = kartaList.get(0);
             kartaOO = konvertujUOO(karta.getProjekcijaId(), karta.getSjedisteId(), karta);
@@ -43,7 +43,7 @@ public class KartaAdapter {
     
     public static ArrayList<KartaOO> preuzmiPoProjekcijaId(Integer projekcijaId){
         ArrayList<KartaOO> kartaOOList = new ArrayList<>();
-        List<Karta> kartaList = kartaDAO.selectBy(new Karta(null, projekcijaId, null, null, null, null));
+        List<Karta> kartaList = kartaDAO.selectBy(new Karta(null, projekcijaId, null, null, null));
         for (Karta karta : kartaList) {
             kartaOOList.add(konvertujUOO(projekcijaId, karta.getSjedisteId(), karta));
         }
@@ -52,7 +52,7 @@ public class KartaAdapter {
     
     public static ArrayList<KartaOO> preuzmiPoSjedisteId(Integer sjedisteId){
         ArrayList<KartaOO> kartaOOList = new ArrayList<>();
-        List<Karta> kartaList = kartaDAO.selectBy(new Karta(null, null, sjedisteId, null, null, null));
+        List<Karta> kartaList = kartaDAO.selectBy(new Karta(null, null, sjedisteId, null, null));
         for (Karta karta : kartaList) {
             kartaOOList.add(konvertujUOO(karta.getProjekcijaId(), sjedisteId, karta));
         }
@@ -60,7 +60,9 @@ public class KartaAdapter {
     }
     
     public static void unesi(KartaOO kartaOO){
-        kartaDAO.insert(konvertujUOV(kartaOO));
+        Karta karta = konvertujUOV(kartaOO);
+        kartaDAO.insert(karta);
+        kartaOO.setKartaId(karta.getKartaId());
     }
     
     public static void izmijeni(KartaOO kartaOO){
@@ -79,7 +81,7 @@ public class KartaAdapter {
                 projekcijaOO,
                 sjedisteOO,
                 karta.getDatumVrijeme(),
-                karta.getCijena(),
+                projekcijaOO.getCijenaKarte(),
                 karta.getRezervisana()
         );
     }
@@ -91,7 +93,6 @@ public class KartaAdapter {
                 kartaOO.getProjekcija().getProjekcijaId(),
                 kartaOO.getSjediste().getSjedisteId(),
                 datumVrijeme,
-                kartaOO.getCijena(),
                 kartaOO.getRezervisana()
         );
     }

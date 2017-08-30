@@ -32,9 +32,8 @@ public class ArtikalAdapter {
     public static ArtikalOO preuzmiPoId(Integer artikalId) {
         ArtikalOO artikalOO = null;
         List<Artikal> artikalList = artikalDAO.selectBy(new Artikal(artikalId, null, null, null, null, null));
-        Artikal artikal = artikalList.get(0);
-        if (null != artikal) {
-            artikalOO = konvertujUOO(artikal);
+        if (1 == artikalList.size()) {
+            artikalOO = konvertujUOO(artikalList.get(0));
         }
         return artikalOO;
     }
@@ -85,7 +84,9 @@ public class ArtikalAdapter {
     }
 
     public static void unesi(ArtikalOO artikalOO){
-        artikalDAO.insert(konvertujUOV(artikalOO));
+        Artikal artikal = konvertujUOV(artikalOO);
+        artikalDAO.insert(artikal);
+        artikalOO.setArtikalId(artikal.getArtikalId());
     }
     
     public static void izmijeni(ArtikalOO artikalOO) {

@@ -17,10 +17,10 @@ import org.unibl.etf.model.domain.oo.PonudaZaFilmOO;
  * @author juhu
  */
 public class PonudaZaFilmAdapter {
-    
+
     private static PonudaZaFilmDAO ponudaZaFilmDAO = MySQLDAOFactory.getInstance().getPonudaZaFilmDAO();
-    
-    public static ArrayList<PonudaZaFilmOO> preuzmiSve(){
+
+    public static ArrayList<PonudaZaFilmOO> preuzmiSve() {
         List<PonudaZaFilm> ponudaZaFilmList = ponudaZaFilmDAO.selectAll();
         ArrayList<PonudaZaFilmOO> ponudaZaFilmOOList = new ArrayList<>();
         for (PonudaZaFilm ponudaZaFilm : ponudaZaFilmList) {
@@ -28,40 +28,40 @@ public class PonudaZaFilmAdapter {
         }
         return ponudaZaFilmOOList;
     }
-    
-    public static PonudaZaFilmOO preuzmiPoId(Integer ponudaZaFilmId){
+
+    public static PonudaZaFilmOO preuzmiPoId(Integer ponudaZaFilmId) {
         PonudaZaFilmOO ponudaZaFilmOO = null;
         List<PonudaZaFilm> ponudaZaFilmList = ponudaZaFilmDAO.selectBy(new PonudaZaFilm(ponudaZaFilmId, null, null, null));
-        PonudaZaFilm ponudaZaFilm = ponudaZaFilmList.get(0);
-        if (null != ponudaZaFilm) {
-            ponudaZaFilmOO = konvertujUOO(ponudaZaFilm);
+        if (1 == ponudaZaFilmList.size()) {
+            ponudaZaFilmOO = konvertujUOO(ponudaZaFilmList.get(0));
         }
         return ponudaZaFilmOO;
     }
-    
-    public static PonudaZaFilmOO preuzmiPoFilmId(Integer filmId){
-        PonudaZaFilmOO ponudaZaFilmOO = null;
+
+    public static ArrayList<PonudaZaFilmOO> preuzmiPoFilmId(Integer filmId) {
+        ArrayList<PonudaZaFilmOO> ponudaZaFilmOOList = new ArrayList<>();
         List<PonudaZaFilm> ponudaZaFilmList = ponudaZaFilmDAO.selectBy(new PonudaZaFilm(null, filmId, null, null));
-        PonudaZaFilm ponudaZaFilm = ponudaZaFilmList.get(0);
-        if (null != ponudaZaFilm) {
-            ponudaZaFilmOO = konvertujUOO(ponudaZaFilm);
+        for (PonudaZaFilm ponudaZaFilm : ponudaZaFilmList) {
+            ponudaZaFilmOOList.add(konvertujUOO(ponudaZaFilm));
         }
-        return ponudaZaFilmOO;
+        return ponudaZaFilmOOList;
     }
-    
-    public static void unesi(PonudaZaFilmOO ponudaZaFilmOO){
-        ponudaZaFilmDAO.insert(konvertujUOV(ponudaZaFilmOO));
+
+    public static void unesi(PonudaZaFilmOO ponudaZaFilmOO) {
+        PonudaZaFilm ponudaZaFilm = konvertujUOV(ponudaZaFilmOO);
+        ponudaZaFilmDAO.insert(ponudaZaFilm);
+        ponudaZaFilmOO.setPonudaZaFilmId(ponudaZaFilm.getPonudaZaFilmId());
     }
-    
-    public static void izmijeni(PonudaZaFilmOO ponudaZaFilmOO){
+
+    public static void izmijeni(PonudaZaFilmOO ponudaZaFilmOO) {
         ponudaZaFilmDAO.update(konvertujUOV(ponudaZaFilmOO));
     }
-    
-    public static void obrisi(Integer ponudaZaFilmId){
+
+    public static void obrisi(Integer ponudaZaFilmId) {
         ponudaZaFilmDAO.delete(ponudaZaFilmId);
     }
-    
-    private static PonudaZaFilmOO konvertujUOO(PonudaZaFilm ponudaZaFilm){
+
+    private static PonudaZaFilmOO konvertujUOO(PonudaZaFilm ponudaZaFilm) {
         return new PonudaZaFilmOO(
                 ponudaZaFilm.getPonudaZaFilmId(),
                 ponudaZaFilm.getPonudaZaFilmId(),
@@ -69,8 +69,8 @@ public class PonudaZaFilmAdapter {
                 ponudaZaFilm.getDatum()
         );
     }
-    
-    private static PonudaZaFilm konvertujUOV(PonudaZaFilmOO ponudaZaFilmOO){
+
+    private static PonudaZaFilm konvertujUOV(PonudaZaFilmOO ponudaZaFilmOO) {
         java.sql.Date datumSQL = new java.sql.Date(ponudaZaFilmOO.getDatum().getTime());
         return new PonudaZaFilm(
                 ponudaZaFilmOO.getPonudaZaFilmId(),
@@ -79,5 +79,5 @@ public class PonudaZaFilmAdapter {
                 datumSQL
         );
     }
-    
+
 }

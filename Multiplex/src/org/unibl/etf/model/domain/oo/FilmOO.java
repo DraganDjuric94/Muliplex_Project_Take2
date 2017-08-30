@@ -7,6 +7,7 @@ package org.unibl.etf.model.domain.oo;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -108,7 +109,14 @@ public class FilmOO {
 
     @Override
     public String toString() {
-        return "FilmOO{" + "filmId=" + filmId + ", naziv=" + naziv + ", trajanje=" + trajanje + ", opis=" + opis + ", slika=" + slika + ", zanrovi=" + zanrovi + '}';
+        return '{'
+                + "filmId=" + filmId 
+                + ", naziv=" + naziv 
+                + ", trajanje=" + trajanje 
+                + ", opis=" + opis 
+                + ", slika=" + slika 
+                + ", zanrovi={\n" + zanrovi.stream().map(zanr -> zanr.toString()).collect(Collectors.joining("\n"))
+                + '}';
     }
 
    
