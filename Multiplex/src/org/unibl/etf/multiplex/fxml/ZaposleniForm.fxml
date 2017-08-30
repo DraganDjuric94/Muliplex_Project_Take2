@@ -20,5 +20,11 @@
       <CheckBox fx:id="zaposleniFormAktivanCHK" layoutX="22.0" layoutY="283.0" mnemonicParsing="false" text="Aktivan" AnchorPane.leftAnchor="15.0" />
       <Button fx:id="zaposleniFormOkBTN" layoutX="175.0" layoutY="561.0" mnemonicParsing="false" text="OK" />
       <Button fx:id="zaposleniFormCancelBTN" layoutX="333.0" layoutY="561.0" mnemonicParsing="false" text="Poništi" />
+      <TextField fx:id="zaposleniFormKorImeTXT" layoutX="15.0" layoutY="341.0" />
+      <TextField fx:id="zaposleniFormLozinkaTXT" layoutX="25.0" layoutY="386.0" />
+      <ComboBox fx:id="zaposleniFormPozicijaCBX" layoutX="25.0" layoutY="440.0" prefWidth="150.0" />
+      <Label layoutX="32.0" layoutY="309.0" text="username" />
+      <Label layoutX="44.0" layoutY="366.0" text="pass" />
+      <Label layoutX="42.0" layoutY="411.0" text="poz" />
    </children>
 </AnchorPane>
