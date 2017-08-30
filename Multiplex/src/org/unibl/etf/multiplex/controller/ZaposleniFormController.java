@@ -92,10 +92,12 @@ public class ZaposleniFormController implements Initializable {
         }else{
             PozicijaOO poz = new PozicijaOO(null, zaposleniFormPozicijaCBX.getSelectionModel().getSelectedItem(),
                 new Date(), null);
+            PozicijaAdapter.unesi(poz);
             zap.setPozicija(poz);
         }
-        
         ZaposleniAdapter.izmijeni(zap);
+        stari.getPozicija().setDatumDo(new Date());
+        PozicijaAdapter.izmijeni(stari.getPozicija());
     }
     
     public void dodaj(){
