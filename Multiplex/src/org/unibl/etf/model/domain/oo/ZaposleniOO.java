@@ -73,6 +73,10 @@ public class ZaposleniOO {
     public PozicijaOO getPozicija() {
         return pozicija;
     }
+    
+    public String getNazivPozicije(){
+        return pozicija.getNaziv();
+    }
 
     public void setZaposleniId(Integer zaposleniId) {
         this.zaposleniId = zaposleniId;

@@ -81,6 +81,14 @@ public class ProjekcijaOO {
     public void setZauzetaSjedista(List<SjedisteOO> zauzetaSjedista) {
         this.zauzetaSjedista = zauzetaSjedista;
     }
+    
+    public Integer getSalaId(){
+        return sala.getSalaId();
+    }
+    
+    public String getNazivFilma(){
+        return film.getNaziv();
+    }
 
     @Override
     public int hashCode() {

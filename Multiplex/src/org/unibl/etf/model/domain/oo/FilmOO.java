@@ -58,6 +58,14 @@ public class FilmOO {
         return zanrovi;
     }
 
+    public String getZanroviStr(){
+        String ret = "";
+        for(ZanrOO z : zanrovi){
+            ret += (z.getNaziv() + ", ");
+        }
+        return ret.substring(0, ret.length() - 2);
+    }
+
     public void setFilmId(Integer filmId) {
         this.filmId = filmId;
     }
