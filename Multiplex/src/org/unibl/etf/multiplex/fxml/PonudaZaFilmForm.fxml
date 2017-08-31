@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Ponuda za film" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <TextArea fx:id="ponudaZaFilmFormOpisTA" layoutX="14.0" layoutY="62.0" prefHeight="200.0" prefWidth="372.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Label layoutX="14.0" layoutY="38.0" text="Opis" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="45.0" />
+      <Label layoutX="14.0" layoutY="272.0" text="Datum" AnchorPane.leftAnchor="14.0" />
+      <DatePicker fx:id="ponudaZaFilmFormDatumDP" layoutX="14.0" layoutY="288.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="288.0" />
+      <Button fx:id="ponudaZaFilmFormPonistiBTN" layoutX="334.0" layoutY="561.0" mnemonicParsing="false" onAction="#ponudaZaFilmFormPonistiBTNHandler" text="Poništi" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Button fx:id="ponudaZaFilmFormOkBTN" layoutX="200.0" layoutY="555.0" mnemonicParsing="false" onAction="#ponudaZaFilmFormOkBTNHandler" text="OK" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="175.0" />
+   </children>
+</AnchorPane>
