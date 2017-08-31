@@ -2,9 +2,7 @@ package org.unibl.etf.multiplex.controller;
 
 
 import java.net.URL;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -15,7 +13,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.unibl.etf.model.adapter.OpremaAdapter;
 import org.unibl.etf.model.adapter.TransakcijaAdapter;
 import org.unibl.etf.model.domain.oo.TransakcijaOO;
 
