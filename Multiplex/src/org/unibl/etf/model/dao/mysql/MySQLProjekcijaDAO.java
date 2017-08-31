@@ -24,7 +24,7 @@ import org.unibl.etf.model.domain.Projekcija;
 public class MySQLProjekcijaDAO implements ProjekcijaDAO {
 
     private static final String SQL_SELECT = "SELECT * FROM projekcija";
-    private static final String SQL_INSERT = "INSERT INTO projekcija VALUES (null, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO projekcija VALUES (null, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE projekcija SET FilmId=?, DatumVrijeme=?, CijenaKarte=? WHERE ProjekcijaId=?";
     private static final String SQL_DELETE = "DELETE FROM projekcija WHERE ProjekcijaId=?";
 

@@ -81,9 +81,11 @@ public class ProjekcijaAdapter {
         
         Projekcija proj = konvertujUOV(projekcija);
 
-        if(trenutna.getSala().getSalaId() != projekcija.getSala().getSalaId()){
+        if(trenutna.getSala().getSalaId() != projekcija.getSala().getSalaId() || 
+                trenutna.getFilm().getFilmId() != projekcija.getFilm().getFilmId() || 
+                trenutna.getCijenaKarte() != projekcija.getCijenaKarte()){
            ArrayList<KartaOO> karteZaProj = KartaAdapter.preuzmiPoProjekcijaId(projekcija.getProjekcijaId());
-           if(karteZaProj.size() > 0 && OBRISI_KARTE){
+           if(OBRISI_KARTE){
                for(KartaOO k : karteZaProj){
                    KartaAdapter.obrisi(k.getKartaId());
                }
@@ -95,12 +97,14 @@ public class ProjekcijaAdapter {
                    ProjekcijaSala noviProjSal = new ProjekcijaSala(projekcija.getProjekcijaId(), projekcija.getSala().getSalaId());
                    projekcijaSalaDAO.insert(noviProjSal);
                    projekcijaDAO.update(proj);
+                   System.out.println("Pozvan je update!");
                    return message;
                }
            }else if (karteZaProj.size() > 0){
                message = "Nije moguce izmijeniti salu za projekciju. Postoje neobrisane karte...";
            }
         }else{
+            System.out.println("Nije prosao if..");
             projekcijaDAO.update(proj);
         }
         
@@ -127,12 +131,13 @@ public class ProjekcijaAdapter {
     public static void dodaj(ProjekcijaOO novaProjekcija){
         
         Projekcija projOv = konvertujUOV(novaProjekcija);
+        projekcijaDAO.insert(projOv);
         
         SalaOO sala = novaProjekcija.getSala();
-        ProjekcijaSala projekcijaSala = new ProjekcijaSala(novaProjekcija.getProjekcijaId(), sala.getSalaId());
+        ProjekcijaSala projekcijaSala = new ProjekcijaSala(projOv.getProjekcijaId(), sala.getSalaId());
         projekcijaSalaDAO.insert(projekcijaSala);
         
-        projekcijaDAO.insert(projOv);
+        
     }
     
     private static  ProjekcijaOO konvertujUOO(Integer filmId, Projekcija projekcija){

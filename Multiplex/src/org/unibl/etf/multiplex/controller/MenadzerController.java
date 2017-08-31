@@ -620,6 +620,47 @@ public class MenadzerController implements Initializable{
         pretraziProjekcijaTXT.setOnKeyReleased((event) -> {
             pretraziProjekciju(pretraziProjekcijaTXT.getText());
         });
+        
+        dodajProjekcijaBTN.setOnAction((event) -> {
+            ProjekcijaFormController control = new ProjekcijaFormController(null, false);
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/org/unibl/etf/multiplex/fxml/ProjekcijaForm.fxml"));
+            try {
+                loader.setController((Object)control);
+                Parent root = (Parent)loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("");
+                stage.setResizable(false);
+                stage.show(); 
+            } catch (IOException ex) {
+                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        });
+        
+        izmijeniProjekcijaBTN.setOnAction((event) -> {
+            ProjekcijaOO pr = tabelaProjekcijaTBL.getSelectionModel().getSelectedItem();
+            ProjekcijaFormController control = new ProjekcijaFormController(pr, true);
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/org/unibl/etf/multiplex/fxml/ProjekcijaForm.fxml"));
+            try {
+                loader.setController((Object)control);
+                Parent root = (Parent)loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("");
+                stage.setResizable(false);
+                stage.show(); 
+            } catch (IOException ex) {
+                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        obrisiProjekcijaBTN.setOnAction((event) -> {
+           ProjekcijaOO pr = tabelaProjekcijaTBL.getSelectionModel().getSelectedItem();
+           ProjekcijaAdapter.obrisi(pr.getProjekcijaId());
+        });
     }
     
     private void initializeMenadzerFilmovi() {
@@ -641,6 +682,49 @@ public class MenadzerController implements Initializable{
         
         pretraziFilmTXT.setOnKeyReleased((event) -> {
             pretraziFilm(pretraziFilmTXT.getText());
+        });
+        
+        
+        izmijeniFilmBTN.setOnAction((event) -> {
+            FilmOO flm = filmoviTBL.getSelectionModel().getSelectedItem();
+            FilmFormController control = new FilmFormController(flm, true);
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/org/unibl/etf/multiplex/fxml/FilmForm.fxml"));
+            try {
+                loader.setController((Object)control);
+                Parent root = (Parent)loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("");
+                stage.setResizable(false);
+                stage.show(); 
+            } catch (IOException ex) {
+                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        dodajFilmBTN.setOnAction((event) -> {
+            FilmFormController control = new FilmFormController(null, false);
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/org/unibl/etf/multiplex/fxml/FilmForm.fxml"));
+            try {
+                loader.setController((Object)control);
+                Parent root = (Parent)loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("");
+                stage.setResizable(false);
+                stage.show(); 
+            } catch (IOException ex) {
+                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        obrisiFilmBTN.setOnAction((event) -> {
+            FilmOO flm = filmoviTBL.getSelectionModel().getSelectedItem();
+            if(flm != null){
+                FilmAdapter.obrisi(flm.getFilmId());
+            }
         });
     }
     
