@@ -19,7 +19,7 @@
       <Label layoutX="15.0" layoutY="160.0" text="Pošiljalac" />
       <Label layoutX="15.0" layoutY="218.0" text="Datum" />
       <DatePicker fx:id="transakcijaFormDate" layoutX="15.0" layoutY="235.0" />
-      <TextField fx:id="transakcijaFormPosiljalacTXT1" layoutX="208.0" layoutY="235.0" prefHeight="25.0" prefWidth="180.0" AnchorPane.rightAnchor="15.0" />
+      <TextField fx:id="transakcijaFormIznosTXT" layoutX="208.0" layoutY="235.0" prefHeight="25.0" prefWidth="180.0" AnchorPane.rightAnchor="15.0" />
       <Label layoutX="208.0" layoutY="218.0" text="Iznos" />
    </children>
 </AnchorPane>
