@@ -29,11 +29,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.unibl.etf.model.adapter.ArtikalAdapter;
 import org.unibl.etf.model.adapter.FilmAdapter;
+import org.unibl.etf.model.adapter.PonudaZaFilmAdapter;
 import org.unibl.etf.model.adapter.ProjekcijaAdapter;
+import org.unibl.etf.model.adapter.SalaAdapter;
+import org.unibl.etf.model.adapter.ZanrAdapter;
 import org.unibl.etf.model.adapter.ZaposleniAdapter;
 import org.unibl.etf.model.domain.oo.ArtikalOO;
 import org.unibl.etf.model.domain.oo.FilmOO;
+import org.unibl.etf.model.domain.oo.PonudaZaFilmOO;
 import org.unibl.etf.model.domain.oo.ProjekcijaOO;
+import org.unibl.etf.model.domain.oo.SalaOO;
+import org.unibl.etf.model.domain.oo.ZanrOO;
 import org.unibl.etf.model.domain.oo.ZaposleniOO;
 
 /**
@@ -224,12 +230,163 @@ public class MenadzerController implements Initializable{
 
     @FXML
     private Button zaposleniEraseBTN;
+    
+    @FXML
+    private Button dodajZanrBTN;
+    
+    @FXML
+    private Button izmijeniZanrBTN;
+    
+    @FXML
+    private TextField pretraziZanrTXT;
+    
+    @FXML
+    private TableView<ZanrOO> zanrTabelaTBL;
+    
+    @FXML
+    private TableColumn<ZanrOO, Integer> zanrIdCOL;
+    
+    @FXML
+    private TableColumn<ZanrOO, String> zanrNazivCOL;
+    
+    @FXML
+    private Button obrisiZanrBTN;
+    
+    @FXML
+    private Button pretraziZanrBTN;
+    
+    @FXML
+    private Tab zanrTAB;
+    
+    @FXML
+    private Button opremaAddBTN;
+
+    @FXML
+    private TableView<PonudaZaFilmOO> ponudeTabelaTBL;
+
+    @FXML
+    private TableColumn<SalaOO, Integer> salaIdCOL;
+
+    @FXML
+    private Button opremaEditBTN;
+
+    @FXML
+    private TableColumn<?, ?> fakturaDatumColumn;
+
+    @FXML
+    private Button opremaEraseBTN;
+
+    @FXML
+    private TextField opremaSearchTXT;
+    @FXML
+    private Button dodajSalaBTN;
+
+    @FXML
+    private TextField transakcijaSearchTXT;
+
+    @FXML
+    private Button pretraziSalaBTN;
+    
+    @FXML
+    private TextField pretraziSalaTXT;
+
+    @FXML
+    private Tab salaTAB;
+
+    @FXML
+    private Button izmijeniSalaBTN;
+
+    @FXML
+    private TableColumn<PonudaZaFilmOO, Date> ponudaDatumCOL;
+
+    @FXML
+    private TableColumn<?, ?> transakcijaVrstaColumn;
+
+    @FXML
+    private TableColumn<PonudaZaFilmOO, Integer> ponudaFilmIdCOL;
+
+    @FXML
+    private TableColumn<?, ?> opremaIspravnostColumn;
+
+    @FXML
+    private Tab fakturaTAB;
+
+    @FXML
+    private TableView<SalaOO> salaTabelaTBL;
+
+    @FXML
+    private TableColumn<PonudaZaFilmOO, String> ponudaOpisCOL;
+
+    @FXML
+    private Button transakcijaAddBTN;
+
+    @FXML
+    private TableColumn<?, ?> fakturaKolicinaColumn;
+
+    @FXML
+    private TableColumn<?, ?> transakcijaPosiljalacColumn;
+    @FXML
+    private Button fakturaSearchBTN;
+
+    @FXML
+    private TableColumn<?, ?> transakcijaPrimalacColumn;
+
+    @FXML
+    private Button dodajPonudaBTN;
+
+    @FXML
+    private Button obrisiPonudaBTN;
+
+    @FXML
+    private TableColumn<?, ?> transakcijaIznosColumn;
+
+    @FXML
+    private Tab transakcijaTAB;
+
+    @FXML
+    private TableColumn<?, ?> transakcijaDatumColumn;
+
+    @FXML
+    private TextField fakturaSearchTXT;
+
+    @FXML
+    private TableColumn<SalaOO, Integer> salaBrKolCOL;
+
+    @FXML
+    private TableColumn<SalaOO, Integer> salaBrRedCOL;
+
+    @FXML
+    private TableColumn<?, ?> opremaNazivOpremeColumn;
+    
+    @FXML
+    private Button pretraziPonudaBTN;
+
+
+    @FXML
+    private TextField pretraziPonudaTXT;
+
+    @FXML
+    private Button izmijeniPonudaBTN;
+    
+    @FXML
+    private Tab ponudaZaFilmTAB;
+
+    @FXML
+    private Button obrisiSalaBTN;
+
+    @FXML
+    private TableColumn<PonudaZaFilmOO, Integer> ponudaIdCOL;
+    
+    
 
     
     private ObservableList<ZaposleniOO> zaposleni = FXCollections.observableArrayList();
     private ObservableList<ProjekcijaOO> projekcije = FXCollections.observableArrayList();
     private ObservableList<FilmOO> filmovi = FXCollections.observableArrayList();
     private ObservableList<ArtikalOO> artikli = FXCollections.observableArrayList();
+    private ObservableList<ZanrOO> zanrovi = FXCollections.observableArrayList();
+    private ObservableList<SalaOO> sale = FXCollections.observableArrayList();
+    private ObservableList<PonudaZaFilmOO> ponude = FXCollections.observableArrayList();
     
     public void preuzmiSveProjekcije(){
         projekcije.clear();
@@ -296,6 +453,107 @@ public class MenadzerController implements Initializable{
     public void preuzmiSveZaposlene(){
         zaposleni.clear();
         zaposleni.addAll(ZaposleniAdapter.preuzmiSve());
+    }
+    
+    public void preuzmiSveZanrove(){
+        zanrovi.clear();
+        zanrovi.addAll(ZanrAdapter.preuzmiSve());
+    }
+    
+    public void pretraziZanr(String tekst){
+        ArrayList<ZanrOO> sve = ZanrAdapter.preuzmiSve();
+        zanrovi.clear();
+        for(ZanrOO z : sve){
+            if(z.getNaziv().toLowerCase().startsWith(tekst.toLowerCase()) || z.getZanrId().toString().startsWith(tekst)){
+                zanrovi.add(z);
+            }
+        } 
+    }
+    
+    private void preuzmiSveSale(){
+        sale.clear();
+        sale.addAll(SalaAdapter.preuzmiSve());
+    }
+    
+    private void preuzmiSvePonude(){
+        ponude.clear();
+        ponude.addAll(PonudaZaFilmAdapter.preuzmiSve());
+    }
+    
+    private void pretraziSale(String tekst){
+        ArrayList<SalaOO> temp = SalaAdapter.preuzmiSve();
+        sale.clear();
+        for(SalaOO t : sale){
+            if(t.getSalaId().toString().startsWith(tekst)){
+                sale.add(t);
+            }
+        }
+    }
+    
+    private void pretraziPonude(String tekst){
+        ArrayList<PonudaZaFilmOO> temp = PonudaZaFilmAdapter.preuzmiSve();
+        ponude.clear();
+        for(PonudaZaFilmOO t : ponude){
+            if(t.getPonudaZaFilmId().toString().startsWith(tekst) || t.getFilmId().toString().startsWith(tekst)){
+                ponude.add(t);
+            }
+        }
+    }
+    
+    private void initializeMenadzerPonude(){
+        preuzmiSvePonude();
+        
+        ponudaIdCOL.setCellValueFactory(new PropertyValueFactory<>("ponudaZaFilmId"));
+        ponudaFilmIdCOL.setCellValueFactory(new PropertyValueFactory<>("filmId"));
+        ponudaOpisCOL.setCellValueFactory(new PropertyValueFactory<>("opis"));
+        ponudaDatumCOL.setCellValueFactory(new PropertyValueFactory<>("datum"));
+        
+        ponudeTabelaTBL.setItems(ponude);
+        
+        pretraziPonudaBTN.setOnAction((event) -> {
+            pretraziPonude(pretraziPonudaTXT.getText());
+        });
+        
+        pretraziPonudaTXT.setOnKeyReleased((event) -> {
+            pretraziPonude(pretraziPonudaTXT.getText());
+        });
+    
+    }
+    
+    private void initializeMenadzerSala(){
+        preuzmiSveSale();
+        
+        salaIdCOL.setCellValueFactory(new PropertyValueFactory<>("salaId"));
+        salaBrRedCOL.setCellValueFactory(new PropertyValueFactory<>("brojRedova"));
+        salaBrKolCOL.setCellValueFactory(new PropertyValueFactory<>("brojKolona"));
+        
+        salaTabelaTBL.setItems(sale);
+        
+        pretraziSalaBTN.setOnAction((event) -> {
+            pretraziSale(pretraziSalaTXT.getText());
+        });
+        
+        pretraziSalaTXT.setOnKeyReleased((event) -> {
+            pretraziSale(pretraziSalaTXT.getText());
+        });
+    }
+    
+    private void initializeMenadzerZanr(){
+        preuzmiSveZanrove();
+        
+        zanrIdCOL.setCellValueFactory(new PropertyValueFactory<>("zanrId"));
+        zanrNazivCOL.setCellValueFactory(new PropertyValueFactory<>("naziv"));
+        
+        zanrTabelaTBL.setItems(zanrovi);
+        
+        pretraziZanrBTN.setOnAction((event) -> {
+            pretraziZanr(pretraziZanrTXT.getText());
+        });
+        
+        pretraziZanrTXT.setOnKeyReleased((event) -> {
+            pretraziZanr(pretraziZanrTXT.getText());
+        });
+        
     }
     
     private void initializeMenadzerProjekcija() {
@@ -429,6 +687,9 @@ public class MenadzerController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
     
         opremaTAB.setDisable(true);
+        initializeMenadzerSala();
+        initializeMenadzerPonude();
+        initializeMenadzerZanr();
         initializeMenadzerProjekcija();
         initializeMenadzerFilmovi();
         initializeMenadzerArtikal();
