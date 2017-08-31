@@ -554,6 +554,51 @@ public class MenadzerController implements Initializable{
             pretraziZanr(pretraziZanrTXT.getText());
         });
         
+        izmijeniZanrBTN.setOnAction((event) -> {
+            int index = zanrTabelaTBL.getSelectionModel().getSelectedIndex();
+            System.out.println(index);
+            ZanrOO zanr = zanrovi.get(index);
+            System.out.println(zanr);
+            //ZanrFormController control = new ZanrFormController(zanr, true);
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/org/unibl/etf/multiplex/fxml/ZanrForm.fxml"));
+            try {
+            //    loader.setController((Object)control);
+                Parent root = (Parent)loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("");
+                stage.setResizable(false);
+                stage.show(); 
+            } catch (IOException ex) {
+                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        dodajZanrBTN.setOnAction((event) -> {
+            //ZanrFormController control = new ZanrFormController(null, false);
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/org/unibl/etf/multiplex/fxml/ZanrForm.fxml"));
+            try {
+               // loader.setController((Object)control);
+                Parent root = (Parent)loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("");
+                stage.setResizable(false);
+                stage.show(); 
+            } catch (IOException ex) {
+                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        obrisiZanrBTN.setOnAction((event) -> {
+            int index = zanrTabelaTBL.getSelectionModel().getSelectedIndex();
+            System.out.println(index);
+            ZanrOO zanr = zanrovi.get(index);
+            ZanrAdapter.obrisi(zanr.getZanrId());
+        });
+        
     }
     
     private void initializeMenadzerProjekcija() {
