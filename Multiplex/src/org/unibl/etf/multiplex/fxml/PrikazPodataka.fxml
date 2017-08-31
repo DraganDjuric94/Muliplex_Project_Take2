@@ -143,21 +143,22 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Sala">
+            <Tab fx:id="salaTAB" text="Sala">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
-                        <Button mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
-                        <TextField prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
-                        <TableView prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+                        <Button fx:id="izmijeniSalaBTN" mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button fx:id="pretraziSalaBTN" mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField fx:id="pretraziSalaTXT" prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView fx:id="salaTabelaTBL" prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn fx:id="salaIdCOL" prefWidth="75.0" text="Id" />
+                              <TableColumn fx:id="salaBrRedCOL" prefWidth="75.0" text="Broj redova" />
+                              <TableColumn fx:id="salaBrKolCOL" prefWidth="75.0" text="Broj kolona" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
-                        <Button mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+                        <Button fx:id="obrisiSalaBTN" mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button fx:id="dodajSalaBTN" mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
               </content>
@@ -184,40 +185,42 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Zanr">
+            <Tab fx:id="zanrTAB" text="Zanr">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="727.0" layoutY="528.0" mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
-                        <Button layoutX="676.0" layoutY="531.0" mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
-                        <TableView layoutX="14.0" layoutY="52.0" prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+                        <Button fx:id="dodajZanrBTN" layoutX="727.0" layoutY="528.0" mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+                        <Button fx:id="obrisiZanrBTN" layoutX="676.0" layoutY="531.0" mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <TableView fx:id="zanrTabelaTBL" layoutX="14.0" layoutY="52.0" prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn fx:id="zanrIdCOL" prefWidth="75.0" text="Id" />
+                            <TableColumn fx:id="zanrNazivCOL" prefWidth="75.0" text="Naziv" />
                           </columns>
                         </TableView>
-                        <TextField layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="695.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
-                        <Button layoutX="723.0" layoutY="15.0" mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
-                        <Button layoutX="612.0" layoutY="531.0" mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <TextField fx:id="pretraziZanrTXT" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="695.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <Button fx:id="pretraziZanrBTN" layoutX="723.0" layoutY="15.0" mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <Button fx:id="izmijeniZanrBTN" layoutX="612.0" layoutY="531.0" mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Pozicija">
+            <Tab fx:id="ponudaZaFilmTAB" text="Ponuda za film">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="586.0" layoutY="524.0" mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
-                        <Button layoutX="713.0" layoutY="13.0" mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
-                        <TextField layoutX="57.0" layoutY="13.0" prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
-                        <TableView layoutX="14.0" layoutY="54.0" prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+                        <Button fx:id="izmijeniPonudaBTN" layoutX="586.0" layoutY="524.0" mnemonicParsing="false" text="Izmijeni" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="131.0" />
+                        <Button fx:id="pretraziPonudaBTN" layoutX="713.0" layoutY="13.0" mnemonicParsing="false" text="Pretrazi" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                        <TextField fx:id="pretraziPonudaTXT" layoutX="57.0" layoutY="13.0" prefHeight="25.0" prefWidth="625.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="15.0" />
+                        <TableView fx:id="ponudeTabelaTBL" layoutX="14.0" layoutY="54.0" prefHeight="448.0" prefWidth="765.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn fx:id="ponudaIdCOL" prefWidth="75.0" text="Id" />
+                              <TableColumn fx:id="ponudaFilmIdCOL" prefWidth="75.0" text="Film id" />
+                              <TableColumn fx:id="ponudaOpisCOL" prefWidth="75.0" text="Opis" />
+                              <TableColumn fx:id="ponudaDatumCOL" prefWidth="75.0" text="Datum" />
                            </columns>
                         </TableView>
-                        <Button layoutX="660.0" layoutY="524.0" mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
-                        <Button layoutX="741.0" layoutY="524.0" mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+                        <Button fx:id="obrisiPonudaBTN" layoutX="660.0" layoutY="524.0" mnemonicParsing="false" text="Obrisi" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="76.0" />
+                        <Button fx:id="dodajPonudaBTN" layoutX="741.0" layoutY="524.0" mnemonicParsing="false" text="Dodaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
               </content>
