@@ -2,78 +2,98 @@ package org.unibl.etf.multiplex.controller;
 
 
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.unibl.etf.model.adapter.OpremaAdapter;
-import org.unibl.etf.model.domain.oo.OpremaOO;
+import org.unibl.etf.model.adapter.TransakcijaAdapter;
+import org.unibl.etf.model.domain.oo.TransakcijaOO;
 
 /**
  * FXML Controller class
  *
  * @author Miloš
  */
-public class OpremaFormController implements Initializable {
+public class TransakcijaFormController implements Initializable {
 
     @FXML
-    private AnchorPane opremaForm;
+    private AnchorPane transakcijaForm;
     @FXML
-    private TextField opremaFormBrojInventaraTXT;
+    private TextField transakcijaFormVrstaTransakcijeTXT;
     @FXML
-    private TextField opremaFormNazivTXT;
+    private TextField transakcijaFormPrimalacTXT;
     @FXML
-    private Button opremaFormOkBTN;
+    private TextField transakcijaFormPosiljalacTXT;
     @FXML
-    private Button opremaFormCancelBTN;
+    private TextField transakcijaFormIznosTXT;
     @FXML
-    private CheckBox opremaFormIspravnaCHK;
+    private Button transakcijaFormOkBTN;
+    @FXML
+    private DatePicker transakcijaFormDate;
+    @FXML
+    private Button transakcijaFormCancelBTN;
 
     /**
      * Initializes the controller class.
      */
-    private OpremaOO old;
+    private TransakcijaOO old;
     private Boolean isUpdating = false;
-    private String brojInventara;
-    private String naziv;
-    private Boolean ispravnost;
+    private String vrstaTransakcije;
+    private String primalac;
+    private String posiljalac;
+    private Double iznos;
+    private Date datum;
     
-    public OpremaFormController(OpremaOO it, Boolean updateFlag) {
+    public TransakcijaFormController(TransakcijaOO it, Boolean updateFlag) {
         
         if(updateFlag) {
             
             isUpdating = updateFlag;
             old = it;
-            brojInventara = old.getBrojInventara();
-            naziv = old.getNaziv();
-            ispravnost = old.getIspravnost();
+            vrstaTransakcije = old.getVrstaTransakcije();
+            primalac = old.getPrimalac();
+            posiljalac = old.getPosaljilac();
+            iznos = old.getIznos();
+            datum = old.getDatumTransakcije();
+            
         }
     }
     
-    public void updateOprema() {
+    public void updateTransakcija() {
         
-        OpremaOO it = new OpremaOO(
-                                old.getOpremaId(), 
-                                opremaFormBrojInventaraTXT.getText(), 
-                                opremaFormNazivTXT.getText(), 
-                                opremaFormIspravnaCHK.isSelected()
-                            );
-        OpremaAdapter.izmijeni(it);
+        TransakcijaOO it = new TransakcijaOO(
+                old.getTransakcijaId(),
+                transakcijaFormVrstaTransakcijeTXT.getText(),
+                transakcijaFormPrimalacTXT.getText(),
+                transakcijaFormPosiljalacTXT.getText(),
+                Date.from(transakcijaFormDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), // too much trouble for nothing
+                Double.parseDouble(transakcijaFormIznosTXT.getText())
+        );
+                
+        TransakcijaAdapter.izmijeni(it);
     }
     
-    public void addOprema() {
+    public void addTransakcija() {
     
-        OpremaOO it = new OpremaOO(
-                                null, 
-                                opremaFormBrojInventaraTXT.getText(), 
-                                opremaFormNazivTXT.getText(), 
-                                opremaFormIspravnaCHK.isSelected()
-                            );
-        OpremaAdapter.unesi(it);
+        TransakcijaOO it = new TransakcijaOO(
+                null,
+                transakcijaFormVrstaTransakcijeTXT.getText(),
+                transakcijaFormPrimalacTXT.getText(),
+                transakcijaFormPosiljalacTXT.getText(),
+                Date.from(transakcijaFormDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), // too much trouble for nothing
+                Double.parseDouble(transakcijaFormIznosTXT.getText())
+        );
+        TransakcijaAdapter.unesi(it);
     }
     
     @Override
@@ -81,28 +101,30 @@ public class OpremaFormController implements Initializable {
         
         if(isUpdating){
          
-            opremaFormBrojInventaraTXT.setText(brojInventara);
-            opremaFormNazivTXT.setText(naziv);
-            opremaFormIspravnaCHK.setSelected(ispravnost);   
+            transakcijaFormVrstaTransakcijeTXT.setText(vrstaTransakcije);
+            transakcijaFormPrimalacTXT.setText(primalac);
+            transakcijaFormPosiljalacTXT.setText(posiljalac);
+            transakcijaFormDate.setValue(LocalDate.now());
+            transakcijaFormIznosTXT.setText(iznos.toString());
         }
         
-        opremaFormOkBTN.setOnAction((event) -> {
+        transakcijaFormOkBTN.setOnAction((event) -> {
             //TODO Provjeriti da li su unesena polja i sl
             if(isUpdating) {
                 
-                updateOprema();
+                updateTransakcija();
                 
             } else {
                 
-                addOprema();
+                addTransakcija();
             } 
-            Stage stage = (Stage) opremaFormOkBTN.getScene().getWindow();
+            Stage stage = (Stage) transakcijaFormOkBTN.getScene().getWindow();
             stage.close();
         });
         
-        opremaFormCancelBTN.setOnAction((event) -> {
+        transakcijaFormCancelBTN.setOnAction((event) -> {
         
-            Stage stage = (Stage) opremaFormCancelBTN.getScene().getWindow();
+            Stage stage = (Stage) transakcijaFormCancelBTN.getScene().getWindow();
             stage.close();
         
         });
