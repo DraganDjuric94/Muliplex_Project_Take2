@@ -36,7 +36,7 @@ import org.unibl.etf.model.domain.oo.ZaposleniOO;
  *
  * @author juhu
  */
-public class PravnikControlelr implements Initializable{
+public class PravnikController implements Initializable{
 
     @FXML
     private Button opremaAddBTN;
@@ -302,7 +302,7 @@ public class PravnikControlelr implements Initializable{
         ArrayList<ZaposleniOO> tempZ = ZaposleniAdapter.preuzmiSve();
         zaposleni.clear();
         for(ZaposleniOO zap : tempZ){
-            if(zap.getIme().toLowerCase().startsWith(tekst.toLowerCase()) || zap.getZaposleniId().toString().startsWith(tekst)){
+            if(zap.getIme().toLowerCase().contains(tekst.toLowerCase()) || zap.getZaposleniId().toString().contains(tekst)){
                 zaposleni.add(zap);
             }
         }
@@ -313,16 +313,15 @@ public class PravnikControlelr implements Initializable{
         zaposleni.addAll(ZaposleniAdapter.preuzmiSve());
     }
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    private void initializeZaposleniPravnik() {
         
         preuzmiSveZaposlene();
         
-        zaposleniImeColumn.setCellValueFactory(new PropertyValueFactory<ZaposleniOO, String>("ime"));
-        zaposleniPrezimeColumn.setCellValueFactory(new PropertyValueFactory<ZaposleniOO,String>("prezime"));
-        zaposleniJmbgColumn.setCellValueFactory(new PropertyValueFactory<ZaposleniOO,String>("jmbg"));
-        zaposleniPlataColumn.setCellValueFactory(new PropertyValueFactory<ZaposleniOO,Double>("plata"));
-        zaposleniPozicijaColumn.setCellValueFactory(new PropertyValueFactory<ZaposleniOO,String>("nazivPozicije"));
+        zaposleniImeColumn.setCellValueFactory(new PropertyValueFactory<>("ime"));
+        zaposleniPrezimeColumn.setCellValueFactory(new PropertyValueFactory<>("prezime"));
+        zaposleniJmbgColumn.setCellValueFactory(new PropertyValueFactory<>("jmbg"));
+        zaposleniPlataColumn.setCellValueFactory(new PropertyValueFactory<>("plata"));
+        zaposleniPozicijaColumn.setCellValueFactory(new PropertyValueFactory<>("nazivPozicije"));
         
         zaposleniTable.setItems(zaposleni);
         
@@ -351,7 +350,7 @@ public class PravnikControlelr implements Initializable{
                 stage.setResizable(false);
                 stage.show(); 
             } catch (IOException ex) {
-                Logger.getLogger(PravnikControlelr.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
             }    
         });
         
@@ -369,17 +368,19 @@ public class PravnikControlelr implements Initializable{
                 stage.setResizable(false);
                 stage.show(); 
             } catch (IOException ex) {
-                Logger.getLogger(PravnikControlelr.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
             }      
         });
         
         zaposleniEraseBTN.setOnAction((event) -> {
             ZaposleniAdapter.obrisi(zaposleniTable.getSelectionModel().getSelectedItem().getZaposleniId());
         });
+    }
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         
-        
-        
-        
+       initializeZaposleniPravnik();
     }
     
     

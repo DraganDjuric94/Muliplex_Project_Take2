@@ -18,6 +18,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.unibl.etf.model.adapter.PozicijaAdapter;
 import org.unibl.etf.model.adapter.ZanrAdapter;
 import org.unibl.etf.model.adapter.ZaposleniAdapter;
@@ -150,12 +151,22 @@ public class ZaposleniFormController implements Initializable {
         }
         
         zaposleniFormOkBTN.setOnAction((event) -> {
-            //Provjeriti da li su unesena polja i sl
+            // TODO Provjeriti da li su unesena polja i sl
             if(azuriranje){
                 azuriraj();
             }else{
                 dodaj();
             }   
+            
+            Stage stage = (Stage) zaposleniFormOkBTN.getScene().getWindow();
+            stage.close();
+        });
+        
+        zaposleniFormCancelBTN.setOnAction((event) -> {
+        
+            Stage stage = (Stage) zaposleniFormCancelBTN.getScene().getWindow();
+            stage.close();
+        
         });
         
     }    
