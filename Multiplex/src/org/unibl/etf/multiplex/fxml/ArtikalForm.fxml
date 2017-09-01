@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -8,18 +9,23 @@
 
 <AnchorPane id="AnchorPane" fx:id="artikalForm" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" text="Podaci o artiklu" AnchorPane.leftAnchor="15.0" />
-      <Label layoutX="14.0" layoutY="41.0" text="Naziv" AnchorPane.leftAnchor="15.0" />
       <TextField fx:id="artikalFormNazivTXT" layoutX="14.0" layoutY="58.0" prefHeight="25.0" prefWidth="371.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-      <Label layoutX="15.0" layoutY="100.0" text="Količina na stanju" />
       <TextField fx:id="artikalFormKolicinaTXT" layoutX="15.0" layoutY="117.0" prefHeight="25.0" prefWidth="371.0" />
+      <TextField fx:id="artikalFormBarkodTXT" layoutX="15.0" layoutY="174.0" prefHeight="25.0" prefWidth="371.0" />
+      <TextField fx:id="artikalFormTipTXT" layoutX="15.0" layoutY="233.0" prefHeight="25.0" prefWidth="221.0" />
+      <TextField fx:id="artikalFormCijenaTXT" layoutX="293.0" layoutY="233.0" prefHeight="25.0" prefWidth="93.0" />
       <Button fx:id="artikalFormOkBTN" layoutX="175.0" layoutY="561.0" mnemonicParsing="false" text="OK" />
       <Button fx:id="artikalFormCancelBTN" layoutX="333.0" layoutY="561.0" mnemonicParsing="false" text="Poništi" />
-      <TextField fx:id="artikalFormBarkodTXT" layoutX="15.0" layoutY="174.0" prefHeight="25.0" prefWidth="371.0" />
+      <Label layoutX="14.0" layoutY="14.0" text="Podaci o artiklu" AnchorPane.leftAnchor="15.0" />
+      <Label layoutX="14.0" layoutY="41.0" text="Naziv" AnchorPane.leftAnchor="15.0" />
+      <Label layoutX="15.0" layoutY="100.0" text="Količina na stanju" />
       <Label layoutX="15.0" layoutY="157.0" text="Barkod" />
-      <TextField fx:id="artikalFormTipTXT" layoutX="15.0" layoutY="233.0" prefHeight="25.0" prefWidth="221.0" />
       <Label layoutX="15.0" layoutY="216.0" text="Tip" />
-      <TextField fx:id="artikalFormCijenaTXT" layoutX="293.0" layoutY="233.0" prefHeight="25.0" prefWidth="93.0" />
       <Label layoutX="293.0" layoutY="216.0" text="Cijena" />
+      <Label fx:id="validnostPodatakaLBL" alignment="CENTER_RIGHT" layoutX="208.0" layoutY="316.0" prefHeight="30.0" prefWidth="180.0" text="Podaci nisu validni">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

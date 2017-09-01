@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -8,18 +9,23 @@
 
 <AnchorPane id="AnchorPane" fx:id="transakcijaForm" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" text="Podaci o transakciji" AnchorPane.leftAnchor="15.0" />
-      <Label layoutX="14.0" layoutY="41.0" text="Vrsta transakcije" AnchorPane.leftAnchor="15.0" />
       <TextField fx:id="transakcijaFormVrstaTransakcijeTXT" layoutX="14.0" layoutY="58.0" prefHeight="25.0" prefWidth="371.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-      <Label layoutX="15.0" layoutY="100.0" text="Primalac" />
       <TextField fx:id="transakcijaFormPrimalacTXT" layoutX="15.0" layoutY="117.0" prefHeight="25.0" prefWidth="371.0" />
-      <Button fx:id="opremaFormOkBTN" layoutX="175.0" layoutY="561.0" mnemonicParsing="false" text="OK" />
-      <Button fx:id="opremaFormCancelBTN" layoutX="333.0" layoutY="561.0" mnemonicParsing="false" text="Poništi" />
       <TextField fx:id="transakcijaFormPosiljalacTXT" layoutX="15.0" layoutY="177.0" prefHeight="25.0" prefWidth="371.0" />
-      <Label layoutX="15.0" layoutY="160.0" text="Pošiljalac" />
-      <Label layoutX="15.0" layoutY="218.0" text="Datum" />
       <DatePicker fx:id="transakcijaFormDate" layoutX="15.0" layoutY="235.0" />
       <TextField fx:id="transakcijaFormIznosTXT" layoutX="208.0" layoutY="235.0" prefHeight="25.0" prefWidth="180.0" AnchorPane.rightAnchor="15.0" />
+      <Button fx:id="transakcijaFormOkBTN" layoutX="175.0" layoutY="561.0" mnemonicParsing="false" text="OK" />
+      <Button fx:id="transakcijaFormCancelBTN" layoutX="333.0" layoutY="561.0" mnemonicParsing="false" text="Poništi" />
+      <Label layoutX="14.0" layoutY="14.0" text="Podaci o transakciji" AnchorPane.leftAnchor="15.0" />
+      <Label layoutX="14.0" layoutY="41.0" text="Vrsta transakcije" AnchorPane.leftAnchor="15.0" />
+      <Label layoutX="15.0" layoutY="100.0" text="Primalac" />
+      <Label layoutX="15.0" layoutY="160.0" text="Pošiljalac" />
+      <Label layoutX="15.0" layoutY="218.0" text="Datum" />
       <Label layoutX="208.0" layoutY="218.0" text="Iznos" />
+      <Label fx:id="validnostPodatakaLBL" alignment="CENTER_RIGHT" layoutX="198.0" layoutY="300.0" prefHeight="37.0" prefWidth="180.0" text="Podaci nisu validni">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

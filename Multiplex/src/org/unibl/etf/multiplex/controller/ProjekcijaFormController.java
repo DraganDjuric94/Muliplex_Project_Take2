@@ -13,6 +13,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,8 +22,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
+import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.LocalDateTimeStringConverter;
 import org.unibl.etf.model.adapter.FilmAdapter;
 import org.unibl.etf.model.adapter.ProjekcijaAdapter;
@@ -53,20 +57,21 @@ public class ProjekcijaFormController implements Initializable {
     private Button projekcijaFormOkBTN;
     @FXML
     private TextField projekcijaFormVrijemeTXT;
+    @FXML
+    private Label validnostPodatakaLBL;
 
     /**
      * Initializes the controller class.
      */
-    
     private boolean azuriranje = false;
+    private Boolean validniPodaci = false;
     private ProjekcijaOO stari;
     private String vrijeme, cijenaKarte, datum, film, sala;
     private ObservableList<String> filmovi = FXCollections.observableArrayList();
     private ObservableList<String> sale = FXCollections.observableArrayList();
-    
-    
-    public ProjekcijaFormController(ProjekcijaOO projekcija, boolean azuriranje){
-        if(azuriranje){
+
+    public ProjekcijaFormController(ProjekcijaOO projekcija, boolean azuriranje) {
+        if (azuriranje) {
             this.azuriranje = azuriranje;
             stari = projekcija;
             LocalDateTime datVrij = LocalDateTime.ofInstant(projekcija.getDatumVrijeme().toInstant(), ZoneId.systemDefault());
@@ -79,99 +84,144 @@ public class ProjekcijaFormController implements Initializable {
         preuzmiSale();
         preuzmiFilmove();
     }
-    
-    public void preuzmiSale(){
+
+    public void preuzmiSale() {
         ArrayList<SalaOO> temPs = SalaAdapter.preuzmiSve();
         sale.clear();
-        for(SalaOO s : temPs){
-            if(!sale.contains(s.getSalaId().toString())){
+        for (SalaOO s : temPs) {
+            if (!sale.contains(s.getSalaId().toString())) {
                 sale.add(s.getSalaId().toString());
             }
         }
     }
-    
-    public void preuzmiFilmove(){
+
+    public void preuzmiFilmove() {
         ArrayList<FilmOO> temPf = FilmAdapter.preuzmiSve();
         filmovi.clear();
-        for(FilmOO f : temPf){
-            if(!filmovi.contains(f.getFilmId().toString() + "# " +f.getNaziv())){
+        for (FilmOO f : temPf) {
+            if (!filmovi.contains(f.getFilmId().toString() + "# " + f.getNaziv())) {
                 filmovi.add(f.getFilmId().toString() + "# " + f.getNaziv());
             }
         }
     }
-    
-    public void azuriraj(){
-        LocalDateTime datVrij = LocalDateTime.of(LocalDate.parse(projekcijaFormDatumDP.getValue().toString()),LocalTime.parse(projekcijaFormVrijemeTXT.getText()));
-        ProjekcijaOO proj = new ProjekcijaOO(stari.getProjekcijaId(), Date.from(datVrij.atZone(ZoneId.systemDefault()).toInstant()), 
-                null, null, 
-                Double.parseDouble(projekcijaFormCijenaKarteTXT.getText()), 
+
+    public void azuriraj() {
+        LocalDateTime datVrij = LocalDateTime.of(LocalDate.parse(projekcijaFormDatumDP.getValue().toString()), LocalTime.parse(projekcijaFormVrijemeTXT.getText()));
+        ProjekcijaOO proj = new ProjekcijaOO(stari.getProjekcijaId(), Date.from(datVrij.atZone(ZoneId.systemDefault()).toInstant()),
+                null, null,
+                Double.parseDouble(projekcijaFormCijenaKarteTXT.getText()),
                 null);
-        if(projekcijaFormFilmCB
+        if (projekcijaFormFilmCB
                 .getSelectionModel()
                 .getSelectedItem()
-                .equals(stari.getFilm().getFilmId() + "# " + stari.getFilm().getNaziv())){
+                .equals(stari.getFilm().getFilmId() + "# " + stari.getFilm().getNaziv())) {
             proj.setFilm(stari.getFilm());
-        }else{
+        } else {
             proj.setFilm(FilmAdapter.preuzmiPoId(Integer.parseInt(projekcijaFormFilmCB.getSelectionModel().getSelectedItem().split("# ")[0])));
         }
-        
-        if(projekcijaFormSalaCB
+
+        if (projekcijaFormSalaCB
                 .getSelectionModel()
                 .getSelectedItem()
-                .equals(stari.getSala().getSalaId().toString())){
+                .equals(stari.getSala().getSalaId().toString())) {
             proj.setSala(stari.getSala());
-        }else{
+        } else {
             proj.setSala(SalaAdapter.preuzmiPoId(Integer.parseInt(projekcijaFormSalaCB.getSelectionModel().getSelectedItem())));
         }
 
         System.out.println(ProjekcijaAdapter.izmijeni(proj, true));
     }
-    
-    public void dodaj(){
-        LocalDateTime datVrij = LocalDateTime.of(LocalDate.parse(projekcijaFormDatumDP.getValue().toString()),LocalTime.parse(projekcijaFormVrijemeTXT.getText()));
-        ProjekcijaOO proj = new ProjekcijaOO(null, Date.from(datVrij.atZone(ZoneId.systemDefault()).toInstant()), 
-                null, null, 
-                Double.parseDouble(projekcijaFormCijenaKarteTXT.getText()), 
+
+    public void dodaj() {
+        LocalDateTime datVrij = LocalDateTime.of(LocalDate.parse(projekcijaFormDatumDP.getValue().toString()), LocalTime.parse(projekcijaFormVrijemeTXT.getText()));
+        ProjekcijaOO proj = new ProjekcijaOO(null, Date.from(datVrij.atZone(ZoneId.systemDefault()).toInstant()),
+                null, null,
+                Double.parseDouble(projekcijaFormCijenaKarteTXT.getText()),
                 null);
         proj.setFilm(FilmAdapter.preuzmiPoId(Integer.parseInt(projekcijaFormFilmCB.getSelectionModel().getSelectedItem().split("# ")[0])));
         proj.setSala(SalaAdapter.preuzmiPoId(Integer.parseInt(projekcijaFormSalaCB.getSelectionModel().getSelectedItem())));
-        
+
         ProjekcijaAdapter.dodaj(proj);
     }
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
+        projekcijaFormDatumDP.setEditable(false);
+        validnostPodatakaLBL.setVisible(false);
+        omoguciSamoDecimalneBrojeve(projekcijaFormCijenaKarteTXT);
+
         projekcijaFormFilmCB.setItems(filmovi);
         projekcijaFormSalaCB.setItems(sale);
-        
-        if(azuriranje){
+
+        if (azuriranje) {
             projekcijaFormFilmCB.getSelectionModel().select(film);
             projekcijaFormSalaCB.getSelectionModel().select(sala);
             projekcijaFormDatumDP.setValue(LocalDate.parse(datum));
             projekcijaFormVrijemeTXT.setText(vrijeme);
             projekcijaFormCijenaKarteTXT.setText(cijenaKarte);
-        }else{
+        } else {
             projekcijaFormFilmCB.getSelectionModel().select(0);
             projekcijaFormSalaCB.getSelectionModel().select(0);
-        }       
-        
-    }    
+        }
+
+    }
 
     @FXML
     private void projekcijaFormPonistiBTNHandler(ActionEvent event) {
-        ((Stage)projekcijaFormCijenaKarteTXT.getScene().getWindow()).close();
+        ((Stage) projekcijaFormCijenaKarteTXT.getScene().getWindow()).close();
     }
 
     @FXML
     private void projekcijaFormOkBTNHandler(ActionEvent event) {
-        if(azuriranje){
-            azuriraj();
-        }else{
-            dodaj();
+        System.out.println(projekcijaFormDatumDP.getValue());
+        provjeriPodatke();
+        if (validniPodaci == true) {
+            if (azuriranje) {
+                azuriraj();
+            } else {
+                dodaj();
+            }
+            validnostPodatakaLBL.setVisible(false);
+            ((Stage) projekcijaFormCijenaKarteTXT.getScene().getWindow()).close();
+        } else {
+            validnostPodatakaLBL.setVisible(true);
+
         }
-        ((Stage)projekcijaFormCijenaKarteTXT.getScene().getWindow()).close();
+
     }
-    
+
+    private void provjeriPodatke() {
+        
+        LocalDateTime datVrij = LocalDateTime.of(LocalDate.parse(projekcijaFormDatumDP.getValue().toString()), LocalTime.parse(projekcijaFormVrijemeTXT.getText()));
+        LocalDateTime  trenutno = LocalDateTime.now();
+       
+        if ("".equals(projekcijaFormCijenaKarteTXT.getText()) || "".equals(projekcijaFormVrijemeTXT.getText())
+                || projekcijaFormDatumDP.getValue() == null) {
+            validniPodaci = false;
+        } else {
+            if(projekcijaFormVrijemeTXT.getText().matches("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$") && datVrij.isAfter(trenutno)) {
+            validniPodaci = true;
+            } else {
+                validniPodaci = false;
+            }
+        }
+    }
+
+    private void omoguciSamoDecimalneBrojeve(TextField unos) {
+        Pattern validDoubleText = Pattern.compile("[0-9]*[.]?[0-9]*");
+
+        TextFormatter<Double> textFormatter = new TextFormatter<Double>(new DoubleStringConverter(), null,
+                change -> {
+                    String newText = change.getControlNewText();
+                    if (validDoubleText.matcher(newText).matches()) {
+                        return change;
+                    } else {
+                        return null;
+                    }
+                });
+
+        unos.setTextFormatter(textFormatter);
+    }
+
 }

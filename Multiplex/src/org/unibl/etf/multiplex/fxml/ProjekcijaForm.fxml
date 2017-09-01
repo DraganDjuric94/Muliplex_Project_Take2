@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -8,18 +9,23 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <ComboBox fx:id="projekcijaFormFilmCB" layoutX="14.0" layoutY="62.0" prefWidth="150.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <ComboBox fx:id="projekcijaFormSalaCB" layoutX="14.0" layoutY="113.0" prefWidth="150.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <DatePicker fx:id="projekcijaFormDatumDP" layoutX="14.0" layoutY="164.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <TextField fx:id="projekcijaFormVrijemeTXT" layoutX="14.0" layoutY="213.0" prefHeight="25.0" prefWidth="372.0" />
+      <TextField fx:id="projekcijaFormCijenaKarteTXT" layoutX="14.0" layoutY="265.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Button fx:id="projekcijaFormOkBTN" layoutX="221.0" layoutY="561.0" mnemonicParsing="false" onAction="#projekcijaFormOkBTNHandler" text="OK" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="175.0" />
+      <Button fx:id="projekcijaFormPonistiBTN" layoutX="334.0" layoutY="561.0" mnemonicParsing="false" onAction="#projekcijaFormPonistiBTNHandler" text="Poništi" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <Label layoutX="14.0" layoutY="14.0" text="Podaci o projekciji" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
       <Label layoutX="14.0" layoutY="46.0" text="Film" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="45.0" />
       <Label layoutX="11.0" layoutY="105.0" text="Sala" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="96.0" />
       <Label layoutX="22.0" layoutY="154.0" text="Datum" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="147.0" />
       <Label layoutX="14.0" layoutY="248.0" text="Cijena karte" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="248.0" />
-      <ComboBox fx:id="projekcijaFormFilmCB" layoutX="14.0" layoutY="62.0" prefWidth="150.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <ComboBox fx:id="projekcijaFormSalaCB" layoutX="14.0" layoutY="113.0" prefWidth="150.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <DatePicker fx:id="projekcijaFormDatumDP" layoutX="14.0" layoutY="164.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <TextField fx:id="projekcijaFormCijenaKarteTXT" layoutX="14.0" layoutY="265.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <Button fx:id="projekcijaFormPonistiBTN" layoutX="334.0" layoutY="561.0" mnemonicParsing="false" onAction="#projekcijaFormPonistiBTNHandler" text="Poništi" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <Button fx:id="projekcijaFormOkBTN" layoutX="221.0" layoutY="561.0" mnemonicParsing="false" onAction="#projekcijaFormOkBTNHandler" text="OK" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="175.0" />
-      <TextField fx:id="projekcijaFormVrijemeTXT" layoutX="14.0" layoutY="213.0" prefHeight="25.0" prefWidth="372.0" />
       <Label layoutX="16.0" layoutY="196.0" text="Vrijeme:" />
+      <Label fx:id="validnostPodatakaLBL" alignment="CENTER_RIGHT" layoutX="208.0" layoutY="328.0" prefHeight="30.0" prefWidth="180.0" text="Podaci nisu validni">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -1,18 +1,21 @@
 package org.unibl.etf.multiplex.controller;
 
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.converter.DoubleStringConverter;
 import org.unibl.etf.model.adapter.TransakcijaAdapter;
 import org.unibl.etf.model.domain.oo.TransakcijaOO;
 
@@ -39,22 +42,25 @@ public class TransakcijaFormController implements Initializable {
     private DatePicker transakcijaFormDate;
     @FXML
     private Button transakcijaFormCancelBTN;
+    @FXML
+    private Label validnostPodatakaLBL;
 
     /**
      * Initializes the controller class.
      */
     private TransakcijaOO old;
     private Boolean isUpdating = false;
+    private Boolean validniPodaci = false;
     private String vrstaTransakcije;
     private String primalac;
     private String posiljalac;
     private Double iznos;
     private Date datum;
-    
+
     public TransakcijaFormController(TransakcijaOO it, Boolean updateFlag) {
-        
-        if(updateFlag) {
-            
+
+        if (updateFlag) {
+
             isUpdating = updateFlag;
             old = it;
             vrstaTransakcije = old.getVrstaTransakcije();
@@ -62,12 +68,12 @@ public class TransakcijaFormController implements Initializable {
             posiljalac = old.getPosaljilac();
             iznos = old.getIznos();
             datum = old.getDatumTransakcije();
-            
+
         }
     }
-    
+
     public void updateTransakcija() {
-        
+
         TransakcijaOO it = new TransakcijaOO(
                 old.getTransakcijaId(),
                 transakcijaFormVrstaTransakcijeTXT.getText(),
@@ -76,12 +82,12 @@ public class TransakcijaFormController implements Initializable {
                 Date.from(transakcijaFormDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), // too much trouble for nothing
                 Double.parseDouble(transakcijaFormIznosTXT.getText())
         );
-                
+
         TransakcijaAdapter.izmijeni(it);
     }
-    
+
     public void addTransakcija() {
-    
+
         TransakcijaOO it = new TransakcijaOO(
                 null,
                 transakcijaFormVrstaTransakcijeTXT.getText(),
@@ -92,39 +98,78 @@ public class TransakcijaFormController implements Initializable {
         );
         TransakcijaAdapter.unesi(it);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        if(isUpdating){
-         
+
+        validnostPodatakaLBL.setVisible(false);
+        transakcijaFormDate.setEditable(false);
+        omoguciSamoDecimalneBrojeve(transakcijaFormIznosTXT);
+        //unosDatumaFormatter();
+
+        if (isUpdating) {
             transakcijaFormVrstaTransakcijeTXT.setText(vrstaTransakcije);
             transakcijaFormPrimalacTXT.setText(primalac);
             transakcijaFormPosiljalacTXT.setText(posiljalac);
             transakcijaFormDate.setValue(LocalDate.now());
             transakcijaFormIznosTXT.setText(iznos.toString());
+
         }
-        
+
         transakcijaFormOkBTN.setOnAction((event) -> {
             //TODO Provjeriti da li su unesena polja i sl
-            if(isUpdating) {
-                
-                updateTransakcija();
-                
+            provjeriPodatke();
+            if (validniPodaci == true) {
+                if (isUpdating) {
+
+                    updateTransakcija();
+
+                } else {
+
+                    addTransakcija();
+                }
+                validnostPodatakaLBL.setVisible(false);
+                Stage stage = (Stage) transakcijaFormOkBTN.getScene().getWindow();
+                stage.close();
             } else {
-                
-                addTransakcija();
-            } 
-            Stage stage = (Stage) transakcijaFormOkBTN.getScene().getWindow();
-            stage.close();
+                validnostPodatakaLBL.setVisible(true);
+            }
         });
-        
+
         transakcijaFormCancelBTN.setOnAction((event) -> {
-        
+
             Stage stage = (Stage) transakcijaFormCancelBTN.getScene().getWindow();
             stage.close();
-        
+
         });
-    }    
-    
+    }
+
+    private void provjeriPodatke() {
+        if ("".equals(transakcijaFormVrstaTransakcijeTXT.getText()) || "".equals(transakcijaFormPrimalacTXT.getText())
+                || "".equals(transakcijaFormPosiljalacTXT.getText()) || "".equals(transakcijaFormIznosTXT.getText())
+                || transakcijaFormDate.getValue() == null) {
+            validniPodaci = false;
+
+        } else {
+            validniPodaci = true;
+        }
+    }
+
+    private void omoguciSamoDecimalneBrojeve(TextField unos) {
+        Pattern validDoubleText = Pattern.compile("[0-9]*[.]?[0-9]*");
+
+        TextFormatter<Double> textFormatter = new TextFormatter<Double>(new DoubleStringConverter(), null,
+                change -> {
+                    String newText = change.getControlNewText();
+                    if (validDoubleText.matcher(newText).matches()) {
+                        return change;
+                    } else {
+                        return null;
+                    }
+                });
+
+        transakcijaFormIznosTXT.setTextFormatter(textFormatter);
+
+    }
+
 }
