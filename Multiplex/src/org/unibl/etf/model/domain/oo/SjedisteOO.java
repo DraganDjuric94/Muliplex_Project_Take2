@@ -14,75 +14,47 @@ import java.util.Objects;
 public class SjedisteOO {
 
     private Integer sjedisteId;
-    private Integer vrsta;
     private Integer kolona;
+    private Integer vrsta;
 
     public SjedisteOO() {
     }
 
-    public SjedisteOO(Integer sjedisteId, Integer vrsta, Integer kolona) {
+    public SjedisteOO(Integer sjedisteId, Integer kolona, Integer vrsta) {
         this.sjedisteId = sjedisteId;
-        this.vrsta = vrsta;
         this.kolona = kolona;
+        this.vrsta = vrsta;
     }
 
     public Integer getSjedisteId() {
         return sjedisteId;
     }
 
-    public Integer getVrsta() {
-        return vrsta;
-    }
-
     public Integer getKolona() {
         return kolona;
+    }
+
+    public Integer getVrsta() {
+        return vrsta;
     }
 
     public void setSjedisteId(Integer sjedisteId) {
         this.sjedisteId = sjedisteId;
     }
 
-    public void setVrsta(Integer vrsta) {
-        this.vrsta = vrsta;
-    }
-
     public void setKolona(Integer kolona) {
         this.kolona = kolona;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.sjedisteId);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final SjedisteOO other = (SjedisteOO) obj;
-        if (!Objects.equals(this.sjedisteId, other.sjedisteId)) {
-            return false;
-        }
-        return true;
+    public void setVrsta(Integer vrsta) {
+        this.vrsta = vrsta;
     }
 
     @Override
     public String toString() {
-        return 
-                '{' 
-                + "sjedisteId=" + sjedisteId 
-                + ", vrsta=" + vrsta 
-                + ", kolona=" + kolona 
-                + '}';
+        return "SjedisteOO{" + "sjedisteId=" + sjedisteId + ", kolona=" + kolona + ", vrsta=" + vrsta + '}';
     }
+
+    
 
 }

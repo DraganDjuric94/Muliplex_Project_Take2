@@ -31,8 +31,8 @@ import org.unibl.etf.model.domain.oo.SjedisteOO;
  * @author Aleksandar
  */
 public class SalaFormController implements Initializable {
-    
-    private static UnaryOperator<Change> prirodniBrojevi(){
+
+    private static UnaryOperator<Change> prirodniBrojevi() {
         UnaryOperator<Change> naturalNumberFilter = change -> {
             String text = change.getControlNewText();
 
@@ -48,14 +48,12 @@ public class SalaFormController implements Initializable {
         };
         return naturalNumberFilter;
     }
-    
+
     private boolean azuriranje;
     private SalaOO sala;
-    
-    public SalaFormController(SalaOO sala, boolean azuriranje){
-        this.salaFormBrojRedovaTXT.setTextFormatter(new TextFormatter<>(prirodniBrojevi()));
-        this.salaFormBrojKolonaTXT.setTextFormatter(new TextFormatter<>(prirodniBrojevi()));
-        if(azuriranje){
+
+    public SalaFormController(SalaOO sala, boolean azuriranje) {
+        if (azuriranje) {
             this.sala = sala;
             this.azuriranje = true;
         }
@@ -77,72 +75,70 @@ public class SalaFormController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        
-        if(this.azuriranje){
+        this.salaFormBrojRedovaTXT.setTextFormatter(new TextFormatter<>(prirodniBrojevi()));
+        this.salaFormBrojKolonaTXT.setTextFormatter(new TextFormatter<>(prirodniBrojevi()));
+        if (this.azuriranje) {
             this.salaFormBrojRedovaTXT.setText(this.sala.getBrojRedova().toString());
             this.salaFormBrojKolonaTXT.setText(this.sala.getBrojKolona().toString());
         }
-    }    
+    }
 
     @FXML
     private void salaFormPonistiBTNHandler(ActionEvent event) {
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
     @FXML
     private void salaFormOkBTNHandler(ActionEvent event) {
-        if(provjeriPodatke()){
-            if(this.azuriranje){
+        if (provjeriPodatke()) {
+            if (this.azuriranje) {
                 azuriraj();
-            }else{
+            } else {
                 dodaj();
             }
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
-        }else{
+        } else {
             this.salaFormObavjestenjeOGrescLBL.setText("Podaci nisu validni");
             this.salaFormObavjestenjeOGrescLBL.setVisible(true);
         }
-        
+
     }
-    
-    public void dodaj(){
+
+    public void dodaj() {
         List<SjedisteOO> sjedista = new ArrayList<>();
         int brojRedova = Integer.parseInt(this.salaFormBrojRedovaTXT.getText());
         int brojKolona = Integer.parseInt(this.salaFormBrojKolonaTXT.getText());
-        
-        for(int i = 0; i < brojRedova; i++){
-            for(int j = 0; j < brojKolona; j++){
-                sjedista.add(new SjedisteOO(null, (i + 1), ( j + 1)));
+
+        for (int i = 0; i < brojRedova; i++) {
+            for (int j = 0; j < brojKolona; j++) {
+                sjedista.add(new SjedisteOO(null, (j + 1), (i + 1)));
             }
         }
-        
+
         SalaOO novaSala = new SalaOO(
                 null,
                 brojRedova,
                 brojKolona,
                 sjedista
         );
-        
-        SalaAdapter.unesi(sala);
-        
+
+        SalaAdapter.unesi(novaSala);
+
     }
-    
-    public void azuriraj(){
+
+    public void azuriraj() {
         this.sala.setBrojRedova(Integer.parseInt(this.salaFormBrojRedovaTXT.getText()));
         this.sala.setBrojKolona(Integer.parseInt(this.salaFormBrojKolonaTXT.getText()));
-        
+
         SalaAdapter.izmijeni(sala);
-        
+
     }
-    
-    public boolean provjeriPodatke(){
-        return (
-                (null != this.salaFormBrojRedovaTXT.getText()) &&
-                (null != this.salaFormBrojKolonaTXT.getText())
-                );
+
+    public boolean provjeriPodatke() {
+        return ((null != this.salaFormBrojRedovaTXT.getText())
+                && (null != this.salaFormBrojKolonaTXT.getText()));
     }
-    
+
 }

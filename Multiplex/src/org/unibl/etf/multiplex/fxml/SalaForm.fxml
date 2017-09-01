@@ -13,8 +13,8 @@
       <Label layoutX="14.0" layoutY="53.0" text="Broj redova" AnchorPane.topAnchor="45.0" />
       <Label layoutX="14.0" layoutY="97.0" text="Broj kolona" AnchorPane.topAnchor="96.0" />
       <TextField fx:id="salaFormBrojKolonaTXT" layoutX="14.0" layoutY="113.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <Button fx:id="salaFormPonistiBTN" layoutX="334.0" layoutY="561.0" mnemonicParsing="false" onAction="#salaFormPonistiBTNHandler" text="Poništi" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <Button fx:id="salaFormOkBTN" layoutX="244.0" layoutY="561.0" mnemonicParsing="false" onAction="#salaFormOkBTNHandler" text="OK" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="175.0" />
+      <Button fx:id="salaFormPonistiBTN" layoutX="334.0" layoutY="561.0" mnemonicParsing="false" onAction="#salaFormPonistiBTNHandler" text="Poništi" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <Label fx:id="salaFormObavjestenjeOGrescLBL" layoutX="14.0" layoutY="153.0" text="Obavjestenje o gresci" visible="false" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="147.0" />
    </children>
 </AnchorPane>

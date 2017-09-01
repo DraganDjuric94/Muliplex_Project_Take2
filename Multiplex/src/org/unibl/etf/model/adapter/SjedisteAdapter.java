@@ -70,8 +70,8 @@ public class SjedisteAdapter {
     private static SjedisteOO konvertujUOO(Sjediste sjediste){
         return new SjedisteOO(
                 sjediste.getSjedisteId(),
-                sjediste.getVrsta(),
-                sjediste.getKolona()
+                sjediste.getKolona(),
+                sjediste.getVrsta()
         );
     }
     
@@ -79,8 +79,8 @@ public class SjedisteAdapter {
         return new Sjediste(
                 sjedisteOO.getSjedisteId(),
                 salaId,
-                sjedisteOO.getVrsta(),
-                sjedisteOO.getKolona()
+                sjedisteOO.getKolona(),
+                sjedisteOO.getVrsta()
         );
     }
 }

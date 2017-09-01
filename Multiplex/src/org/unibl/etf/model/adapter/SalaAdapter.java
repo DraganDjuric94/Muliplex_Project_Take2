@@ -77,7 +77,7 @@ public class SalaAdapter {
             //dodavanje brojRedova x brojKolona sjedista
             for(int i = 0; i < salaOO.getBrojRedova(); i++){
                 for(int j = 0; j < salaOO.getBrojKolona(); j++){
-                    SjedisteAdapter.unesi(salaOO.getSalaId(), new SjedisteOO(null, (i + 1), (j + 1)));
+                    SjedisteAdapter.unesi(salaOO.getSalaId(), new SjedisteOO(null, (j + 1), (i + 1)));
                 }
             }
             
