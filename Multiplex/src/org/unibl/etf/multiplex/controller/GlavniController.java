@@ -786,7 +786,7 @@ public class GlavniController implements Initializable{
                 stage.setResizable(false);
                 stage.show(); 
             } catch (IOException ex) {
-                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         
@@ -806,7 +806,7 @@ public class GlavniController implements Initializable{
                     stage.setResizable(false);
                     stage.show(); 
                 } catch (IOException ex) {
-                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -874,7 +874,7 @@ public class GlavniController implements Initializable{
                     stage.setResizable(false);
                     stage.show(); 
                 } catch (IOException ex) {
-                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             
         });
@@ -894,7 +894,7 @@ public class GlavniController implements Initializable{
                     stage.setResizable(false);
                     stage.show(); 
                 } catch (IOException ex) {
-                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -962,7 +962,7 @@ public class GlavniController implements Initializable{
                     stage.setResizable(false);
                     stage.show(); 
                 } catch (IOException ex) {
-                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -980,7 +980,7 @@ public class GlavniController implements Initializable{
                 stage.setResizable(false);
                 stage.show(); 
             } catch (IOException ex) {
-                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         
@@ -1052,7 +1052,7 @@ public class GlavniController implements Initializable{
                 stage.setResizable(false);
                 stage.show(); 
             } catch (IOException ex) {
-                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         });
@@ -1072,7 +1072,7 @@ public class GlavniController implements Initializable{
                     stage.setResizable(false);
                     stage.show(); 
                 } catch (IOException ex) {
-                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -1149,7 +1149,7 @@ public class GlavniController implements Initializable{
                     stage.setResizable(false);
                     stage.show(); 
                 } catch (IOException ex) {
-                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -1167,7 +1167,7 @@ public class GlavniController implements Initializable{
                 stage.setResizable(false);
                 stage.show(); 
             } catch (IOException ex) {
-                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         
@@ -1238,7 +1238,7 @@ public class GlavniController implements Initializable{
                 stage.setResizable(false);
                 stage.show(); 
             } catch (IOException ex) {
-                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         
@@ -1257,7 +1257,7 @@ public class GlavniController implements Initializable{
                     stage.setResizable(false);
                     stage.show(); 
                 } catch (IOException ex) {
-                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -1332,7 +1332,7 @@ public class GlavniController implements Initializable{
                     stage.setResizable(false);
                     stage.show(); 
                 } catch (IOException ex) {
-                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
                 } 
             }
         });
@@ -1350,7 +1350,7 @@ public class GlavniController implements Initializable{
                 stage.setResizable(false);
                 stage.show(); 
             } catch (IOException ex) {
-                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
             }      
         });
         
@@ -1421,7 +1421,7 @@ public class GlavniController implements Initializable{
                     stage.setResizable(false);
                     stage.show(); 
                 } catch (IOException ex) {
-                    Logger.getLogger(KinoOperaterController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
                 }    
             }
         });
@@ -1439,7 +1439,7 @@ public class GlavniController implements Initializable{
                 stage.setResizable(false);
                 stage.show(); 
             } catch (IOException ex) {
-                Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
             }      
         });
         
@@ -1510,7 +1510,7 @@ public class GlavniController implements Initializable{
                     stage.setResizable(false);
                     stage.show(); 
                 } catch (IOException ex) {
-                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
                 } 
           
         });
@@ -1530,7 +1530,7 @@ public class GlavniController implements Initializable{
                     stage.setResizable(false);
                     stage.show(); 
                 } catch (IOException ex) {
-                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
                 } 
             }
         });
@@ -1605,7 +1605,7 @@ public class GlavniController implements Initializable{
                     stage.setResizable(false);
                     stage.show(); 
                 } catch (IOException ex) {
-                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
                 } 
         });
         
@@ -1624,7 +1624,7 @@ public class GlavniController implements Initializable{
                     stage.setResizable(false);
                     stage.show(); 
                 } catch (IOException ex) {
-                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GlavniController.class.getName()).log(Level.SEVERE, null, ex);
                 } 
             }
       });
