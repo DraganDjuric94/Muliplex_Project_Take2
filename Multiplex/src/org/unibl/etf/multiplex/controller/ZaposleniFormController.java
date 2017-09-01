@@ -122,7 +122,7 @@ public class ZaposleniFormController implements Initializable {
                 zaposleniFormKorImeTXT.getText(), pass, 
                 Double.parseDouble(zaposleniFormPlataTXT.getText()), 
                 zaposleniFormAktivanCHK.isSelected(), null);
-        if(zaposleniFormPozicijaCBX.getSelectionModel().getSelectedItem().equals(stari.getPozicija().getNaziv())){
+        if(stari.getPozicija() != null && zaposleniFormPozicijaCBX.getSelectionModel().getSelectedItem().equals(stari.getPozicija().getNaziv())){
             zap.setPozicija(stari.getPozicija());
         }else{
             PozicijaOO poz = new PozicijaOO(null, zaposleniFormPozicijaCBX.getSelectionModel().getSelectedItem(),
