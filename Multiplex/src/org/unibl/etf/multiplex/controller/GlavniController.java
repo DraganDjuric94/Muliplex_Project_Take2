@@ -669,6 +669,58 @@ public class GlavniController implements Initializable{
             pretraziSale(pretraziSalaTXT.getText());
         });
         
+        dodajSalaBTN.setOnAction((event) -> {
+        
+                SalaFormController control = new SalaFormController(null, false);
+                FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/org/unibl/etf/multiplex/fxml/SalaForm.fxml"));
+                try {
+                    loader.setController((Object)control);
+                    Parent root = (Parent)loader.load();
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.setTitle("");
+                    stage.setResizable(false);
+                    stage.show(); 
+                } catch (IOException ex) {
+                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+        });
+        
+        izmijeniSalaBTN.setOnAction((event) -> {
+            SalaOO sala = salaTabelaTBL.getSelectionModel().getSelectedItem();
+            if(sala != null){
+                SalaFormController control = new SalaFormController(sala, true);
+                FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/org/unibl/etf/multiplex/fxml/SalaForm.fxml"));
+                try {
+                    loader.setController((Object)control);
+                    Parent root = (Parent)loader.load();
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.setTitle("");
+                    stage.setResizable(false);
+                    stage.show(); 
+                } catch (IOException ex) {
+                    Logger.getLogger(PravnikController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
+        obrisiSalaBTN.setOnAction((event) -> {
+            SalaOO sala = salaTabelaTBL.getSelectionModel().getSelectedItem();
+            if(sala != null){
+                SalaAdapter.obrisi(sala.getSalaId());
+            }
+        });
+        
+        if(samoCitanje){
+            obrisiSalaBTN.disableProperty().set(true);
+            dodajSalaBTN.disableProperty().set(true);
+            izmijeniSalaBTN.disableProperty().set(true);
+        }
+        
     }
     
     private void initializeZanr(boolean samoCitanje){
