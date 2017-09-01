@@ -24,5 +24,7 @@
             <Font size="25.0" />
          </font>
       </Label>
+      <Label fx:id="vrijemeLBL" layoutX="144.0" layoutY="219.0" text="Vrijeme: 01.01.0101. 18:00:00" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="302.0" />
+      <Label fx:id="salaLBL" layoutX="331.0" layoutY="219.0" text="Sala: 56" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="228.0" />
    </children>
 </AnchorPane>

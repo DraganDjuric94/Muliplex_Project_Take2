@@ -17,7 +17,9 @@
          </font>
       </Label>
       <Label fx:id="opisFilmLBL" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="144.0" layoutY="69.0" prefHeight="88.0" prefWidth="456.0" text="OPIS FILMA I SL." wrapText="true" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0" />
-      <Label fx:id="trajanjeLBL" layoutX="382.0" layoutY="169.0" prefHeight="17.0" prefWidth="105.0" text="Trajanje: 200 min" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="113.0" />
-      <Label fx:id="cijenaLBL" layoutX="437.0" layoutY="169.0" text="Cijena karte: 15KM" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Label fx:id="trajanjeLBL" layoutX="382.0" layoutY="188.0" prefHeight="17.0" prefWidth="105.0" text="Trajanje: 200 min" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="113.0" />
+      <Label fx:id="cijenaLBL" layoutX="487.0" layoutY="188.0" text="Cijena karte: 15KM" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0" />
+      <Label fx:id="vrijemeLBL" layoutX="144.0" layoutY="188.0" text="Vrijeme: 01.01.0000. 18:00:00" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="302.0" />
+      <Label fx:id="salaLBL" layoutX="338.0" layoutY="188.0" text="Sala: 5" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="228.0" />
    </children>
 </AnchorPane>

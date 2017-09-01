@@ -8,22 +8,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.unibl.etf.multiplex.controller.RacunController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.unibl.etf.multiplex.controller.RacunController">
    <children>
-      <Button fx:id="hranaBTN" layoutX="22.0" layoutY="69.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="191.0" style="-fx-background-radius: 30;" text="Hrana">
+      <Button fx:id="hranaBTN" layoutX="14.0" layoutY="560.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Dodaj hranu" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" />
+      <Button fx:id="piceBTN" layoutX="116.0" layoutY="560.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Dodaj piće" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="116.0" />
+      <ListView fx:id="listaDodatihArtikala" layoutX="240.0" layoutY="68.0" prefHeight="490.0" prefWidth="463.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0" />
+      <Button fx:id="stampajBTN" layoutX="638.0" layoutY="560.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="62.0" text="Štampaj" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="100.0" />
+      <Button fx:id="odustaniBTN" layoutX="708.0" layoutY="560.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Odustani" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+      <Button fx:id="obrisiBTN" layoutX="625.0" layoutY="14.0" mnemonicParsing="false" prefHeight="4.0" prefWidth="56.0" text="Obriši" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <Label fx:id="ukupnoLBL" alignment="CENTER_RIGHT" layoutX="506.0" layoutY="24.0" prefHeight="17.0" prefWidth="202.0" text="Ukupno za platiti: 0 KM" AnchorPane.rightAnchor="92.0" AnchorPane.topAnchor="24.0">
          <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="piceBTN" layoutX="22.0" layoutY="130.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="191.0" style="-fx-background-radius: 30;" text="Pice">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <ListView fx:id="listaDodatihArtikala" layoutX="240.0" layoutY="69.0" prefHeight="286.0" prefWidth="347.0" />
-      <Button fx:id="stampajBTN" layoutX="28.0" layoutY="320.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" style="-fx-background-radius: 30;" text="Stampaj" />
-      <Button fx:id="odustaniBTN" layoutX="129.0" layoutY="320.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" style="-fx-background-radius: 30;" text="Odustani" />
-      <Button fx:id="obrisiBTN" layoutX="437.0" layoutY="22.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="149.0" style="-fx-background-radius: 30;" text="Obrisi" />
-      <Label fx:id="ukupnoLBL" alignment="CENTER_RIGHT" layoutX="384.0" layoutY="364.0" prefHeight="17.0" prefWidth="202.0" text="Label" />
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
    </children>
 </AnchorPane>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" fx:id="artikliANP" prefHeight="36.0" prefWidth="556.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Label fx:id="nazivLBL" layoutX="14.0" layoutY="10.0" prefHeight="26.0" prefWidth="111.0" text="Kiseli Krastavci" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="5.0" />
+      <Label fx:id="stanjeLBL" alignment="CENTER" layoutX="212.0" layoutY="5.0" prefHeight="26.0" prefWidth="132.0" text="Na stanju: 132451" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <Label fx:id="cijenaLBL" alignment="CENTER_RIGHT" layoutX="499.0" layoutY="10.0" prefHeight="26.0" prefWidth="105.0" text="Cijena: 15 KM" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0" />
+   </children>
+</AnchorPane>
