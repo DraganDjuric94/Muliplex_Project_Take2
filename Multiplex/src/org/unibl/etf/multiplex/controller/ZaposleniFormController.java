@@ -6,9 +6,15 @@
 package org.unibl.etf.multiplex.controller;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -83,9 +89,18 @@ public class ZaposleniFormController implements Initializable {
     }
     
     public void azuriraj(){
+        MessageDigest digest;
+	String pass = "";
+	try {
+            digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(zaposleniFormLozinkaTXT.getText().getBytes(StandardCharsets.UTF_8));
+            pass = Base64.getEncoder().encodeToString(hash);
+	} catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ZaposleniFormController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ZaposleniOO zap = new ZaposleniOO(stari.getZaposleniId(), zaposleniFormImeTXT.getText(), 
                 zaposleniFormPrezimeTXT.getText(), zaposleniFormJmbgTXT.getText(), 
-                zaposleniFormKorImeTXT.getText(), zaposleniFormLozinkaTXT.getText(), 
+                zaposleniFormKorImeTXT.getText(), pass, 
                 Double.parseDouble(zaposleniFormPlataTXT.getText()), 
                 zaposleniFormAktivanCHK.isSelected(), null);
         if(zaposleniFormPozicijaCBX.getSelectionModel().getSelectedItem().equals(stari.getPozicija().getNaziv())){
@@ -102,9 +117,18 @@ public class ZaposleniFormController implements Initializable {
     }
     
     public void dodaj(){
+        MessageDigest digest;
+	String pass = "";
+	try {
+            digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(zaposleniFormLozinkaTXT.getText().getBytes(StandardCharsets.UTF_8));
+            pass = Base64.getEncoder().encodeToString(hash);
+	} catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ZaposleniFormController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ZaposleniOO zap = new ZaposleniOO(null, zaposleniFormImeTXT.getText(), 
                 zaposleniFormPrezimeTXT.getText(), zaposleniFormJmbgTXT.getText(), 
-                zaposleniFormKorImeTXT.getText(), zaposleniFormLozinkaTXT.getText(), 
+                zaposleniFormKorImeTXT.getText(), pass, 
                 Double.parseDouble(zaposleniFormPlataTXT.getText()), 
                 zaposleniFormAktivanCHK.isSelected(), null);
         PozicijaOO poz = new PozicijaOO(null, zaposleniFormPozicijaCBX.getSelectionModel().getSelectedItem(),
