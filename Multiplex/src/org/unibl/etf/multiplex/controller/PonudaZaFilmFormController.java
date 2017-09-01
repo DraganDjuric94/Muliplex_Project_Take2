@@ -74,14 +74,14 @@ public class PonudaZaFilmFormController implements Initializable {
         stage.close();
     }
     
-    public void dodaj(){
+    public void azuriraj(){
         this.ponudaZaFilm.setOpis(this.ponudaZaFilmFormOpisTA.getText());
         this.ponudaZaFilm.setDatum(Date.from(this.ponudaZaFilmFormDatumDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         
-        PonudaZaFilmAdapter.unesi(ponudaZaFilm);
+        PonudaZaFilmAdapter.izmijeni(ponudaZaFilm);
     }
     
-    public void azuriraj(){
+    public void dodaj(){
         PonudaZaFilmOO novaPonudaZaFilm = new PonudaZaFilmOO(
                 null,
                 null,
