@@ -137,8 +137,8 @@ public class SalaFormController implements Initializable {
     }
 
     public boolean provjeriPodatke() {
-        return ((null != this.salaFormBrojRedovaTXT.getText())
-                && (null != this.salaFormBrojKolonaTXT.getText()));
+        return ((0 < this.salaFormBrojRedovaTXT.getText().length())
+                && (0 < this.salaFormBrojKolonaTXT.getText().length()));
     }
 
 }
