@@ -75,6 +75,7 @@ public class ZaposleniOO {
     }
     
     public String getNazivPozicije(){
+	   if (pozicija == null) return "Neaktivan";
         return pozicija.getNaziv();
     }
 
