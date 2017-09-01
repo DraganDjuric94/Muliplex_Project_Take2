@@ -67,10 +67,7 @@ public class ZanrOO {
 
     @Override
     public String toString() {
-        return '{'
-                + "zanrId=" + zanrId
-                + ", naziv=" + naziv
-                + '}';
+        return naziv;
     }
 
 }
