@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import org.unibl.etf.model.adapter.PonudaZaFilmAdapter;
@@ -32,6 +33,7 @@ public class PonudaZaFilmFormController implements Initializable {
 
     private PonudaZaFilmOO ponudaZaFilm;
     private boolean azuriranje;
+    private boolean dobarUnos = false;
     
     public PonudaZaFilmFormController(PonudaZaFilmOO ponudaZaFilm, boolean azuriranje){
         if(azuriranje){
@@ -48,6 +50,8 @@ public class PonudaZaFilmFormController implements Initializable {
     private Button ponudaZaFilmFormPonistiBTN;
     @FXML
     private Button ponudaZaFilmFormOkBTN;
+    @FXML
+    private Label greskaLBL;
 
     /**
      * Initializes the controller class.
@@ -68,13 +72,17 @@ public class PonudaZaFilmFormController implements Initializable {
 
     @FXML
     private void ponudaZaFilmFormOkBTNHandler(ActionEvent event) {
-        if(this.azuriranje){
-            azuriraj();
+        if(provjeriUnos()){
+            if(this.azuriranje){
+                azuriraj();
+            }else{
+                dodaj();
+            }
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.close();
         }else{
-            dodaj();
+            greskaLBL.setVisible(true);
         }
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.close();
     }
     
     public void azuriraj(){
@@ -92,6 +100,14 @@ public class PonudaZaFilmFormController implements Initializable {
                 Date.from(this.ponudaZaFilmFormDatumDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         
         PonudaZaFilmAdapter.unesi(novaPonudaZaFilm);
+    }
+    
+    public boolean provjeriUnos(){
+        if(ponudaZaFilmFormOpisTA != null && ponudaZaFilmFormOpisTA.getText().length() > 0 && ponudaZaFilmFormDatumDP.getValue() != null){
+           return true;
+        }else{
+            return false;
+        }
     }
     
 }

@@ -1,27 +1,3 @@
-/*
- * Decompiled with CFR 0_122.
- * 
- * Could not load the following classes:
- *  javafx.application.Platform
- *  javafx.beans.property.DoubleProperty
- *  javafx.beans.property.Property
- *  javafx.collections.FXCollections
- *  javafx.collections.ObservableList
- *  javafx.event.ActionEvent
- *  javafx.event.Event
- *  javafx.event.EventHandler
- *  javafx.fxml.FXML
- *  javafx.fxml.Initializable
- *  javafx.scene.Node
- *  javafx.scene.control.Button
- *  javafx.scene.control.ListCell
- *  javafx.scene.control.ListView
- *  javafx.scene.control.MultipleSelectionModel
- *  javafx.scene.control.TextField
- *  javafx.scene.input.KeyEvent
- *  javafx.scene.layout.AnchorPane
- *  javafx.util.Callback
- */
 package org.unibl.etf.multiplex.controller;
 
 import java.io.PrintStream;
@@ -137,8 +113,8 @@ implements Initializable {
                     this.setGraphic(null);
                 } else {
                     ProjekcijaOO proj = karta.getProjekcija();
-                    proj.getFilm().setSlika("images/testSlika.jpg");
-                    PodaciZaRezervacijuList podaci = new PodaciZaRezervacijuList(proj.getFilm().getSlika(), proj.getFilm().getNaziv(), proj.getFilm().getOpis(), proj.getFilm().getTrajanje().toString(), "5.35", "Broj rezervacije: " + karta.getKartaId().toString());
+                    //proj.getFilm().setSlika("images/testSlika.jpg");
+                    PodaciZaRezervacijuList podaci = new PodaciZaRezervacijuList(proj.getFilm().getSlika(), proj.getFilm().getNaziv(), proj.getFilm().getOpis(),proj.getDatumVrijeme().toString(),proj.getSala().getSalaId().toString(), proj.getFilm().getTrajanje().toString(), proj.getCijenaKarte().toString(), "Broj rezervacije: " + karta.getKartaId().toString());
                     AnchorPane fxmlPrikaz = podaci.getFXMLPrikaz();
                     fxmlPrikaz.prefWidthProperty().bindBidirectional((Property)PregledRezervacijaController.this.rezervacijeLST.prefWidthProperty());
                     this.setGraphic((Node)fxmlPrikaz);

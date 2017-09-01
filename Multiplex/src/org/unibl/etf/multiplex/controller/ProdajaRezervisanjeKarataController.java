@@ -1,35 +1,3 @@
-/*
- * Decompiled with CFR 0_122.
- * 
- * Could not load the following classes:
- *  javafx.application.Platform
- *  javafx.beans.property.DoubleProperty
- *  javafx.beans.property.Property
- *  javafx.collections.FXCollections
- *  javafx.collections.ObservableList
- *  javafx.event.ActionEvent
- *  javafx.event.Event
- *  javafx.event.EventHandler
- *  javafx.fxml.FXML
- *  javafx.fxml.FXMLLoader
- *  javafx.fxml.Initializable
- *  javafx.scene.Node
- *  javafx.scene.Parent
- *  javafx.scene.Scene
- *  javafx.scene.control.Button
- *  javafx.scene.control.ChoiceBox
- *  javafx.scene.control.ListCell
- *  javafx.scene.control.ListView
- *  javafx.scene.control.MultipleSelectionModel
- *  javafx.scene.control.SingleSelectionModel
- *  javafx.scene.control.TextField
- *  javafx.scene.input.KeyEvent
- *  javafx.scene.layout.AnchorPane
- *  javafx.stage.Stage
- *  javafx.stage.Window
- *  javafx.stage.WindowEvent
- *  javafx.util.Callback
- */
 package org.unibl.etf.multiplex.controller;
 
 import java.io.IOException;
@@ -100,9 +68,9 @@ implements Initializable {
     public void preuzmiSveProjekcije() {
         this.projekcije.clear();
         this.projekcije.addAll(ProjekcijaAdapter.preuzmiSve());
-        for (ProjekcijaOO p : this.projekcije) {
+        /*for (ProjekcijaOO p : this.projekcije) {
             p.getFilm().setSlika("images/testSlika.jpg");
-        }
+        }*/
     }
 
     public void preuzmiSveZanrove() {
@@ -131,9 +99,9 @@ implements Initializable {
                 it.remove();
             }
         }
-        for (ProjekcijaOO p : this.projekcije) {
+        /*for (ProjekcijaOO p : this.projekcije) {
             p.getFilm().setSlika("images/testSlika.jpg");
-        }
+        }*/
     }
 
     public void update() {
@@ -153,9 +121,9 @@ implements Initializable {
                 it.remove();
             }
         }
-        for (ProjekcijaOO p : proj) {
+        /*for (ProjekcijaOO p : proj) {
             p.getFilm().setSlika("images/testSlika.jpg");
-        }
+        }*/
         if (!proj.equals(this.projekcije)) {
             this.projekcije.clear();
             this.projekcije.addAll((Collection)proj);
@@ -194,7 +162,7 @@ implements Initializable {
                     this.setText(null);
                     this.setGraphic(null);
                 } else {
-                    PodaciZaProjekcijuList podaci = new PodaciZaProjekcijuList(proj.getFilm().getSlika(), proj.getFilm().getNaziv(), proj.getFilm().getOpis(), proj.getFilm().getTrajanje().toString(), "5.35");
+                    PodaciZaProjekcijuList podaci = new PodaciZaProjekcijuList(proj.getFilm().getSlika(), proj.getFilm().getNaziv(), proj.getFilm().getOpis(),proj.getDatumVrijeme().toString(),proj.getSala().getSalaId().toString(), proj.getFilm().getTrajanje().toString(), proj.getCijenaKarte().toString());
                     AnchorPane fxmlPrikaz = podaci.getFXMLPrikaz();
                     fxmlPrikaz.prefWidthProperty().bindBidirectional((Property)ProdajaRezervisanjeKarataController.this.projekcijeLST.prefWidthProperty());
                     this.setGraphic((Node)fxmlPrikaz);

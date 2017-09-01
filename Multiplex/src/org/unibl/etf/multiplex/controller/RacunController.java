@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.unibl.etf.model.adapter.RacunAdapter;
 import org.unibl.etf.model.domain.oo.RacunOO;
@@ -69,9 +71,12 @@ public class RacunController implements Initializable {
                 super.updateItem(item, empty);
                 if (empty) {
                     setText(null);
+                    setGraphic(null);
                 } else {
-                    this.setAlignment(Pos.CENTER);
-                    setText(item.getArtikal().getNaziv() + "                      x" + item.getKolicina() + "                   ukupno " + item.getKolicina());
+                    PodaciZaRacunList podaci = new PodaciZaRacunList(item.getArtikal().getNaziv(), item.getKolicina().toString(), item.getUkupnaCijena().toString());
+                    AnchorPane fxmlPrikaz = podaci.getFXMLView();
+                    fxmlPrikaz.prefWidthProperty().bindBidirectional(listaDodatihArtikala.prefWidthProperty());
+                    setGraphic(fxmlPrikaz);
                 }
             }
         });
@@ -96,7 +101,7 @@ public class RacunController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Hrana");
-        stage.setResizable(false);
+        //stage.setResizable(false);
         stage.showAndWait();
         racun = controller.preuzmiRacun();
         if (!racun.getStavke().isEmpty()) {
@@ -121,7 +126,7 @@ public class RacunController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Pice");
-        stage.setResizable(false);
+        //stage.setResizable(false);
         stage.showAndWait();
         racun = controller.preuzmiRacun();
         if (!racun.getStavke().isEmpty()) {

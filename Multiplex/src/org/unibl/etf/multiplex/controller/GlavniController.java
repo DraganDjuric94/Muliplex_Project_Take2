@@ -10,8 +10,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -420,6 +423,157 @@ public class GlavniController implements Initializable{
     private ObservableList<FakturaOO> fakture = FXCollections.observableArrayList();
     private String vrstaKorisnika;
     
+    public void updateOprema() {
+        ArrayList<OpremaOO> temp = OpremaAdapter.preuzmiSve();
+        ObservableList<OpremaOO> kar = FXCollections.observableArrayList();
+        for (OpremaOO k : temp) {
+            if (k.getNaziv().toLowerCase().startsWith(opremaSearchTXT.getText().toLowerCase())){
+                kar.add(k);
+            }
+        }
+        if (!kar.equals(this.oprema)) {
+            this.oprema.clear();
+            this.oprema.addAll(kar);
+            System.out.println("update!");
+        }
+    }
+    
+    public void updateZaposleni() {
+        ArrayList<ZaposleniOO> temp = ZaposleniAdapter.preuzmiSve();
+        ObservableList<ZaposleniOO> kar = FXCollections.observableArrayList();
+        for (ZaposleniOO k : temp) {
+            if (k.getIme().toLowerCase().startsWith(zaposleniSearchTXT.getText().toLowerCase())){
+                kar.add(k);
+            }
+        }
+        if (!kar.equals(this.zaposleni)) {
+            this.zaposleni.clear();
+            this.zaposleni.addAll(kar);
+            System.out.println("update!");
+        }
+    }
+    
+    public void updateArtikal() {
+        ArrayList<ArtikalOO> temp = ArtikalAdapter.preuzmiSve();
+        ObservableList<ArtikalOO> kar = FXCollections.observableArrayList();
+        for (ArtikalOO k : temp) {
+            if (k.getNaziv().toLowerCase().startsWith(artikalSearchTXT.getText().toLowerCase())){
+                kar.add(k);
+            }
+        }
+        if (!kar.equals(this.artikli)) {
+            this.artikli.clear();
+            this.artikli.addAll(kar);
+            System.out.println("update!");
+        }
+    }
+    
+    public void updateTransakcija() {
+        ArrayList<TransakcijaOO> temp = TransakcijaAdapter.preuzmiSve();
+        ObservableList<TransakcijaOO> kar = FXCollections.observableArrayList();
+        for (TransakcijaOO k : temp) {
+            if (k.getTransakcijaId().toString().startsWith(transakcijaSearchTXT.getText()) || k.getPosaljilac().toLowerCase().startsWith(transakcijaSearchTXT.getText().toLowerCase())){
+                kar.add(k);
+            }
+        }
+        if (!kar.equals(this.transakcije)) {
+            this.transakcije.clear();
+            this.transakcije.addAll(kar);
+            System.out.println("update!");
+        }
+    }
+    
+    public void updateFaktura() {
+        ArrayList<FakturaOO> temp = FakturaAdapter.preuzmiSve();
+        ObservableList<FakturaOO> kar = FXCollections.observableArrayList();
+        for (FakturaOO k : temp) {
+            if (k.getFakturaId().toString().startsWith(fakturaSearchTXT.getText()) || k.getNazivRobe().toLowerCase().startsWith(fakturaSearchTXT.getText().toLowerCase())){
+                kar.add(k);
+            }
+        }
+        if (!kar.equals(this.fakture)) {
+            this.fakture.clear();
+            this.fakture.addAll(kar);
+            System.out.println("update!");
+        }
+    }
+    
+    public void updateFilm() {
+        ArrayList<FilmOO> temp = FilmAdapter.preuzmiSve();
+        ObservableList<FilmOO> kar = FXCollections.observableArrayList();
+        for (FilmOO k : temp) {
+            if (k.getNaziv().toLowerCase().startsWith(pretraziFilmTXT.getText().toLowerCase()) || k.getFilmId().toString().startsWith(pretraziFilmTXT.getText())){
+                kar.add(k);
+            }
+        }
+        if (!kar.equals(this.filmovi)) {
+            this.filmovi.clear();
+            this.filmovi.addAll(kar);
+            System.out.println("update!");
+        }
+    }
+    
+    public void updateSala() {
+        ArrayList<SalaOO> temp = SalaAdapter.preuzmiSve();
+        ObservableList<SalaOO> kar = FXCollections.observableArrayList();
+        for (SalaOO k : temp) {
+            if (k.getSalaId().toString().toLowerCase().startsWith(pretraziSalaTXT.getText().toLowerCase())){
+                kar.add(k);
+            }
+        }
+        if (!kar.equals(this.sale)) {
+            this.sale.clear();
+            this.sale.addAll(kar);
+            System.out.println("update!");
+        }
+    }
+    
+    public void updateProjekcija() {
+        ArrayList<ProjekcijaOO> temp = ProjekcijaAdapter.preuzmiSve();
+        ObservableList<ProjekcijaOO> kar = FXCollections.observableArrayList();
+        for (ProjekcijaOO k : temp) {
+            if (k.getNazivFilma().toString().toLowerCase().startsWith(pretraziProjekcijaTXT.getText().toLowerCase()) || k.getProjekcijaId().toString().startsWith(pretraziProjekcijaTXT.getText())){
+                kar.add(k);
+            }
+        }
+        if (!kar.equals(this.projekcije)) {
+            this.projekcije.clear();
+            this.projekcije.addAll(kar);
+            System.out.println("update!");
+        }
+    }
+    
+    public void updateZanr() {
+        ArrayList<ZanrOO> temp = ZanrAdapter.preuzmiSve();
+        ObservableList<ZanrOO> kar = FXCollections.observableArrayList();
+        for (ZanrOO k : temp) {
+            if (k.getNaziv().toString().toLowerCase().startsWith(pretraziZanrTXT.getText().toLowerCase())){
+                kar.add(k);
+            }
+        }
+        if (!kar.equals(this.zanrovi)) {
+            this.zanrovi.clear();
+            this.zanrovi.addAll(kar);
+            System.out.println("update!");
+        }
+    }
+    
+    public void updatePonuda() {
+        ArrayList<PonudaZaFilmOO> temp = PonudaZaFilmAdapter.preuzmiSve();
+        ObservableList<PonudaZaFilmOO> kar = FXCollections.observableArrayList();
+        for (PonudaZaFilmOO k : temp) {
+            if (k.getPonudaZaFilmId().toString().startsWith(pretraziPonudaTXT.getText()) || k.getFilmId().toString().startsWith(pretraziPonudaTXT.getText())){
+                kar.add(k);
+            }
+            
+        }
+        if (!kar.equals(this.ponude)) {
+            this.ponude.clear();
+            this.ponude.addAll(kar);
+            System.out.println("update!");
+        }
+    }
+    
     public GlavniController(String vrstaKorisnika){
         this.vrstaKorisnika = vrstaKorisnika;  
     }
@@ -458,7 +612,7 @@ public class GlavniController implements Initializable{
         ArrayList<OpremaOO> temp = OpremaAdapter.preuzmiSve();
         oprema.clear();
         for(OpremaOO it : temp){
-            if(it.getNaziv().toLowerCase().contains(tekst.toLowerCase()) || it.getBrojInventara().toLowerCase().contains(tekst.toLowerCase())){
+            if(it.getNaziv().toLowerCase().startsWith(tekst.toLowerCase())){
                 oprema.add(it);
             }
         }
@@ -564,7 +718,7 @@ public class GlavniController implements Initializable{
     private void pretraziSale(String tekst){
         ArrayList<SalaOO> temp = SalaAdapter.preuzmiSve();
         sale.clear();
-        for(SalaOO t : sale){
+        for(SalaOO t : temp){
             if(t.getSalaId().toString().startsWith(tekst)){
                 sale.add(t);
             }
@@ -574,7 +728,7 @@ public class GlavniController implements Initializable{
     private void pretraziPonude(String tekst){
         ArrayList<PonudaZaFilmOO> temp = PonudaZaFilmAdapter.preuzmiSve();
         ponude.clear();
-        for(PonudaZaFilmOO t : ponude){
+        for(PonudaZaFilmOO t : temp){
             if(t.getPonudaZaFilmId().toString().startsWith(tekst) || t.getFilmId().toString().startsWith(tekst)){
                 ponude.add(t);
             }
@@ -583,6 +737,25 @@ public class GlavniController implements Initializable{
     
     private void initializePonude(boolean samoCitanje){
         preuzmiSvePonude();
+        
+        Timer t = new Timer();
+        
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        updatePonuda();
+                    }
+                });
+            }
+        }, 0, 3000);
+        
+        ponudaIdCOL.prefWidthProperty().bind(ponudeTabelaTBL.widthProperty().multiply(0.25));
+        ponudaFilmIdCOL.prefWidthProperty().bind(ponudeTabelaTBL.widthProperty().multiply(0.25));
+        ponudaOpisCOL.prefWidthProperty().bind(ponudeTabelaTBL.widthProperty().multiply(0.25));
+        ponudaDatumCOL.prefWidthProperty().bind(ponudeTabelaTBL.widthProperty().multiply(0.25));
         
         ponudaIdCOL.setCellValueFactory(new PropertyValueFactory<>("ponudaZaFilmId"));
         ponudaFilmIdCOL.setCellValueFactory(new PropertyValueFactory<>("filmId"));
@@ -655,6 +828,24 @@ public class GlavniController implements Initializable{
     private void initializeSala(boolean samoCitanje){
         preuzmiSveSale();
         
+        Timer t = new Timer();
+        
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateSala();
+                    }
+                });
+            }
+        }, 0, 3000);
+        
+        salaIdCOL.prefWidthProperty().bind(salaTabelaTBL.widthProperty().multiply(0.33));
+        salaBrKolCOL.prefWidthProperty().bind(salaTabelaTBL.widthProperty().multiply(0.34));
+        salaBrRedCOL.prefWidthProperty().bind(salaTabelaTBL.widthProperty().multiply(0.33));
+        
         salaIdCOL.setCellValueFactory(new PropertyValueFactory<>("salaId"));
         salaBrRedCOL.setCellValueFactory(new PropertyValueFactory<>("brojRedova"));
         salaBrKolCOL.setCellValueFactory(new PropertyValueFactory<>("brojKolona"));
@@ -726,6 +917,23 @@ public class GlavniController implements Initializable{
     private void initializeZanr(boolean samoCitanje){
         preuzmiSveZanrove();
         
+        Timer t = new Timer();
+        
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateZanr();
+                    }
+                });
+            }
+        }, 0, 3000);
+        
+        zanrIdCOL.prefWidthProperty().bind(zanrTabelaTBL.widthProperty().multiply(0.5));
+        zanrNazivCOL.prefWidthProperty().bind(zanrTabelaTBL.widthProperty().multiply(0.5));
+        
         zanrIdCOL.setCellValueFactory(new PropertyValueFactory<>("zanrId"));
         zanrNazivCOL.setCellValueFactory(new PropertyValueFactory<>("naziv"));
         
@@ -794,6 +1002,26 @@ public class GlavniController implements Initializable{
     private void initializeProjekcija(boolean samoCitanje) {
 
         preuzmiSveProjekcije();
+        
+        Timer t = new Timer();
+        
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateProjekcija();
+                    }
+                });
+            }
+        }, 0, 3000);
+        
+        projekcijaIdCOL.prefWidthProperty().bind(tabelaProjekcijaTBL.widthProperty().multiply(0.2));
+        projekcijaNazivfCOL.prefWidthProperty().bind(tabelaProjekcijaTBL.widthProperty().multiply(0.2));
+        projekcijaSalaCOL.prefWidthProperty().bind(tabelaProjekcijaTBL.widthProperty().multiply(0.2));
+        datVrijCOL.prefWidthProperty().bind(tabelaProjekcijaTBL.widthProperty().multiply(0.2));
+        projekcijaCijenaCOL.prefWidthProperty().bind(tabelaProjekcijaTBL.widthProperty().multiply(0.2));
         
         projekcijaIdCOL.setCellValueFactory(new PropertyValueFactory<>("projekcijaId"));
         projekcijaNazivfCOL.setCellValueFactory(new PropertyValueFactory<>("nazivFilma"));
@@ -866,7 +1094,28 @@ public class GlavniController implements Initializable{
     private void initializeFilmovi(boolean samoCitanje) {
         
         preuzmiSveFilmove();
+        
+        Timer t = new Timer();
+        
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateFilm();
+                    }
+                });
+            }
+        }, 0, 3000);
           
+        filmIdCOL.prefWidthProperty().bind(filmoviTBL.widthProperty().multiply(0.15));
+        filmNazivCOL.prefWidthProperty().bind(filmoviTBL.widthProperty().multiply(0.15));
+        filmOpisCOL.prefWidthProperty().bind(filmoviTBL.widthProperty().multiply(0.25));
+        filmTrajanjeCOL.prefWidthProperty().bind(filmoviTBL.widthProperty().multiply(0.15));
+        filmSLikaCOL.prefWidthProperty().bind(filmoviTBL.widthProperty().multiply(0.15));
+        filmZanroviCOL.prefWidthProperty().bind(filmoviTBL.widthProperty().multiply(0.15));
+        
         filmIdCOL.setCellValueFactory(new PropertyValueFactory<>("filmId"));
         filmNazivCOL.setCellValueFactory(new PropertyValueFactory<>("naziv"));
         filmOpisCOL.setCellValueFactory(new PropertyValueFactory<>("opis"));
@@ -938,6 +1187,26 @@ public class GlavniController implements Initializable{
     
     private void initializeArtikal(boolean samoCitanje) {
         preuzmiSveArtikle();
+        
+        Timer t = new Timer();
+        
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateArtikal();
+                    }
+                });
+            }
+        }, 0, 3000);
+        
+        artikalNazivColumn.prefWidthProperty().bind(artikalTable.widthProperty().multiply(0.2));
+        artikalTipColumn.prefWidthProperty().bind(artikalTable.widthProperty().multiply(0.2));
+        artikalBarkodColumn.prefWidthProperty().bind(artikalTable.widthProperty().multiply(0.2));
+        artikalKolicinaColumn.prefWidthProperty().bind(artikalTable.widthProperty().multiply(0.2));
+        artikalCijenaColumn.prefWidthProperty().bind(artikalTable.widthProperty().multiply(0.2));
         
         artikalNazivColumn.setCellValueFactory(new PropertyValueFactory<>("naziv"));
         artikalTipColumn.setCellValueFactory(new PropertyValueFactory<>("tip"));
@@ -1012,6 +1281,26 @@ public class GlavniController implements Initializable{
         
         preuzmiSveZaposlene();
         
+        Timer t = new Timer();
+        
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateZaposleni();
+                    }
+                });
+            }
+        }, 0, 3000);
+        
+        zaposleniImeColumn.prefWidthProperty().bind(zaposleniTable.widthProperty().multiply(0.2));
+        zaposleniPrezimeColumn.prefWidthProperty().bind(zaposleniTable.widthProperty().multiply(0.2));
+        zaposleniJmbgColumn.prefWidthProperty().bind(zaposleniTable.widthProperty().multiply(0.2));
+        zaposleniPlataColumn.prefWidthProperty().bind(zaposleniTable.widthProperty().multiply(0.2));
+        zaposleniPozicijaColumn.prefWidthProperty().bind(zaposleniTable.widthProperty().multiply(0.2));
+        
         zaposleniImeColumn.setCellValueFactory(new PropertyValueFactory<>("ime"));
         zaposleniPrezimeColumn.setCellValueFactory(new PropertyValueFactory<>("prezime"));
         zaposleniJmbgColumn.setCellValueFactory(new PropertyValueFactory<>("jmbg"));
@@ -1082,6 +1371,24 @@ public class GlavniController implements Initializable{
     private void initializeOprema(boolean samoCitanje) {
     
         preuzmiSvuOpremu();
+        
+        Timer t = new Timer();
+        
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateOprema();
+                    }
+                });
+            }
+        }, 0, 3000);
+        
+        opremaBrojInventaraColumn.prefWidthProperty().bind(opremaTable.widthProperty().multiply(0.33));
+        opremaNazivOpremeColumn.prefWidthProperty().bind(opremaTable.widthProperty().multiply(0.34));
+        opremaIspravnostColumn.prefWidthProperty().bind(opremaTable.widthProperty().multiply(0.33));
         
         opremaBrojInventaraColumn.setCellValueFactory(new PropertyValueFactory<>("brojInventara"));
         opremaNazivOpremeColumn.setCellValueFactory(new PropertyValueFactory<>("naziv"));
@@ -1154,6 +1461,26 @@ public class GlavniController implements Initializable{
     private void initializeTransakcije(boolean samoCitanje){
         preuzmiSveTransakcije();
         
+        Timer t = new Timer();
+        
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateTransakcija();
+                    }
+                });
+            }
+        }, 0, 3000);
+        
+        transakcijaVrstaColumn.prefWidthProperty().bind(traksancijaTable.widthProperty().multiply(0.2));
+        transakcijaPrimalacColumn.prefWidthProperty().bind(traksancijaTable.widthProperty().multiply(0.2));
+        transakcijaPosiljalacColumn.prefWidthProperty().bind(traksancijaTable.widthProperty().multiply(0.2));
+        transakcijaDatumColumn.prefWidthProperty().bind(traksancijaTable.widthProperty().multiply(0.2));
+        transakcijaIznosColumn.prefWidthProperty().bind(traksancijaTable.widthProperty().multiply(0.2));
+        
         transakcijaVrstaColumn.setCellValueFactory(new PropertyValueFactory<>("vrstaTransakcije"));
         transakcijaPrimalacColumn.setCellValueFactory(new PropertyValueFactory<>("primalac"));
         transakcijaPosiljalacColumn.setCellValueFactory(new PropertyValueFactory<>("posaljilac"));
@@ -1224,6 +1551,28 @@ public class GlavniController implements Initializable{
     
     private void initializeFakture(boolean samoCitanje){
         preuzmiSveFakture();
+        
+        Timer t = new Timer();
+        
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateFaktura();
+                    }
+                });
+            }
+        }, 0, 3000);
+        
+        fakturaBrojRacunaColumn.prefWidthProperty().bind(fakturaTable.widthProperty().multiply(0.17));
+        fakturaNazivRobeColumn.prefWidthProperty().bind(fakturaTable.widthProperty().multiply(0.17));
+        fakturaJedinicaMjereColumn.prefWidthProperty().bind(fakturaTable.widthProperty().multiply(0.17));
+        fakturaKolicinaColumn.prefWidthProperty().bind(fakturaTable.widthProperty().multiply(0.17));
+        fakturaCijenaColumn.prefWidthProperty().bind(fakturaTable.widthProperty().multiply(0.16));
+        fakturaDatumColumn.prefWidthProperty().bind(fakturaTable.widthProperty().multiply(0.16));
+        fakturaRacunIzdaoColumn.prefWidthProperty().bind(fakturaTable.widthProperty().multiply(0.16));
         
         fakturaBrojRacunaColumn.setCellValueFactory(new PropertyValueFactory<>("brojRacuna"));
         fakturaNazivRobeColumn.setCellValueFactory(new PropertyValueFactory<>("nazivRobe"));
@@ -1349,7 +1698,7 @@ public class GlavniController implements Initializable{
                     System.exit(1);
                 });
                 stage.show();
-                ((Stage) opremaAddBTN.getScene().getWindow()).close();
+                ((Stage) taboviTPN.getScene().getWindow()).close();
             }catch (IOException ex) {
                 Logger.getLogger(Multiplex.class.getName()).log(Level.SEVERE, null, ex);
             }    
@@ -1365,7 +1714,7 @@ public class GlavniController implements Initializable{
                     System.exit(1);
                 });
                 stage.show();
-                ((Stage) opremaAddBTN.getScene().getWindow()).close();
+                ((Stage) taboviTPN.getScene().getWindow()).close();
             }catch (IOException ex) {
                 Logger.getLogger(Multiplex.class.getName()).log(Level.SEVERE, null, ex);
             }

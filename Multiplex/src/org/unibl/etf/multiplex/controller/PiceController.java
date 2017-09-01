@@ -9,8 +9,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +31,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.unibl.etf.model.adapter.ArtikalAdapter;
 import org.unibl.etf.model.domain.oo.ArtikalOO;
@@ -73,15 +78,43 @@ public class PiceController implements Initializable {
         this.listaDodatihArtikalaOBS = listaDodatihArtikalaOBS;
         this.racun = racun;
     }
+    
+    public void update() {
+        ArrayList<ArtikalOO> temp = ArtikalAdapter.preuzmiPoTipu("Pice");
+        ObservableList<ArtikalOO> kar = FXCollections.observableArrayList();
+        for (ArtikalOO k : temp) {
+            if (!k.getNaziv().toLowerCase().startsWith(pretraziTXT.getText().toLowerCase())) continue;
+            kar.add(k);
+        }
+        if (!kar.equals(this.listaUkupnoArtikala)) {
+            this.listaUkupnoArtikalaOBS.clear();
+            this.listaUkupnoArtikalaOBS.addAll(kar);
+            System.out.println("update!");
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        update();
+                    }
+                });
+            }
+        }, 0, 5000);
+        
         dodajBTN.requestFocus();
         setFieldForIntegersOnly(kolicinaTXT);
         if(racun.getUkupnaCijena() == 0.0) {
         ukupnoLBL.setVisible(false);
         } else {
-            ukupnoLBL.setText("Ukupno za platiti: " + racun.getUkupnaCijena());
+            ukupnoLBL.setText("Ukupno za platiti: " + racun.getUkupnaCijena() + "KM");
         }
         
         listaDodatihArtikala.setItems(listaDodatihArtikalaOBS);
@@ -91,9 +124,13 @@ public class PiceController implements Initializable {
                 super.updateItem(item, empty);
                 if (empty) {
                     setText(null);
+                    setGraphic(null);
                 } else {
-                    this.setAlignment(Pos.CENTER);
-                    setText(item.getArtikal().getNaziv() + "                      x" + item.getKolicina() + "                   ukupno " + item.getArtikal().getCijena());
+                    PodaciZaRacunList podaci = new PodaciZaRacunList(item.getArtikal().getNaziv(), item.getKolicina().toString(), item.getUkupnaCijena().toString());
+                    AnchorPane fxmlPrikaz = podaci.getFXMLView();
+                    fxmlPrikaz.prefWidthProperty().bindBidirectional(listaDodatihArtikala.prefWidthProperty());
+                    //fxmlPrikaz.prefWidthProperty().subtract(20);
+                    setGraphic(fxmlPrikaz);
                 }
             }
         });
@@ -107,10 +144,12 @@ public class PiceController implements Initializable {
                 super.updateItem(item, empty);
                 if (empty) {
                     setText(null);
+                    setGraphic(null);
                 } else {
-                    this.setAlignment(Pos.CENTER);
-                    setText(item.getNaziv() + " Stanje: " + item.getKolicinaNaStanju() + " Cijena: " + item.getCijena());
-
+                    PodaciZaArtikliList podaci = new PodaciZaArtikliList(item.getNaziv(), item.getKolicinaNaStanju().toString(), item.getCijena().toString());
+                    AnchorPane fxmlPrikaz = podaci.getFXMLView();
+                    fxmlPrikaz.prefWidthProperty().bindBidirectional(listaUkupnoArtikala.prefWidthProperty());
+                    setGraphic(fxmlPrikaz);
                 }
             }
         });
@@ -155,7 +194,7 @@ public class PiceController implements Initializable {
             ukupnoZaPlatiti += racun.getStavke().get(i).getUkupnaCijena();
         }
         ukupnoLBL.setVisible(true);
-        ukupnoLBL.setText("Ukupno za platiti: " + ukupnoZaPlatiti.toString());
+        ukupnoLBL.setText("Ukupno za platiti: " + ukupnoZaPlatiti.toString() + " KM");
         racun.setUkupnaCijena(ukupnoZaPlatiti);
         kolicinaTXT.clear();
         kolicina = 0;
@@ -178,7 +217,7 @@ public class PiceController implements Initializable {
             for (int i = 0; i < racun.getStavke().size(); i++) {
                 ukupnoZaPlatiti += racun.getStavke().get(i).getUkupnaCijena();
             }
-            ukupnoLBL.setText("Ukupno za platiti: " + ukupnoZaPlatiti.toString());
+            ukupnoLBL.setText("Ukupno za platiti: " + ukupnoZaPlatiti.toString() + "KM");
         }
         racun.setUkupnaCijena(ukupnoZaPlatiti);
         ukupnoZaPlatiti = 0.0;

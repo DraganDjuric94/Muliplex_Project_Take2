@@ -103,8 +103,11 @@ implements Initializable {
         ArrayList<String> izabranaSjedista = new ArrayList<String>();
         for (Node n : projSjed) {
             String boja = "#" + n.getStyle().split("#")[1];
-            if (!"#abe476".equals(boja)) continue;
-            izabranaSjedista.add(new Integer(GridPane.getRowIndex((Node)n) + 1).toString() + "||" + new Integer(GridPane.getColumnIndex((Node)n) + 1).toString());
+            if ("#abe476".equals(boja)){
+                System.out.println(new Integer(GridPane.getRowIndex((Node)n) + 1).toString() + "||" + new Integer(GridPane.getColumnIndex((Node)n) + 1).toString());
+                izabranaSjedista.add(new Integer(GridPane.getRowIndex((Node)n) + 1).toString() + "||" + new Integer(GridPane.getColumnIndex((Node)n) + 1).toString());
+                
+            }
         }
         ArrayList izabraneKarte = new ArrayList();
         for (String s : izabranaSjedista) {
@@ -116,12 +119,16 @@ implements Initializable {
             karta.setProjekcija(this.projekcija);
             karta.setRezervisana(rezervacija);
             SjedisteOO sjediste = new SjedisteOO();
-            sjediste.setVrsta(Integer.parseInt(sjedisteRK[0]));
-            sjediste.setKolona(Integer.parseInt(sjedisteRK[1]));
+            /*sjediste.setVrsta(Integer.parseInt(sjedisteRK[0]));
+            sjediste.setKolona(Integer.parseInt(sjedisteRK[1]));*/
+            System.out.println(this.projekcija.getProjekcijaId());
+            System.out.println(this.projekcija.getSala().getSalaId());
             for (SjedisteOO sj : this.projekcija.getSala().getSjedista()) {
-                if (sj.getVrsta() != Integer.parseInt(sjedisteRK[0]) || sj.getKolona() != Integer.parseInt(sjedisteRK[1])) continue;
-                sjediste = sj;
-                break;
+                if (sj.getVrsta() == Integer.parseInt(sjedisteRK[0]) && sj.getKolona() == Integer.parseInt(sjedisteRK[1])){
+                    sjediste = sj;
+                    System.out.println("Brejno za: " + sjediste);
+                    break;
+                }
             }
             karta.setSjediste(sjediste);
             KartaAdapter.unesi(karta);

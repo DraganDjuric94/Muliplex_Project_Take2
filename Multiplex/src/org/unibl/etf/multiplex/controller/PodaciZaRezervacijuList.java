@@ -1,15 +1,3 @@
-/*
- * Decompiled with CFR 0_122.
- * 
- * Could not load the following classes:
- *  javafx.fxml.FXML
- *  javafx.fxml.FXMLLoader
- *  javafx.scene.control.ContentDisplay
- *  javafx.scene.control.Label
- *  javafx.scene.image.Image
- *  javafx.scene.image.ImageView
- *  javafx.scene.layout.AnchorPane
- */
 package org.unibl.etf.multiplex.controller;
 
 import java.io.IOException;
@@ -40,8 +28,12 @@ public class PodaciZaRezervacijuList {
     private AnchorPane projekcijaANP;
     @FXML
     private Label brojRezervacijeLBL;
+    @FXML
+    private Label salaLBL;
+    @FXML
+    private Label vrijemeLBL; 
 
-    public PodaciZaRezervacijuList(String slika, String naslov, String opis, String trajanje, String cijena, String idRezervacije) {
+    public PodaciZaRezervacijuList(String slika, String naslov, String opis,String vrijeme, String sala, String trajanje, String cijena, String idRezervacije) {
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/org/unibl/etf/multiplex/fxml/RezervacijaIzListe.fxml"));
         fxmlLoader.setController((Object)this);
         try {
@@ -58,6 +50,8 @@ public class PodaciZaRezervacijuList {
         this.trajanjeLBL.setText("Trajanje: " + trajanje + " min");
         this.cijenaLBL.setText("Cijena: " + cijena + " KM");
         this.brojRezervacijeLBL.setText(idRezervacije);
+        this.vrijemeLBL.setText("Vrijeme: " + vrijeme);
+        this.salaLBL.setText("Sala: " + sala);
     }
 
     public AnchorPane getFXMLPrikaz() {
