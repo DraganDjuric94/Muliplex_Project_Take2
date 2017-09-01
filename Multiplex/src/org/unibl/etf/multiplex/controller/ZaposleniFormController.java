@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -22,7 +23,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.unibl.etf.model.adapter.PozicijaAdapter;
@@ -34,7 +37,7 @@ import org.unibl.etf.model.domain.oo.ZaposleniOO;
 /**
  * FXML Controller class
  *
- * @author juhu
+ * @author juhu, Aleksandar
  */
 public class ZaposleniFormController implements Initializable {
 
@@ -60,6 +63,22 @@ public class ZaposleniFormController implements Initializable {
     private TextField zaposleniFormLozinkaTXT;
     @FXML
     private ComboBox<String> zaposleniFormPozicijaCBX;
+    @FXML
+    private Label zaposleniFormObavjestenjeOGresciLBL;
+    
+    private static UnaryOperator<TextFormatter.Change> realniBrojeviFilter = change -> {
+        String text = change.getControlNewText();
+
+        if (!change.isContentChange()) {
+            return change;
+        }
+
+        if (text.matches("^\\d*\\.?\\d*$") || text.isEmpty()) {
+            return change;
+        }
+
+        return null;
+    };
     
     private boolean azuriranje = false;
     private ObservableList<String> pozicije = FXCollections.observableArrayList();
@@ -152,8 +171,10 @@ public class ZaposleniFormController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.zaposleniFormPlataTXT.setTextFormatter(new TextFormatter<>(realniBrojeviFilter));   
         
         zaposleniFormPozicijaCBX.setItems(pozicije);
+        
         if(azuriranje){
             zaposleniFormImeTXT.setText(ime);
             zaposleniFormPrezimeTXT.setText(prezime);
@@ -175,15 +196,18 @@ public class ZaposleniFormController implements Initializable {
         }
         
         zaposleniFormOkBTN.setOnAction((event) -> {
-            // TODO Provjeriti da li su unesena polja i sl
-            if(azuriranje){
-                azuriraj();
+            if (provjeriPodatke()) {
+                if (azuriranje) {
+                    azuriraj();
+                } else {
+                    dodaj();
+                }
+
+                Stage stage = (Stage) zaposleniFormOkBTN.getScene().getWindow();
+                stage.close();
             }else{
-                dodaj();
-            }   
-            
-            Stage stage = (Stage) zaposleniFormOkBTN.getScene().getWindow();
-            stage.close();
+                this.zaposleniFormObavjestenjeOGresciLBL.setVisible(true);
+            }
         });
         
         zaposleniFormCancelBTN.setOnAction((event) -> {
@@ -193,6 +217,18 @@ public class ZaposleniFormController implements Initializable {
         
         });
         
-    }    
+    }
+
+    public boolean provjeriPodatke(){
+        return
+                (
+                (0 < this.zaposleniFormImeTXT.getText().length()) &&
+                (0 < this.zaposleniFormPrezimeTXT.getText().length()) &&
+                (0 < this.zaposleniFormJmbgTXT.getText().length()) &&
+                (0 < this.zaposleniFormPlataTXT.getText().length()) &&
+                (0 < this.zaposleniFormKorImeTXT.getText().length()) &&
+                (0 < this.zaposleniFormLozinkaTXT.getText().length())
+                );
+    }
     
 }

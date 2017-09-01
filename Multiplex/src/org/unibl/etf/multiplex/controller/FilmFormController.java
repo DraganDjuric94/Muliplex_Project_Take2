@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -25,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.unibl.etf.model.adapter.FilmAdapter;
@@ -39,6 +41,20 @@ import org.unibl.etf.model.domain.oo.ZanrOO;
  */
 public class FilmFormController implements Initializable {
 
+    private static UnaryOperator<TextFormatter.Change> prirodniBrojeviFilter = change -> {
+        String text = change.getControlNewText();
+
+        if (!change.isContentChange()) {
+            return change;
+        }
+
+        if (text.matches("[1-9][0-9]*") || text.isEmpty()) {
+            return change;
+        }
+
+        return null;
+    };
+    
     @FXML
     private TextField filmFormNazivTXT;
     @FXML
@@ -61,6 +77,8 @@ public class FilmFormController implements Initializable {
     private Button filmFormOkBTN;
     @FXML
     private Button filmFormPonistiBTN;
+    @FXML
+    private Label filmFormObavjestenjeOGresciLBL;
     
     private File file;
     private boolean mijenjanaSlika;
@@ -134,6 +152,7 @@ public class FilmFormController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.filmFormTrajanjeTXT.setTextFormatter(new TextFormatter<>(prirodniBrojeviFilter));
         filmFormSviZanroviLV.setItems(zanroviSvi);
         filmFormUbaceniZanroviLV.setItems(zanroviUbaceni);
         
@@ -180,12 +199,27 @@ public class FilmFormController implements Initializable {
 
     @FXML
     private void filmFormOkBTNHandler(ActionEvent event) {
-        if(azuriranje){
-            azuriraj();
+        if (provjeriPodatke()) {
+            if (azuriranje) {
+                azuriraj();
+            } else {
+                dodaj();
+            }
+            ((Stage) filmFormIzbaciZanrBTN.getScene().getWindow()).close();
         }else{
-            dodaj();
+            this.filmFormObavjestenjeOGresciLBL.setVisible(true);
         }
-        ((Stage) filmFormIzbaciZanrBTN.getScene().getWindow()).close();
+    }
+    
+    public boolean provjeriPodatke(){
+        return
+                (
+                (0 < this.filmFormNazivTXT.getText().length()) &&
+                (0 < this.filmFormTrajanjeTXT.getText().length()) &&
+                (0 < this.filmFormOpisTA.getText().length()) &&
+                ((null != file ) || (azuriranje)) &&
+                (0 < this.filmFormUbaceniZanroviLV.getItems().size())
+                );
     }
     
 }

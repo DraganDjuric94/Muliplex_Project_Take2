@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -16,7 +17,7 @@ import org.unibl.etf.model.domain.oo.OpremaOO;
 /**
  * FXML Controller class
  *
- * @author Miloš
+ * @author Miloš, Aleksandar
  */
 public class OpremaFormController implements Initializable {
 
@@ -32,6 +33,9 @@ public class OpremaFormController implements Initializable {
     private Button opremaFormCancelBTN;
     @FXML
     private CheckBox opremaFormIspravnaCHK;
+    
+    @FXML
+    private Label opremaFormObavjestenjeOGresciLBL;
 
     /**
      * Initializes the controller class.
@@ -87,17 +91,20 @@ public class OpremaFormController implements Initializable {
         }
         
         opremaFormOkBTN.setOnAction((event) -> {
-            //TODO Provjeriti da li su unesena polja i sl
-            if(isUpdating) {
-                
-                updateOprema();
-                
-            } else {
-                
-                addOprema();
-            } 
-            Stage stage = (Stage) opremaFormOkBTN.getScene().getWindow();
-            stage.close();
+            if (checkData()) {
+                if (isUpdating) {
+
+                    updateOprema();
+
+                } else {
+
+                    addOprema();
+                }
+                Stage stage = (Stage) opremaFormOkBTN.getScene().getWindow();
+                stage.close();
+            }else{
+                this.opremaFormObavjestenjeOGresciLBL.setVisible(true);
+            }
         });
         
         opremaFormCancelBTN.setOnAction((event) -> {
@@ -106,6 +113,11 @@ public class OpremaFormController implements Initializable {
             stage.close();
         
         });
-    }    
+    }
+
+    public boolean checkData() {
+        return ((0 < this.opremaFormBrojInventaraTXT.getText().length())
+                && (0 < this.opremaFormNazivTXT.getText().length()));
+    }
     
 }

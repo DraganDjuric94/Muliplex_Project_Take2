@@ -6,7 +6,10 @@
 package org.unibl.etf.multiplex.controller;
 
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -52,8 +55,8 @@ public class PonudaZaFilmFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if(this.azuriranje){
-            this.ponudaZaFilmFormOpisTA.setText(this.ponudaZaFilm.getOpis());
-            this.ponudaZaFilmFormDatumDP.setValue(this.ponudaZaFilm.getDatum().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            java.sql.Date datum = (java.sql.Date)this.ponudaZaFilm.getDatum();
+            this.ponudaZaFilmFormDatumDP.setValue(datum.toLocalDate());
         }
     }    
 
@@ -86,8 +89,7 @@ public class PonudaZaFilmFormController implements Initializable {
                 null,
                 null,
                 this.ponudaZaFilmFormOpisTA.getText(),
-                Date.from(this.ponudaZaFilmFormDatumDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())
-        );
+                Date.from(this.ponudaZaFilmFormDatumDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         
         PonudaZaFilmAdapter.unesi(novaPonudaZaFilm);
     }

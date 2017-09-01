@@ -13,8 +13,9 @@
       <TextField fx:id="opremaFormBrojInventaraTXT" layoutX="14.0" layoutY="58.0" prefHeight="25.0" prefWidth="371.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
       <Label layoutX="15.0" layoutY="100.0" text="Naziv opreme" />
       <TextField fx:id="opremaFormNazivTXT" layoutX="15.0" layoutY="117.0" prefHeight="25.0" prefWidth="371.0" />
+      <CheckBox fx:id="opremaFormIspravnaCHK" layoutX="14.0" layoutY="161.0" mnemonicParsing="false" text="Ispravna" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="161.0" />
       <Button fx:id="opremaFormOkBTN" layoutX="175.0" layoutY="561.0" mnemonicParsing="false" text="OK" />
       <Button fx:id="opremaFormCancelBTN" layoutX="333.0" layoutY="561.0" mnemonicParsing="false" text="Poništi" />
-      <CheckBox fx:id="opremaFormIspravnaCHK" layoutX="14.0" layoutY="161.0" mnemonicParsing="false" text="Ispravna" AnchorPane.leftAnchor="14.0" />
+      <Label fx:id="opremaFormObavjestenjeOGresciLBL" layoutX="15.0" layoutY="189.0" text="Podaci nisu validni" visible="false" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="192.0" />
    </children>
 </AnchorPane>

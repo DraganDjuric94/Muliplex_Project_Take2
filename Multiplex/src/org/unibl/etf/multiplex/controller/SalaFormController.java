@@ -21,7 +21,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
 import javafx.stage.Stage;
 import org.unibl.etf.model.adapter.SalaAdapter;
-import org.unibl.etf.model.domain.Sjediste;
 import org.unibl.etf.model.domain.oo.SalaOO;
 import org.unibl.etf.model.domain.oo.SjedisteOO;
 
@@ -32,22 +31,19 @@ import org.unibl.etf.model.domain.oo.SjedisteOO;
  */
 public class SalaFormController implements Initializable {
 
-    private static UnaryOperator<Change> prirodniBrojevi() {
-        UnaryOperator<Change> naturalNumberFilter = change -> {
-            String text = change.getControlNewText();
+    private static UnaryOperator<Change> prirodniBrojeviFilter = change -> {
+        String text = change.getControlNewText();
 
-            if (!change.isContentChange()) {
-                return change;
-            }
+        if (!change.isContentChange()) {
+            return change;
+        }
 
-            if (text.matches("[1-9][0-9]*") || text.isEmpty()) {
-                return change;
-            }
+        if (text.matches("[1-9][0-9]*") || text.isEmpty()) {
+            return change;
+        }
 
-            return null;
-        };
-        return naturalNumberFilter;
-    }
+        return null;
+    };
 
     private boolean azuriranje;
     private SalaOO sala;
@@ -75,8 +71,8 @@ public class SalaFormController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.salaFormBrojRedovaTXT.setTextFormatter(new TextFormatter<>(prirodniBrojevi()));
-        this.salaFormBrojKolonaTXT.setTextFormatter(new TextFormatter<>(prirodniBrojevi()));
+        this.salaFormBrojRedovaTXT.setTextFormatter(new TextFormatter<>(prirodniBrojeviFilter));
+        this.salaFormBrojKolonaTXT.setTextFormatter(new TextFormatter<>(prirodniBrojeviFilter));
         if (this.azuriranje) {
             this.salaFormBrojRedovaTXT.setText(this.sala.getBrojRedova().toString());
             this.salaFormBrojKolonaTXT.setText(this.sala.getBrojKolona().toString());
