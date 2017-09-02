@@ -7,6 +7,7 @@ package org.unibl.etf.model.adapter;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.unibl.etf.model.dao.ProjekcijaDAO;
 import org.unibl.etf.model.dao.ProjekcijaSalaDAO;
@@ -50,7 +51,9 @@ public class ProjekcijaAdapter {
         
         
         for(Projekcija p : projekcijeOv){
-            projekcije.add(konvertujUOO(p.getFilmId(), p));
+            if (p.getDatumVrijeme().after(new Timestamp(new Date().getTime()))) {
+                projekcije.add(konvertujUOO(p.getFilmId(), p));
+            }
         }
         
         return projekcije;
@@ -175,6 +178,8 @@ public class ProjekcijaAdapter {
         return retVal;
         
     }
+    
+    
     
     private static  Projekcija konvertujUOV(ProjekcijaOO projekcija){
        
