@@ -12,6 +12,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
@@ -202,7 +203,30 @@ public class ProjekcijaFormController implements Initializable {
         } else {
             if(projekcijaFormVrijemeTXT.getText().matches("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")) {
                 LocalDateTime datVrij = LocalDateTime.of(LocalDate.parse(projekcijaFormDatumDP.getValue().toString()), LocalTime.parse(projekcijaFormVrijemeTXT.getText()));
-                if(datVrij.isAfter(trenutno)){
+                ArrayList<ProjekcijaOO> danasnje = ProjekcijaAdapter.preuzmiSve();
+                Iterator<ProjekcijaOO> it = danasnje.iterator();
+                FilmOO filmZaPr = FilmAdapter.preuzmiPoId(Integer.parseInt(projekcijaFormFilmCB.getSelectionModel().getSelectedItem().split("#")[0]));
+                SalaOO salaZaPr = SalaAdapter.preuzmiPoId(Integer.parseInt(projekcijaFormSalaCB.getSelectionModel().getSelectedItem()));
+                boolean dobroVrijeme = true;
+                while(it.hasNext()){
+                    ProjekcijaOO pr = it.next();
+                    LocalDateTime odPr = LocalDateTime.ofInstant(pr.getDatumVrijeme().toInstant(), ZoneId.systemDefault());
+                    if(datVrij.equals(odPr) && pr.getSala().equals(salaZaPr)){
+                        dobroVrijeme = false;
+                        break;
+                    }else if(datVrij.isBefore(odPr) && pr.getSala().equals(salaZaPr)){
+                        if(!datVrij.plusMinutes(filmZaPr.getTrajanje() + 30).isBefore(odPr)){
+                            dobroVrijeme = false;
+                            break;
+                        }
+                    }else if(datVrij.isAfter(odPr) && pr.getSala().equals(salaZaPr)){
+                        if(!odPr.plusMinutes(pr.getFilm().getTrajanje() + 30).isBefore(datVrij)){
+                            dobroVrijeme = false;
+                            break;
+                        }
+                    }
+                }
+                if(datVrij.isAfter(trenutno) && dobroVrijeme){
                     validniPodaci = true;
                 }else{
                     validniPodaci = false;
