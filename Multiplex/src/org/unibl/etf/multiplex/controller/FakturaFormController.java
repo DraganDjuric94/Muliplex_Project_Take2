@@ -183,7 +183,8 @@ public class FakturaFormController implements Initializable {
         if ("".equals(fakturaFormBrojRacunaTXT.getText()) || "".equals(fakturaFormNazivRobeTXT.getText())
                 || "".equals(fakturaFormJedinicaMjereTXT) || "".equals(fakturaFormKolicinaTXT.getText())
                 || "".equals(fakturaFormCijenaTXT.getText()) || fakturaFormDatumDP.getValue() == null
-                || "".equals(fakturaFormRacunIzdaoTXT.getText())) {
+                || "".equals(fakturaFormRacunIzdaoTXT.getText()) || Double.parseDouble(fakturaFormCijenaTXT.getText()) == 0.0
+                || fakturaFormDatumDP.getValue().isAfter(LocalDate.now())) {
             validniPodaci = false;
         } else {
             validniPodaci = true;
