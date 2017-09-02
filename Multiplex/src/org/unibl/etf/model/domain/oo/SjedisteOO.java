@@ -51,6 +51,44 @@ public class SjedisteOO {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.sjedisteId);
+        hash = 37 * hash + Objects.hashCode(this.kolona);
+        hash = 37 * hash + Objects.hashCode(this.vrsta);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SjedisteOO other = (SjedisteOO) obj;
+        if (!Objects.equals(this.sjedisteId, other.sjedisteId)) {
+            return false;
+        }
+        if (!Objects.equals(this.kolona, other.kolona)) {
+            return false;
+        }
+        if (!Objects.equals(this.vrsta, other.vrsta)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+
+    
+    
+    
+    @Override
     public String toString() {
         return "SjedisteOO{" + "sjedisteId=" + sjedisteId + ", kolona=" + kolona + ", vrsta=" + vrsta + '}';
     }

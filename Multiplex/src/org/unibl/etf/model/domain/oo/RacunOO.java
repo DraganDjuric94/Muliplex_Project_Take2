@@ -65,7 +65,10 @@ public class RacunOO {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.racunId);
+        hash = 73 * hash + Objects.hashCode(this.racunId);
+        hash = 73 * hash + Objects.hashCode(this.datumIzdavanja);
+        hash = 73 * hash + Objects.hashCode(this.ukupnaCijena);
+        hash = 73 * hash + Objects.hashCode(this.stavke);
         return hash;
     }
 
@@ -84,8 +87,21 @@ public class RacunOO {
         if (!Objects.equals(this.racunId, other.racunId)) {
             return false;
         }
+        if (!Objects.equals(this.datumIzdavanja, other.datumIzdavanja)) {
+            return false;
+        }
+        if (!Objects.equals(this.ukupnaCijena, other.ukupnaCijena)) {
+            return false;
+        }
+        if (!Objects.equals(this.stavke, other.stavke)) {
+            return false;
+        }
         return true;
     }
+
+    
+
+    
 
     @Override
     public String toString() {

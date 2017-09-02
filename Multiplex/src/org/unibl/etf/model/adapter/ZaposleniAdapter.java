@@ -114,7 +114,7 @@ public class ZaposleniAdapter {
     public static void izmijeni(ZaposleniOO zaposleniOO){
         PozicijaOO zadnjaPozicijaZaposlenogOO = vratiTrenutnuPozicijuZaposlenog(zaposleniOO.getZaposleniId());
         PozicijaOO trenutnaPozicijaZaposlenogOO = zaposleniOO.getPozicija();
-        if(!zadnjaPozicijaZaposlenogOO.getPozicijaId().equals(trenutnaPozicijaZaposlenogOO.getPozicijaId())){
+        if(zadnjaPozicijaZaposlenogOO == null || trenutnaPozicijaZaposlenogOO == null || !zadnjaPozicijaZaposlenogOO.getPozicijaId().equals(trenutnaPozicijaZaposlenogOO.getPozicijaId())){
             zaposleniPozicijaDAO.insert(new ZaposleniPozicija(zaposleniOO.getZaposleniId(), trenutnaPozicijaZaposlenogOO.getPozicijaId()));
         }
         zaposleniDAO.update(konvertujUOV(zaposleniOO));

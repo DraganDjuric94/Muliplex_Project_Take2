@@ -80,6 +80,20 @@ public class ZaposleniFormController implements Initializable {
         return null;
     };
     
+    private static UnaryOperator<TextFormatter.Change> prirodniBrojevi = change -> {
+        String text = change.getControlNewText();
+
+        if (!change.isContentChange()) {
+            return change;
+        }
+
+        if (text.matches("[0-9]+") || text.isEmpty()) {
+            return change;
+        }
+
+        return null;
+    };
+    
     private boolean azuriranje = false;
     private ObservableList<String> pozicije = FXCollections.observableArrayList();
     private ZaposleniOO stari;
@@ -131,8 +145,11 @@ public class ZaposleniFormController implements Initializable {
             zap.setPozicija(poz);
         }
         ZaposleniAdapter.izmijeni(zap);
-        stari.getPozicija().setDatumDo(new Date());
-        PozicijaAdapter.izmijeni(stari.getPozicija());
+        if(stari.getPozicija() != null){
+            stari.getPozicija().setDatumDo(new Date());
+            PozicijaAdapter.izmijeni(stari.getPozicija());
+        }
+        
     }
     
     public void dodaj(){
@@ -172,7 +189,7 @@ public class ZaposleniFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.zaposleniFormPlataTXT.setTextFormatter(new TextFormatter<>(realniBrojeviFilter));   
-        
+        this.zaposleniFormJmbgTXT.setTextFormatter(new TextFormatter<>(prirodniBrojevi));
         zaposleniFormPozicijaCBX.setItems(pozicije);
         
         if(azuriranje){
@@ -185,10 +202,14 @@ public class ZaposleniFormController implements Initializable {
             zaposleniFormLozinkaTXT.setText(loz);
             int index = 0;
             for(String s : pozicije){
-                if(s.equals(stari.getPozicija().getNaziv())){
-                    break;
+                if(stari.getPozicija() != null){
+                    if(s.equals(stari.getPozicija().getNaziv())){
+                        break;
+                    }
+                    index++;
+                }else{
+                    index = 0;
                 }
-                index++;
             }
             zaposleniFormPozicijaCBX.getSelectionModel().select(index);
         }else{
@@ -224,7 +245,7 @@ public class ZaposleniFormController implements Initializable {
                 (
                 (0 < this.zaposleniFormImeTXT.getText().length()) &&
                 (0 < this.zaposleniFormPrezimeTXT.getText().length()) &&
-                (0 < this.zaposleniFormJmbgTXT.getText().length()) &&
+                (13 == this.zaposleniFormJmbgTXT.getText().length()) &&
                 (0 < this.zaposleniFormPlataTXT.getText().length()) &&
                 (0 < this.zaposleniFormKorImeTXT.getText().length()) &&
                 (0 < this.zaposleniFormLozinkaTXT.getText().length())

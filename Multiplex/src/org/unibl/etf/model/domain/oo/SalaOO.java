@@ -63,8 +63,11 @@ public class SalaOO {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.salaId);
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.salaId);
+        hash = 37 * hash + Objects.hashCode(this.brojRedova);
+        hash = 37 * hash + Objects.hashCode(this.brojKolona);
+        hash = 37 * hash + Objects.hashCode(this.sjedista);
         return hash;
     }
 
@@ -83,8 +86,21 @@ public class SalaOO {
         if (!Objects.equals(this.salaId, other.salaId)) {
             return false;
         }
+        if (!Objects.equals(this.brojRedova, other.brojRedova)) {
+            return false;
+        }
+        if (!Objects.equals(this.brojKolona, other.brojKolona)) {
+            return false;
+        }
+        if (!Objects.equals(this.sjedista, other.sjedista)) {
+            return false;
+        }
         return true;
     }
+
+    
+
+    
 
     @Override
     public String toString() {

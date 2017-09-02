@@ -84,7 +84,12 @@ public class ArtikalOO {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.artikalId);
+        hash = 43 * hash + Objects.hashCode(this.artikalId);
+        hash = 43 * hash + Objects.hashCode(this.naziv);
+        hash = 43 * hash + Objects.hashCode(this.kolicinaNaStanju);
+        hash = 43 * hash + Objects.hashCode(this.barkod);
+        hash = 43 * hash + Objects.hashCode(this.tip);
+        hash = 43 * hash + Objects.hashCode(this.cijena);
         return hash;
     }
 
@@ -100,11 +105,30 @@ public class ArtikalOO {
             return false;
         }
         final ArtikalOO other = (ArtikalOO) obj;
+        if (!Objects.equals(this.naziv, other.naziv)) {
+            return false;
+        }
+        if (!Objects.equals(this.barkod, other.barkod)) {
+            return false;
+        }
+        if (!Objects.equals(this.tip, other.tip)) {
+            return false;
+        }
         if (!Objects.equals(this.artikalId, other.artikalId)) {
+            return false;
+        }
+        if (!Objects.equals(this.kolicinaNaStanju, other.kolicinaNaStanju)) {
+            return false;
+        }
+        if (!Objects.equals(this.cijena, other.cijena)) {
             return false;
         }
         return true;
     }
+
+    
+
+    
 
     @Override
     public String toString() {

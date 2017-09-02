@@ -62,8 +62,11 @@ public class StavkaOO {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 41 * hash + Objects.hashCode(this.stavkaId);
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.stavkaId);
+        hash = 89 * hash + Objects.hashCode(this.kolicina);
+        hash = 89 * hash + Objects.hashCode(this.ukupnaCijena);
+        hash = 89 * hash + Objects.hashCode(this.artikal);
         return hash;
     }
 
@@ -82,8 +85,21 @@ public class StavkaOO {
         if (!Objects.equals(this.stavkaId, other.stavkaId)) {
             return false;
         }
+        if (!Objects.equals(this.kolicina, other.kolicina)) {
+            return false;
+        }
+        if (!Objects.equals(this.ukupnaCijena, other.ukupnaCijena)) {
+            return false;
+        }
+        if (!Objects.equals(this.artikal, other.artikal)) {
+            return false;
+        }
         return true;
     }
+
+    
+
+    
 
     @Override
     public String toString() {

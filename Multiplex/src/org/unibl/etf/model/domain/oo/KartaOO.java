@@ -83,8 +83,13 @@ public class KartaOO {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.kartaId);
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.kartaId);
+        hash = 23 * hash + Objects.hashCode(this.projekcija);
+        hash = 23 * hash + Objects.hashCode(this.sjediste);
+        hash = 23 * hash + Objects.hashCode(this.datumIzdavanja);
+        hash = 23 * hash + Objects.hashCode(this.cijena);
+        hash = 23 * hash + Objects.hashCode(this.rezervisana);
         return hash;
     }
 
@@ -103,8 +108,27 @@ public class KartaOO {
         if (!Objects.equals(this.kartaId, other.kartaId)) {
             return false;
         }
+        if (!Objects.equals(this.projekcija, other.projekcija)) {
+            return false;
+        }
+        if (!Objects.equals(this.sjediste, other.sjediste)) {
+            return false;
+        }
+        if (!Objects.equals(this.datumIzdavanja, other.datumIzdavanja)) {
+            return false;
+        }
+        if (!Objects.equals(this.cijena, other.cijena)) {
+            return false;
+        }
+        if (!Objects.equals(this.rezervisana, other.rezervisana)) {
+            return false;
+        }
         return true;
     }
+
+    
+
+    
 
     @Override
     public String toString() {

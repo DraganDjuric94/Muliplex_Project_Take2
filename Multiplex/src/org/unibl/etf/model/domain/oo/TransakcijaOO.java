@@ -82,8 +82,13 @@ public class TransakcijaOO {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.transakcijaId);
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.transakcijaId);
+        hash = 67 * hash + Objects.hashCode(this.vrstaTransakcije);
+        hash = 67 * hash + Objects.hashCode(this.primalac);
+        hash = 67 * hash + Objects.hashCode(this.posaljilac);
+        hash = 67 * hash + Objects.hashCode(this.datumTransakcije);
+        hash = 67 * hash + Objects.hashCode(this.iznos);
         return hash;
     }
 
@@ -99,11 +104,28 @@ public class TransakcijaOO {
             return false;
         }
         final TransakcijaOO other = (TransakcijaOO) obj;
+        if (!Objects.equals(this.vrstaTransakcije, other.vrstaTransakcije)) {
+            return false;
+        }
+        if (!Objects.equals(this.primalac, other.primalac)) {
+            return false;
+        }
+        if (!Objects.equals(this.posaljilac, other.posaljilac)) {
+            return false;
+        }
         if (!Objects.equals(this.transakcijaId, other.transakcijaId)) {
+            return false;
+        }
+        if (!Objects.equals(this.datumTransakcije, other.datumTransakcije)) {
+            return false;
+        }
+        if (!Objects.equals(this.iznos, other.iznos)) {
             return false;
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {

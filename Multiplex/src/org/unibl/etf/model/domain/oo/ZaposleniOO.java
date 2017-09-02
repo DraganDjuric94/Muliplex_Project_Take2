@@ -117,8 +117,16 @@ public class ZaposleniOO {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.zaposleniId);
+        int hash = 3;
+        hash = 73 * hash + Objects.hashCode(this.zaposleniId);
+        hash = 73 * hash + Objects.hashCode(this.ime);
+        hash = 73 * hash + Objects.hashCode(this.prezime);
+        hash = 73 * hash + Objects.hashCode(this.jmbg);
+        hash = 73 * hash + Objects.hashCode(this.korisnickoIme);
+        hash = 73 * hash + Objects.hashCode(this.lozinka);
+        hash = 73 * hash + Objects.hashCode(this.plata);
+        hash = 73 * hash + Objects.hashCode(this.aktivan);
+        hash = 73 * hash + Objects.hashCode(this.pozicija);
         return hash;
     }
 
@@ -134,11 +142,37 @@ public class ZaposleniOO {
             return false;
         }
         final ZaposleniOO other = (ZaposleniOO) obj;
+        if (!Objects.equals(this.ime, other.ime)) {
+            return false;
+        }
+        if (!Objects.equals(this.prezime, other.prezime)) {
+            return false;
+        }
+        if (!Objects.equals(this.jmbg, other.jmbg)) {
+            return false;
+        }
+        if (!Objects.equals(this.korisnickoIme, other.korisnickoIme)) {
+            return false;
+        }
+        if (!Objects.equals(this.lozinka, other.lozinka)) {
+            return false;
+        }
         if (!Objects.equals(this.zaposleniId, other.zaposleniId)) {
+            return false;
+        }
+        if (!Objects.equals(this.plata, other.plata)) {
+            return false;
+        }
+        if (!Objects.equals(this.aktivan, other.aktivan)) {
+            return false;
+        }
+        if (!Objects.equals(this.pozicija, other.pozicija)) {
             return false;
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {

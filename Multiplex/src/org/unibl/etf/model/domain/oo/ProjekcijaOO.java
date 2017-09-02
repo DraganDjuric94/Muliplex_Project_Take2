@@ -93,7 +93,12 @@ public class ProjekcijaOO {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.projekcijaId);
+        hash = 29 * hash + Objects.hashCode(this.projekcijaId);
+        hash = 29 * hash + Objects.hashCode(this.datumVrijeme);
+        hash = 29 * hash + Objects.hashCode(this.film);
+        hash = 29 * hash + Objects.hashCode(this.sala);
+        hash = 29 * hash + Objects.hashCode(this.cijenaKarte);
+        hash = 29 * hash + Objects.hashCode(this.zauzetaSjedista);
         return hash;
     }
 
@@ -112,8 +117,26 @@ public class ProjekcijaOO {
         if (!Objects.equals(this.projekcijaId, other.projekcijaId)) {
             return false;
         }
+        if (!Objects.equals(this.datumVrijeme, other.datumVrijeme)) {
+            return false;
+        }
+        if (!Objects.equals(this.film, other.film)) {
+            return false;
+        }
+        if (!Objects.equals(this.sala, other.sala)) {
+            return false;
+        }
+        if (!Objects.equals(this.cijenaKarte, other.cijenaKarte)) {
+            return false;
+        }
+        if (!Objects.equals(this.zauzetaSjedista, other.zauzetaSjedista)) {
+            return false;
+        }
         return true;
     }
+
+    
+    
 
     @Override
     public String toString() {

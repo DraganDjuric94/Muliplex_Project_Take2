@@ -63,8 +63,11 @@ public class OpremaOO {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.opremaId);
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.opremaId);
+        hash = 29 * hash + Objects.hashCode(this.brojInventara);
+        hash = 29 * hash + Objects.hashCode(this.naziv);
+        hash = 29 * hash + Objects.hashCode(this.ispravnost);
         return hash;
     }
 
@@ -80,11 +83,24 @@ public class OpremaOO {
             return false;
         }
         final OpremaOO other = (OpremaOO) obj;
+        if (!Objects.equals(this.brojInventara, other.brojInventara)) {
+            return false;
+        }
+        if (!Objects.equals(this.naziv, other.naziv)) {
+            return false;
+        }
         if (!Objects.equals(this.opremaId, other.opremaId)) {
+            return false;
+        }
+        if (!Objects.equals(this.ispravnost, other.ispravnost)) {
             return false;
         }
         return true;
     }
+
+    
+
+    
 
     @Override
     public String toString() {

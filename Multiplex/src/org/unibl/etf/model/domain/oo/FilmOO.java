@@ -92,8 +92,13 @@ public class FilmOO {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.filmId);
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.filmId);
+        hash = 89 * hash + Objects.hashCode(this.naziv);
+        hash = 89 * hash + Objects.hashCode(this.trajanje);
+        hash = 89 * hash + Objects.hashCode(this.opis);
+        hash = 89 * hash + Objects.hashCode(this.slika);
+        hash = 89 * hash + Objects.hashCode(this.zanrovi);
         return hash;
     }
 
@@ -109,11 +114,30 @@ public class FilmOO {
             return false;
         }
         final FilmOO other = (FilmOO) obj;
+        if (!Objects.equals(this.naziv, other.naziv)) {
+            return false;
+        }
+        if (!Objects.equals(this.opis, other.opis)) {
+            return false;
+        }
+        if (!Objects.equals(this.slika, other.slika)) {
+            return false;
+        }
         if (!Objects.equals(this.filmId, other.filmId)) {
+            return false;
+        }
+        if (!Objects.equals(this.trajanje, other.trajanje)) {
+            return false;
+        }
+        if (!Objects.equals(this.zanrovi, other.zanrovi)) {
             return false;
         }
         return true;
     }
+
+   
+
+    
 
     @Override
     public String toString() {

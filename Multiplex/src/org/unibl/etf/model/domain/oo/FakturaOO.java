@@ -103,8 +103,15 @@ public class FakturaOO {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.fakturaId);
+        int hash = 7;
+        hash = 43 * hash + Objects.hashCode(this.fakturaId);
+        hash = 43 * hash + Objects.hashCode(this.brojRacuna);
+        hash = 43 * hash + Objects.hashCode(this.nazivRobe);
+        hash = 43 * hash + Objects.hashCode(this.jedinicaMjere);
+        hash = 43 * hash + Objects.hashCode(this.kolicina);
+        hash = 43 * hash + Objects.hashCode(this.cijena);
+        hash = 43 * hash + Objects.hashCode(this.datum);
+        hash = 43 * hash + Objects.hashCode(this.racunIzdao);
         return hash;
     }
 
@@ -120,11 +127,36 @@ public class FakturaOO {
             return false;
         }
         final FakturaOO other = (FakturaOO) obj;
+        if (!Objects.equals(this.brojRacuna, other.brojRacuna)) {
+            return false;
+        }
+        if (!Objects.equals(this.nazivRobe, other.nazivRobe)) {
+            return false;
+        }
+        if (!Objects.equals(this.jedinicaMjere, other.jedinicaMjere)) {
+            return false;
+        }
+        if (!Objects.equals(this.racunIzdao, other.racunIzdao)) {
+            return false;
+        }
         if (!Objects.equals(this.fakturaId, other.fakturaId)) {
+            return false;
+        }
+        if (!Objects.equals(this.kolicina, other.kolicina)) {
+            return false;
+        }
+        if (!Objects.equals(this.cijena, other.cijena)) {
+            return false;
+        }
+        if (!Objects.equals(this.datum, other.datum)) {
             return false;
         }
         return true;
     }
+
+    
+
+    
 
     @Override
     public String toString() {

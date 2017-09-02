@@ -62,8 +62,11 @@ public class PozicijaOO {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.pozicijaId);
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.pozicijaId);
+        hash = 67 * hash + Objects.hashCode(this.naziv);
+        hash = 67 * hash + Objects.hashCode(this.datumOd);
+        hash = 67 * hash + Objects.hashCode(this.datumDo);
         return hash;
     }
 
@@ -79,11 +82,24 @@ public class PozicijaOO {
             return false;
         }
         final PozicijaOO other = (PozicijaOO) obj;
+        if (!Objects.equals(this.naziv, other.naziv)) {
+            return false;
+        }
         if (!Objects.equals(this.pozicijaId, other.pozicijaId)) {
+            return false;
+        }
+        if (!Objects.equals(this.datumOd, other.datumOd)) {
+            return false;
+        }
+        if (!Objects.equals(this.datumDo, other.datumDo)) {
             return false;
         }
         return true;
     }
+
+    
+
+    
 
     @Override
     public String toString() {

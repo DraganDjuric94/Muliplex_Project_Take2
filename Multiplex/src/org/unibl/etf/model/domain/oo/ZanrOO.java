@@ -43,7 +43,8 @@ public class ZanrOO {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.zanrId);
+        hash = 59 * hash + Objects.hashCode(this.zanrId);
+        hash = 59 * hash + Objects.hashCode(this.naziv);
         return hash;
     }
 
@@ -59,11 +60,16 @@ public class ZanrOO {
             return false;
         }
         final ZanrOO other = (ZanrOO) obj;
+        if (!Objects.equals(this.naziv, other.naziv)) {
+            return false;
+        }
         if (!Objects.equals(this.zanrId, other.zanrId)) {
             return false;
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {
