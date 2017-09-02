@@ -86,7 +86,7 @@ public class PiceController implements Initializable {
             if (!k.getNaziv().toLowerCase().startsWith(pretraziTXT.getText().toLowerCase())) continue;
             kar.add(k);
         }
-        if (!kar.equals(this.listaUkupnoArtikala)) {
+        if (!kar.equals(this.listaUkupnoArtikalaOBS)) {
             this.listaUkupnoArtikalaOBS.clear();
             this.listaUkupnoArtikalaOBS.addAll(kar);
             System.out.println("update!");
@@ -167,8 +167,8 @@ public class PiceController implements Initializable {
             kolicina = Integer.parseInt(kolicinaTXT.getText());
         }
         ArtikalOO artikal = listaUkupnoArtikala.getSelectionModel().getSelectedItem();
-        if (kolicina == 0 || artikal == null) {
-            neispravanOdabir("Niste odabrali stavku za dodavanje na racun ili niste unijeli kolicinu!");
+        if (kolicina == 0 || artikal == null || (artikal != null && artikal.getKolicinaNaStanju() < kolicina)) {
+            neispravanOdabir("Niste odabrali stavku za dodavanje na racun ili niste unijeli odgovarajuću kolicinu!");
             return;
         }
         ukupnaCijena = kolicina * artikal.getCijena();
@@ -225,7 +225,7 @@ public class PiceController implements Initializable {
     }
 
     private void pretraziBTN_Clicked() {
-        if (!pretraziTXT.getText().isEmpty()) {
+      //  if (!pretraziTXT.getText().isEmpty()) {
             pretragaTXT = pretraziTXT.getText();
             listaUkupnoArtikalaOBS.clear();
            ArrayList<ArtikalOO> artikli = ArtikalAdapter.preuzmiPoTipu("Pice");
@@ -234,10 +234,10 @@ public class PiceController implements Initializable {
                    listaUkupnoArtikalaOBS.add(artikal);
                }
            }           
-        } else {
+      /*  } else {
             listaUkupnoArtikalaOBS.clear();
             listaUkupnoArtikalaOBS.addAll(ArtikalAdapter.preuzmiPoTipu("Pice"));  
-        }
+        }*/
 
     }
 

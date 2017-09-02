@@ -29,7 +29,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.unibl.etf.model.adapter.ArtikalAdapter;
 import org.unibl.etf.model.adapter.RacunAdapter;
+import org.unibl.etf.model.domain.oo.ArtikalOO;
 import org.unibl.etf.model.domain.oo.RacunOO;
 import org.unibl.etf.model.domain.oo.StavkaOO;
 
@@ -106,7 +108,7 @@ public class RacunController implements Initializable {
         racun = controller.preuzmiRacun();
         if (!racun.getStavke().isEmpty()) {
             ukupnoLBL.setVisible(true);
-            ukupnoLBL.setText("Ukupno za platiti: " + racun.getUkupnaCijena());
+            ukupnoLBL.setText("Ukupno za platiti: " + racun.getUkupnaCijena() + " KM");
         } else {
             ukupnoLBL.setVisible(false);
         }
@@ -131,7 +133,7 @@ public class RacunController implements Initializable {
         racun = controller.preuzmiRacun();
         if (!racun.getStavke().isEmpty()) {
             ukupnoLBL.setVisible(true);
-            ukupnoLBL.setText("Ukupno za platiti: " + racun.getUkupnaCijena());
+            ukupnoLBL.setText("Ukupno za platiti: " + racun.getUkupnaCijena() + " KM");
         } else {
             ukupnoLBL.setVisible(false);
         }
@@ -152,20 +154,32 @@ public class RacunController implements Initializable {
             for (int i = 0; i < racun.getStavke().size(); i++) {
                 ukupnoZaPlatiti += racun.getStavke().get(i).getUkupnaCijena();
             }
-            ukupnoLBL.setText("Ukupno za platiti: " + ukupnoZaPlatiti.toString());
+            ukupnoLBL.setText("Ukupno za platiti: " + ukupnoZaPlatiti.toString() + " KM");
         }
         racun.setUkupnaCijena(ukupnoZaPlatiti);
         ukupnoZaPlatiti = 0.0;
     }
 
     private void odustaniBTN_Clicked() {
-        ((Stage) odustaniBTN.getScene().getWindow()).close();
+        listaDodatihArtikalaOBS.clear();
+        stavke = new ArrayList<>();
+        racun = new RacunOO(null,null,0.0,stavke);
+        ukupnoLBL.setVisible(false);
     }
 
     private void stampajBTN_Clicked() {
         if (racun.getUkupnaCijena() != 0) {
             racun.setDatumIzdavanja(new Date());
+            for(StavkaOO st : racun.getStavke()){
+                ArtikalOO art = st.getArtikal();
+                art.setKolicinaNaStanju(art.getKolicinaNaStanju() - st.getKolicina());
+                ArtikalAdapter.izmijeni(art);
+            }
             RacunAdapter.unesi(racun);
+            listaDodatihArtikalaOBS.clear();
+            stavke = new ArrayList<>();
+            racun = new RacunOO(null,null,0.0,stavke);
+            ukupnoLBL.setVisible(false);
         } else {
             neispravanOdabir("Na racunu nema stavki!");
         }
