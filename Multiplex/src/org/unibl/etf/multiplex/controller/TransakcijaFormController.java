@@ -147,7 +147,7 @@ public class TransakcijaFormController implements Initializable {
     private void provjeriPodatke() {
         if ("".equals(transakcijaFormVrstaTransakcijeTXT.getText()) || "".equals(transakcijaFormPrimalacTXT.getText())
                 || "".equals(transakcijaFormPosiljalacTXT.getText()) || "".equals(transakcijaFormIznosTXT.getText())
-                || transakcijaFormDate.getValue() == null) {
+                || transakcijaFormDate.getValue() == null || transakcijaFormDate.getValue().isAfter(LocalDate.now())) {
             validniPodaci = false;
 
         } else {
