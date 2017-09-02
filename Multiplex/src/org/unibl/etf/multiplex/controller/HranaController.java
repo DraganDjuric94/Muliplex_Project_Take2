@@ -169,7 +169,7 @@ public class HranaController implements Initializable {
             kolicina = Integer.parseInt(kolicinaTXT.getText());
         }
         ArtikalOO artikal = listaUkupnoArtikala.getSelectionModel().getSelectedItem();
-        if (kolicina == 0 || artikal == null || (artikal != null && artikal.getKolicinaNaStanju() < kolicina)) {
+        if (kolicina == 0 || artikal == null || (artikal != null && artikal.getKolicinaNaStanju() <= kolicina)) {
             neispravanOdabir("Niste odabrali stavku za dodavanje na racun ili niste unijeli odgovarajuću kolicinu!");
             return;
         }
