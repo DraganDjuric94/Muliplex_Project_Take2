@@ -91,7 +91,7 @@ public class FakturaFormController implements Initializable {
             this.fakturaFormJedinicaMjereTXT.setText(faktura.getJedinicaMjere());
             this.fakturaFormKolicinaTXT.setText(faktura.getKolicina().toString());
             this.fakturaFormCijenaTXT.setText(faktura.getCijena().toString());
-            this.fakturaFormDatumDP.setValue(faktura.getDatum().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            this.fakturaFormDatumDP.setValue(LocalDate.parse(faktura.getDatum().toString()));
             this.fakturaFormRacunIzdaoTXT.setText(faktura.getRacunIzdao());
         }
     }
