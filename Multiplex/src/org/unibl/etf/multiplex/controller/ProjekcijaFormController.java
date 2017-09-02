@@ -193,15 +193,20 @@ public class ProjekcijaFormController implements Initializable {
 
     private void provjeriPodatke() {
         
-        LocalDateTime datVrij = LocalDateTime.of(LocalDate.parse(projekcijaFormDatumDP.getValue().toString()), LocalTime.parse(projekcijaFormVrijemeTXT.getText()));
+        
         LocalDateTime  trenutno = LocalDateTime.now();
        
         if ("".equals(projekcijaFormCijenaKarteTXT.getText()) || "".equals(projekcijaFormVrijemeTXT.getText())
                 || projekcijaFormDatumDP.getValue() == null) {
             validniPodaci = false;
         } else {
-            if(projekcijaFormVrijemeTXT.getText().matches("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$") && datVrij.isAfter(trenutno)) {
-            validniPodaci = true;
+            if(projekcijaFormVrijemeTXT.getText().matches("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")) {
+                LocalDateTime datVrij = LocalDateTime.of(LocalDate.parse(projekcijaFormDatumDP.getValue().toString()), LocalTime.parse(projekcijaFormVrijemeTXT.getText()));
+                if(datVrij.isAfter(trenutno)){
+                    validniPodaci = true;
+                }else{
+                    validniPodaci = false;
+                }
             } else {
                 validniPodaci = false;
             }
