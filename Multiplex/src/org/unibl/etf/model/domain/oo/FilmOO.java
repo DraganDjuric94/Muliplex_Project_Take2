@@ -59,6 +59,7 @@ public class FilmOO {
     }
 
     public String getZanroviStr(){
+        if(zanrovi.size() == 0) return "Nema";
         String ret = "";
         for(ZanrOO z : zanrovi){
             ret += (z.getNaziv() + ", ");
