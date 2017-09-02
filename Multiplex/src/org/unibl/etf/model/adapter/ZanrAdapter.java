@@ -7,8 +7,10 @@ package org.unibl.etf.model.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.unibl.etf.model.dao.FilmZanrDAO;
 import org.unibl.etf.model.dao.ZanrDAO;
 import org.unibl.etf.model.dao.mysql.MySQLDAOFactory;
+import org.unibl.etf.model.domain.FilmZanr;
 import org.unibl.etf.model.domain.Zanr;
 import org.unibl.etf.model.domain.oo.ZanrOO;
 
@@ -19,6 +21,7 @@ import org.unibl.etf.model.domain.oo.ZanrOO;
 public class ZanrAdapter {
     
     private static ZanrDAO zanrDAO = MySQLDAOFactory.getInstance().getZanrDAO();
+    private static FilmZanrDAO filmZanrDAO = MySQLDAOFactory.getInstance().getFilmZanrDAO();
     
     public static ArrayList<ZanrOO> preuzmiSve(){
         List<Zanr> zanrList = zanrDAO.selectAll();
@@ -58,6 +61,12 @@ public class ZanrAdapter {
     }
     
     public static void obrisi(Integer zanrId){
+        List<FilmZanr> filmZanrList = filmZanrDAO.selectBy(new FilmZanr(null, zanrId));
+        
+        for(FilmZanr filmZanr: filmZanrList){
+            filmZanrDAO.delete(filmZanr.getFilmId(), zanrId);
+        }
+        
         zanrDAO.delete(zanrId);
     }
     
