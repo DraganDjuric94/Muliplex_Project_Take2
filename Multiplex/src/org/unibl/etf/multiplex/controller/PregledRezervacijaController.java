@@ -123,16 +123,20 @@ implements Initializable {
         });
         this.otkaziBTN.setOnAction(event -> {
             KartaOO karta = (KartaOO)this.rezervacijeLST.getSelectionModel().getSelectedItem();
-            KartaAdapter.obrisi(karta.getKartaId());
-            this.update();
+            if(karta != null){
+                KartaAdapter.obrisi(karta.getKartaId());
+                this.update();
+            }
         }
         );
         this.potvrdiBTN.setOnAction(event -> {
             KartaOO karta = (KartaOO)this.rezervacijeLST.getSelectionModel().getSelectedItem();
-            karta.setDatumIzdavanja(new Date());
-            karta.setRezervisana(false);
-            KartaAdapter.izmijeni(karta);
-            this.update();
+            if(karta != null){
+                karta.setDatumIzdavanja(new Date());
+                karta.setRezervisana(false);
+                KartaAdapter.izmijeni(karta);
+                this.update();
+            }
         }
         );
     }

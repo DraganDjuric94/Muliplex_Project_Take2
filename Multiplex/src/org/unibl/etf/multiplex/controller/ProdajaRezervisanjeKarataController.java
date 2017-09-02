@@ -199,7 +199,9 @@ implements Initializable {
         }
         );
         this.izaberiBTN.setOnAction(event -> {
-            IzborSjedistaController control = new IzborSjedistaController(((ProjekcijaOO)this.projekcijeLST.getSelectionModel().getSelectedItem()).getProjekcijaId());
+            ProjekcijaOO pr = projekcijeLST.getSelectionModel().getSelectedItem();
+            if(pr != null){
+            IzborSjedistaController control = new IzborSjedistaController(pr.getProjekcijaId());
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/org/unibl/etf/multiplex/fxml/IzborSjedista.fxml"));
             try {
                 loader.setController((Object)control);
@@ -222,6 +224,7 @@ implements Initializable {
             catch (IOException ex) {
                 Logger.getLogger(ProdajaRezervisanjeKarataController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
         }
         );
     }

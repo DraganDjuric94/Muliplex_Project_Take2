@@ -1,29 +1,4 @@
-/*
- * Decompiled with CFR 0_122.
- * 
- * Could not load the following classes:
- *  javafx.collections.ObservableList
- *  javafx.event.ActionEvent
- *  javafx.event.Event
- *  javafx.event.EventHandler
- *  javafx.event.EventType
- *  javafx.fxml.FXML
- *  javafx.fxml.Initializable
- *  javafx.geometry.HPos
- *  javafx.geometry.VPos
- *  javafx.scene.Node
- *  javafx.scene.Scene
- *  javafx.scene.control.Button
- *  javafx.scene.input.MouseEvent
- *  javafx.scene.layout.AnchorPane
- *  javafx.scene.layout.ColumnConstraints
- *  javafx.scene.layout.GridPane
- *  javafx.scene.layout.Priority
- *  javafx.scene.layout.RowConstraints
- *  javafx.scene.layout.StackPane
- *  javafx.stage.Stage
- *  javafx.stage.Window
- */
+
 package org.unibl.etf.multiplex.controller;
 
 import java.net.URL;
