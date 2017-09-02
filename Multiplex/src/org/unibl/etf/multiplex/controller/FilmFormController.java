@@ -12,6 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.logging.Level;
@@ -105,7 +107,20 @@ public class FilmFormController implements Initializable {
     
     public void preuzmiZanrove(){
         zanroviSvi.clear();
-        zanroviSvi.addAll(ZanrAdapter.preuzmiSve());
+        ArrayList<ZanrOO> zanroviLista = ZanrAdapter.preuzmiSve();
+        for(ZanrOO zn : zanroviLista){
+            boolean sadrzi = false;
+            Iterator<ZanrOO> it = zanroviSvi.iterator();
+            while(it.hasNext()){
+                if(it.next().getNaziv().toLowerCase().equals(zn.getNaziv().toLowerCase())){
+                    sadrzi = true;
+                    break;
+                }
+            }
+            if(!sadrzi){
+                zanroviSvi.add(zn);
+            }
+        }
     }
     
     public void dodaj(){
