@@ -98,7 +98,8 @@ public class ZaposleniFormController implements Initializable {
     private ObservableList<String> pozicije = FXCollections.observableArrayList();
     private ZaposleniOO stari;
     private String ime, prezime, jmbg, plata, korIme, loz;
-    private boolean aktivan;
+    private boolean aktivan = false;
+    private boolean mijenjanaPozicija = false;
 
     /**
      * Initializes the controller class.
@@ -114,7 +115,9 @@ public class ZaposleniFormController implements Initializable {
             prezime = zap.getPrezime();
             jmbg = zap.getJmbg();
             plata = zap.getPlata().toString();
-            aktivan = zap.getAktivan();
+            if(zap.getPozicija() != null){
+                aktivan = true;
+            }
             korIme = zap.getKorisnickoIme();
             loz = zap.getLozinka();
         }
@@ -136,16 +139,21 @@ public class ZaposleniFormController implements Initializable {
                 zaposleniFormKorImeTXT.getText(), pass, 
                 Double.parseDouble(zaposleniFormPlataTXT.getText()), 
                 zaposleniFormAktivanCHK.isSelected(), null);
-        if(stari.getPozicija() != null && zaposleniFormPozicijaCBX.getSelectionModel().getSelectedItem().equals(stari.getPozicija().getNaziv())){
+        if(stari.getPozicija() != null && zap.getAktivan() == stari.getAktivan() && zaposleniFormPozicijaCBX.getSelectionModel().getSelectedItem().equals(stari.getPozicija().getNaziv())){
             zap.setPozicija(stari.getPozicija());
         }else{
-            PozicijaOO poz = new PozicijaOO(null, zaposleniFormPozicijaCBX.getSelectionModel().getSelectedItem(),
+            mijenjanaPozicija = true;
+            if(zap.getAktivan()){
+                PozicijaOO poz = new PozicijaOO(null, zaposleniFormPozicijaCBX.getSelectionModel().getSelectedItem(),
                 new Date(), null);
-            PozicijaAdapter.unesi(poz);
-            zap.setPozicija(poz);
+                PozicijaAdapter.unesi(poz);
+                zap.setPozicija(poz);
+            }else{
+                zap.setPozicija(null);
+            }
         }
         ZaposleniAdapter.izmijeni(zap);
-        if(stari.getPozicija() != null){
+        if(stari.getPozicija() != null && mijenjanaPozicija){
             stari.getPozicija().setDatumDo(new Date());
             PozicijaAdapter.izmijeni(stari.getPozicija());
         }
@@ -167,8 +175,11 @@ public class ZaposleniFormController implements Initializable {
                 zaposleniFormKorImeTXT.getText(), pass, 
                 Double.parseDouble(zaposleniFormPlataTXT.getText()), 
                 zaposleniFormAktivanCHK.isSelected(), null);
-        PozicijaOO poz = new PozicijaOO(null, zaposleniFormPozicijaCBX.getSelectionModel().getSelectedItem(),
+        PozicijaOO poz = null;
+        if(zap.getAktivan()){
+            poz = new PozicijaOO(null, zaposleniFormPozicijaCBX.getSelectionModel().getSelectedItem(),
                 new Date(), null);
+        }
         zap.setPozicija(poz);
         
         ZaposleniAdapter.unesi(zap);
@@ -199,7 +210,7 @@ public class ZaposleniFormController implements Initializable {
             zaposleniFormPlataTXT.setText(plata);
             zaposleniFormAktivanCHK.setSelected(aktivan);
             zaposleniFormKorImeTXT.setText(korIme);
-            zaposleniFormLozinkaTXT.setText(loz);
+            //zaposleniFormLozinkaTXT.setText(loz);
             int index = 0;
             for(String s : pozicije){
                 if(stari.getPozicija() != null){

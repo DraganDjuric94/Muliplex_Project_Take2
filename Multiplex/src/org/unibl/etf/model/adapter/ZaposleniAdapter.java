@@ -100,22 +100,27 @@ public class ZaposleniAdapter {
     public static void unesi(ZaposleniOO zaposleniOO){
         PozicijaOO pozicijaOO = zaposleniOO.getPozicija();
         
-        if((null == pozicijaOO.getPozicijaId()) || (null == PozicijaAdapter.preuzmiPoId(pozicijaOO.getPozicijaId()))){
-            PozicijaAdapter.unesi(pozicijaOO);
+        if(zaposleniOO.getAktivan()){
+            if((null == pozicijaOO.getPozicijaId()) || (null == PozicijaAdapter.preuzmiPoId(pozicijaOO.getPozicijaId()))){
+                PozicijaAdapter.unesi(pozicijaOO);
+            }
         }
         
         Zaposleni zaposleni = konvertujUOV(zaposleniOO);
         zaposleniDAO.insert(zaposleni);
         zaposleniOO.setZaposleniId(zaposleni.getZaposleniId());
-        
-        zaposleniPozicijaDAO.insert(new ZaposleniPozicija(zaposleniOO.getZaposleniId(), zaposleniOO.getPozicija().getPozicijaId()));
+        if(zaposleni.getAktivan()){
+            zaposleniPozicijaDAO.insert(new ZaposleniPozicija(zaposleniOO.getZaposleniId(), zaposleniOO.getPozicija().getPozicijaId()));
+        }
     }
     
     public static void izmijeni(ZaposleniOO zaposleniOO){
         PozicijaOO zadnjaPozicijaZaposlenogOO = vratiTrenutnuPozicijuZaposlenog(zaposleniOO.getZaposleniId());
         PozicijaOO trenutnaPozicijaZaposlenogOO = zaposleniOO.getPozicija();
-        if(zadnjaPozicijaZaposlenogOO == null || trenutnaPozicijaZaposlenogOO == null || !zadnjaPozicijaZaposlenogOO.getPozicijaId().equals(trenutnaPozicijaZaposlenogOO.getPozicijaId())){
-            zaposleniPozicijaDAO.insert(new ZaposleniPozicija(zaposleniOO.getZaposleniId(), trenutnaPozicijaZaposlenogOO.getPozicijaId()));
+        if(zaposleniOO.getAktivan()){
+            if(zadnjaPozicijaZaposlenogOO == null || trenutnaPozicijaZaposlenogOO == null || !zadnjaPozicijaZaposlenogOO.getPozicijaId().equals(trenutnaPozicijaZaposlenogOO.getPozicijaId())){
+                zaposleniPozicijaDAO.insert(new ZaposleniPozicija(zaposleniOO.getZaposleniId(), trenutnaPozicijaZaposlenogOO.getPozicijaId()));
+            }
         }
         zaposleniDAO.update(konvertujUOV(zaposleniOO));
         
