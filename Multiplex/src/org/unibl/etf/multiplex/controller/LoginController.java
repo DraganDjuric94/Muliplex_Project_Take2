@@ -68,26 +68,61 @@ public class LoginController implements Initializable {
     }
     
     private void otvoriProzor(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/unibl/etf/multiplex/fxml/PrikazPodataka.fxml"));
+        if(z.getNazivPozicije().equals("Prodavac karata")){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/unibl/etf/multiplex/fxml/ProdajaRezervisanjeKarata.fxml"));
             try {
-                loader.setController(new GlavniController(z.getNazivPozicije()));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);
-                stage.setTitle(z.getNazivPozicije());
-                
+                stage.setTitle("Prodavac karata"); 
                 stage.setOnCloseRequest((WindowEvent event1) -> {
                     System.exit(1);
                 });
-                
                 stage.show();
-                
                 ((Stage)prijavaBTN.getScene().getWindow()).close();
-                
             }catch (IOException ex) {
                 Logger.getLogger(Multiplex.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }else if(z.getNazivPozicije().equals("Prodavac hrane i pića")){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/unibl/etf/multiplex/fxml/Racun.fxml"));
+            try {
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Prodavac hrane i pića"); 
+                stage.setOnCloseRequest((WindowEvent event1) -> {
+                    System.exit(1);
+                });
+                stage.show();
+                ((Stage)prijavaBTN.getScene().getWindow()).close();
+            }catch (IOException ex) {
+                Logger.getLogger(Multiplex.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }else{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/unibl/etf/multiplex/fxml/PrikazPodataka.fxml"));
+                try {
+                    loader.setController(new GlavniController(z.getNazivPozicije()));
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.setTitle(z.getNazivPozicije());
+
+                    stage.setOnCloseRequest((WindowEvent event1) -> {
+                        System.exit(1);
+                    });
+
+                    stage.show();
+
+                    ((Stage)prijavaBTN.getScene().getWindow()).close();
+
+                }catch (IOException ex) {
+                    Logger.getLogger(Multiplex.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
     }
     
     @Override

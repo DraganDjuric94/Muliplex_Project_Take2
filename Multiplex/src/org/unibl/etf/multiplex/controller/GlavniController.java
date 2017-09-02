@@ -1686,7 +1686,7 @@ public class GlavniController implements Initializable{
             taboviTPN.getTabs().remove(zanrTAB);
             taboviTPN.getTabs().remove(ponudaZaFilmTAB);
             taboviTPN.getTabs().remove(zaposleniTAB);
-        }else if("Prodavac karata".equals(vrstaKorisnika)){
+       /* }else if("Prodavac karata".equals(vrstaKorisnika)){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/unibl/etf/multiplex/fxml/ProdajaRezervisanjeKarata.fxml"));
             try {
                 Parent root = loader.load();
@@ -1701,8 +1701,8 @@ public class GlavniController implements Initializable{
                 ((Stage) taboviTPN.getScene().getWindow()).close();
             }catch (IOException ex) {
                 Logger.getLogger(Multiplex.class.getName()).log(Level.SEVERE, null, ex);
-            }    
-        }else if("Prodavac hrane i pića".equals(vrstaKorisnika)){//   
+            }    */
+       /* }else if("Prodavac hrane i pića".equals(vrstaKorisnika)){//   
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/unibl/etf/multiplex/fxml/Racun.fxml"));
             try {
                 Parent root = loader.load();
@@ -1717,7 +1717,7 @@ public class GlavniController implements Initializable{
                 ((Stage) taboviTPN.getScene().getWindow()).close();
             }catch (IOException ex) {
                 Logger.getLogger(Multiplex.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
         }else if("Skladištar".equals(vrstaKorisnika)){
             initializeArtikal(false);
             
